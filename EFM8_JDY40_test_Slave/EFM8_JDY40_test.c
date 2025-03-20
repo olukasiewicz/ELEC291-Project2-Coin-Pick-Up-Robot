@@ -9,6 +9,7 @@
 
 idata char buff[20];
 idata char msg[20];
+unsigned char overflow_count;
 
 char _c51_external_startup (void)
 {
@@ -254,10 +255,22 @@ void ReceptionOff (void)
 	P2_0=1; // 'set' pin to 1 is normal operation mode.
 }
 
+// timer 0 initialization
+void TIMER0_Init(void)
+{
+	TMOD&=0b_1111_0000; // Set the bits of Timer/Counter 0 to zero
+	TMOD|=0b_0000_0001; // Timer/Counter 0 used as a 16-bit timer
+	TR0=0; // Stop Timer/Counter 0
+}
+
 void main (void)
 {
     unsigned int evilcode=127;
     char c;
+
+	// initialization for the period code
+	float period;
+	TIMER0_Init(); 
 	
 	waitms(500);
 	printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
@@ -280,6 +293,36 @@ void main (void)
 	
 	while(1)
 	{	
+		/* PERIOD CODE */
+		// Reset the counter
+		TL0=0; 
+		TH0=0;
+		TF0=0;
+		overflow_count=0;
+		
+		while(P0_7!=0); // Wait for the signal to be zero
+		while(P0_7!=1); // Wait for the signal to be one
+		TR0=1; // Start the timer
+		while(P0_7!=0) // Wait for the signal to be zero
+		{
+			if(TF0==1) // Did the 16-bit timer overflow?
+			{
+				TF0=0;
+				overflow_count++;
+			}
+		}
+		while(P0_7!=1) // Wait for the signal to be one
+		{
+			if(TF0==1) // Did the 16-bit timer overflow?
+			{
+				TF0=0;
+				overflow_count++;
+			}
+		}
+		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
+		period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
+		printf( "\rT=%f ms    ", period*1000.0);
+
 		if(RXU1()) // Something has arrived
 		{
 				
