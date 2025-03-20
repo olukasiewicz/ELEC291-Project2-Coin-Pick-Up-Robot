@@ -6,7 +6,7 @@
 #define SYSCLK 72000000
 #define BAUDRATE 115200L
 //SlAVE FILE FOR EFM8 
-
+//mommy farts
 idata char buff[20];
 idata char msg[20];
 
