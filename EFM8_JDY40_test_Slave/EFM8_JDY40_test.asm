@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Wed Mar 19 23:12:12 2025
+; This file was generated Thu Mar 20 15:50:12 2025
 ;--------------------------------------------------------
 $name EFM8_JDY40_test
 $optc51 --model-small
@@ -1236,7 +1236,7 @@ _main:
 	mov	dptr,#__str_7
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:273: SendATCommand("AT+RFC\r\n");
+;	EFM8_JDY40_test.c:273: SendATCommand("AT+RFC120\r\n");
 	mov	dptr,#__str_8
 	mov	b,#0x80
 	lcall	_SendATCommand
@@ -1248,7 +1248,7 @@ _main:
 	mov	dptr,#__str_10
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:279: SendATCommand("AT+DVIDABBA\r\n");  
+;	EFM8_JDY40_test.c:279: SendATCommand("AT+DVIDFFFF\r\n");  
 	mov	dptr,#__str_11
 	mov	b,#0x80
 	lcall	_SendATCommand
@@ -1460,10 +1460,10 @@ L015023?:
 	setb	_P3_7
 ;	EFM8_JDY40_test.c:303: P3_2=0;	// wheel 1 
 	clr	_P3_2
-;	EFM8_JDY40_test.c:304: P3_0=1; // wheel 2
-	setb	_P3_0
-;	EFM8_JDY40_test.c:305: P2_5=0; // wheel 2
-	clr	_P2_5
+;	EFM8_JDY40_test.c:304: P3_0=0; // wheel 2
+	clr	_P3_0
+;	EFM8_JDY40_test.c:305: P2_5=1; // wheel 2
+	setb	_P2_5
 ;	EFM8_JDY40_test.c:306: sprintf(msg, "recF\n");
 	mov	a,#__str_25
 	push	acc
@@ -1498,10 +1498,10 @@ L015020?:
 	clr	_P3_7
 ;	EFM8_JDY40_test.c:312: P3_2=1;	// wheel 1 
 	setb	_P3_2
-;	EFM8_JDY40_test.c:313: P3_0=0; // wheel 2
-	clr	_P3_0
-;	EFM8_JDY40_test.c:314: P2_5=1; // wheel 2
-	setb	_P2_5
+;	EFM8_JDY40_test.c:313: P3_0=1; // wheel 2
+	setb	_P3_0
+;	EFM8_JDY40_test.c:314: P2_5=0; // wheel 2
+	clr	_P2_5
 ;	EFM8_JDY40_test.c:315: sprintf(msg, "recB\n");
 	mov	a,#__str_27
 	push	acc
@@ -1570,10 +1570,10 @@ L015014?:
 	mov	b,dph
 	orl	a,b
 	jnz	L015011?
-;	EFM8_JDY40_test.c:327: P3_7=1;  //wheel 1
-	setb	_P3_7
-;	EFM8_JDY40_test.c:328: P3_2=0;	// wheel 1 
-	clr	_P3_2
+;	EFM8_JDY40_test.c:327: P3_7=0;  //wheel 1
+	clr	_P3_7
+;	EFM8_JDY40_test.c:328: P3_2=1;	// wheel 1 
+	setb	_P3_2
 ;	EFM8_JDY40_test.c:329: P3_0=0; // wheel 2
 	clr	_P3_0
 ;	EFM8_JDY40_test.c:330: P2_5=0; // wheel 2
@@ -1756,7 +1756,7 @@ __str_7:
 	db 0x0A
 	db 0x00
 __str_8:
-	db 'AT+RFC'
+	db 'AT+RFC120'
 	db 0x0D
 	db 0x0A
 	db 0x00
@@ -1771,7 +1771,7 @@ __str_10:
 	db 0x0A
 	db 0x00
 __str_11:
-	db 'AT+DVIDABBA'
+	db 'AT+DVIDFFFF'
 	db 0x0D
 	db 0x0A
 	db 0x00

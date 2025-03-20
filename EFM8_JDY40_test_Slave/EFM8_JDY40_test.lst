@@ -1,7 +1,7 @@
 0000              1   ;--------------------------------------------------------
 0000              2   ; File Created by C51
 0000              3   ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-0000              4   ; This file was generated Wed Mar 19 23:12:12 2025
+0000              4   ; This file was generated Thu Mar 20 15:50:12 2025
 0000              5   ;--------------------------------------------------------
                   5   $name EFM8_JDY40_test
                   6   $optc51 --model-small
@@ -584,7 +584,7 @@
 001E            584   ;        EFM8_JDY40_test.c:53: while ((CLKSEL & 0x80) == 0);
 001E            585   L002001?:
 001E E5A9       586            mov     a,_CLKSEL
-0020 30E7D8     587            jnb     acc.7,L002001?
+0020 30E7E8     587            jnb     acc.7,L002001?
 0023            588   ;        EFM8_JDY40_test.c:54: CLKSEL = 0x03;
 0023 75A903     589            mov     _CLKSEL,#0x03
 0026            590   ;        EFM8_JDY40_test.c:55: CLKSEL = 0x03;
@@ -592,7 +592,7 @@
 0029            592   ;        EFM8_JDY40_test.c:56: while ((CLKSEL & 0x80) == 0);
 0029            593   L002004?:
 0029 E5A9       594            mov     a,_CLKSEL
-002B 30E758     595            jnb     acc.7,L002004?
+002B 30E768     595            jnb     acc.7,L002004?
 002E            596   ;        EFM8_JDY40_test.c:61: P0MDOUT |= 0x11; // Enable UART0 TX (P0.4) and UART1 TX (P0.0) as push-pull outputs
 002E 43A411     597            orl     _P0MDOUT,#0x11
 0031            598   ;        EFM8_JDY40_test.c:62: P2MDOUT |= 0x01; // P2.0 in push-pull mode
@@ -654,7 +654,7 @@
 0071            654   ;        EFM8_JDY40_test.c:98: while (!(TMR3CN0 & 0x80));  // Wait for overflow
 0071            655   L003001?:
 0071 E591       656            mov     a,_TMR3CN0
-0073 30E758     657            jnb     acc.7,L003001?
+0073 30E768     657            jnb     acc.7,L003001?
 0076            658   ;        EFM8_JDY40_test.c:99: TMR3CN0 &= ~(0x80);         // Clear overflow indicator
 0076 53917F     659            anl     _TMR3CN0,#0x7F
 0079            660   ;        EFM8_JDY40_test.c:96: for (i = 0; i < us; i++)       // Count <us> overflows
@@ -691,7 +691,7 @@
 008F            691   ;        EFM8_JDY40_test.c:109: for (k=0; k<4; k++) Timer3us(250);
 008F 7E00       692            mov     r6,#0x00
 0091            693   L004001?:
-0091 BE0498     694            cjne    r6,#0x04,L004018?
+0091 BE04A8     694            cjne    r6,#0x04,L004018?
 0094            695   L004018?:
 0094 5000       696            jnc     L004007?
 0096 7582FA     697            mov     dpl,#0xFA
@@ -711,7 +711,7 @@
 00B3            711   L004007?:
 00B3            712   ;        EFM8_JDY40_test.c:108: for(j=0; j<ms; j++)
 00B3 0C         713            inc     r4
-00B4 BC00D8     714            cjne    r4,#0x00,L004005?
+00B4 BC00E8     714            cjne    r4,#0x00,L004005?
 00B7 0D         715            inc     r5
 00B8 8000       716            sjmp    L004005?
 00BA            717   L004009?:
@@ -801,7 +801,7 @@
 0121            801   ;        EFM8_JDY40_test.c:127: while (!TI1);
 0121            802   L006001?:
 0121            803   ;        EFM8_JDY40_test.c:128: TI1=0;
-0121 10C928     804            jbc     _TI1,L006008?
+0121 10C938     804            jbc     _TI1,L006008?
 0124 8000       805            sjmp    L006001?
 0126            806   L006008?:
 0126            807   ;        EFM8_JDY40_test.c:129: SBUF1 = c;
@@ -841,7 +841,7 @@
 014D D002       841            pop     ar2
 014F            842   ;        EFM8_JDY40_test.c:138: s++;     
 014F 0A         843            inc     r2
-0150 BA0068     844            cjne    r2,#0x00,L007001?
+0150 BA0078     844            cjne    r2,#0x00,L007001?
 0153 0B         845            inc     r3
 0154 8000       846            sjmp    L007001?
 0156            847   L007004?:
@@ -861,7 +861,7 @@
 015A            861   ;        EFM8_JDY40_test.c:146: while (!RI1);
 015A            862   L008001?:
 015A            863   ;        EFM8_JDY40_test.c:147: RI1=0;
-015A 10C868     864            jbc     _RI1,L008008?
+015A 10C878     864            jbc     _RI1,L008008?
 015D 8000       865            sjmp    L008001?
 015F            866   L008008?:
 015F            867   ;        EFM8_JDY40_test.c:149: SCON1&=0b_0011_1111;
@@ -889,7 +889,7 @@
 016C 7A00       889            mov     r2,#0x00
 016E 7B00       890            mov     r3,#0x00
 0170            891   L009003?:
-0170 20C8E8     892            jb      _RI1,L009005?
+0170 20C8F8     892            jb      _RI1,L009005?
 0173            893   ;        EFM8_JDY40_test.c:163: SFRPAGE = 0x00;
 0173 75A700     894            mov     _SFRPAGE,#0x00
 0176            895   ;        EFM8_JDY40_test.c:164: Timer3us(20);
@@ -903,12 +903,12 @@
 0184 75A720     903            mov     _SFRPAGE,#0x20
 0187            904   ;        EFM8_JDY40_test.c:166: timeout++;
 0187 0A         905            inc     r2
-0188 BA0028     906            cjne    r2,#0x00,L009012?
+0188 BA0038     906            cjne    r2,#0x00,L009012?
 018B 0B         907            inc     r3
 018C            908   L009012?:
 018C            909   ;        EFM8_JDY40_test.c:167: if(timeout==25000)
-018C BAA8A8     910            cjne    r2,#0xA8,L009003?
-018F BB61A8     911            cjne    r3,#0x61,L009003?
+018C BAA8B8     910            cjne    r2,#0xA8,L009003?
+018F BB61B8     911            cjne    r3,#0x61,L009003?
 0192            912   ;        EFM8_JDY40_test.c:169: SFRPAGE = 0x00;
 0192 75A700     913            mov     _SFRPAGE,#0x00
 0195            914   ;        EFM8_JDY40_test.c:170: return ('\n'); // Timeout after half second
@@ -965,7 +965,7 @@
 01D0 D003       965            pop     ar3
 01D2 D002       966            pop     ar2
 01D4            967   ;        EFM8_JDY40_test.c:190: if(c=='\n')
-01D4 B90AA8     968            cjne    r1,#0x0A,L010002?
+01D4 B90AB8     968            cjne    r1,#0x0A,L010002?
 01D7            969   ;        EFM8_JDY40_test.c:192: *s=0;
 01D7 8A82       970            mov     dpl,r2
 01D9 8B83       971            mov     dph,r3
@@ -1047,7 +1047,7 @@
 0221           1047   ;        EFM8_JDY40_test.c:226: for (k=0; k<4; k++)
 0221 7E00      1048            mov     r6,#0x00
 0223           1049   L012003?:
-0223 BE0428    1050            cjne    r6,#0x04,L012019?
+0223 BE0438    1050            cjne    r6,#0x04,L012019?
 0226           1051   L012019?:
 0226 5000      1052            jnc     L012009?
 0228           1053   ;        EFM8_JDY40_test.c:228: if(RXU1()) return;
@@ -1086,7 +1086,7 @@
 0261           1086   L012009?:
 0261           1087   ;        EFM8_JDY40_test.c:224: for(j=0; j<ms; j++)
 0261 0C        1088            inc     r4
-0262 BC0068    1089            cjne    r4,#0x00,L012007?
+0262 BC0078    1089            cjne    r4,#0x00,L012007?
 0265 0D        1090            inc     r5
 0266 8000      1091            sjmp    L012007?
 0268           1092   L012011?:
@@ -1111,7 +1111,7 @@
 0275 C002      1111            push    ar2
 0277 C003      1112            push    ar3
 0279 C004      1113            push    ar4
-027B 74E8      1114            mov     a,#__str_0
+027B 74F8      1114            mov     a,#__str_0
 027D C0E0      1115            push    acc
 027F 74BC      1116            mov     a,#(__str_0 >> 8)
 0281 C0E0      1117            push    acc
@@ -1151,7 +1151,7 @@
 02C1 C0E0      1151            push    acc
 02C3 7440      1152            mov     a,#0x40
 02C5 C0E0      1153            push    acc
-02C7 74A8      1154            mov     a,#__str_1
+02C7 74B8      1154            mov     a,#__str_1
 02C9 C0E0      1155            push    acc
 02CB 74BD      1156            mov     a,#(__str_1 >> 8)
 02CD C0E0      1157            push    acc
@@ -1177,7 +1177,7 @@
 02DF 90000A    1177            mov     dptr,#0x000A
 02E2 120000    1178            lcall   _waitms
 02E5           1179   ;        EFM8_JDY40_test.c:250: sendstr1("AT+DVID0000\r\n"); // Some unused id, so that we get nothing in RXD1.
-02E5 90BDE8    1180            mov     dptr,#__str_2
+02E5 90BDF8    1180            mov     dptr,#__str_2
 02E8 75F080    1181            mov     b,#0x80
 02EB 120000    1182            lcall   _sendstr1
 02EE           1183   ;        EFM8_JDY40_test.c:251: waitms(10);
@@ -1203,7 +1203,7 @@
 02FA 9001F4    1203            mov     dptr,#0x01F4
 02FD 120000    1204            lcall   _waitms
 0300           1205   ;        EFM8_JDY40_test.c:263: printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
-0300 7428      1206            mov     a,#__str_3
+0300 7438      1206            mov     a,#__str_3
 0302 C0E0      1207            push    acc
 0304 74BE      1208            mov     a,#(__str_3 >> 8)
 0306 C0E0      1209            push    acc
@@ -1221,35 +1221,35 @@
 031E           1221   ;        EFM8_JDY40_test.c:266: ReceptionOff();
 031E 120000    1222            lcall   _ReceptionOff
 0321           1223   ;        EFM8_JDY40_test.c:269: SendATCommand("AT+VER\r\n");
-0321 90BE68    1224            mov     dptr,#__str_4
+0321 90BE78    1224            mov     dptr,#__str_4
 0324 75F080    1225            mov     b,#0x80
 0327 120000    1226            lcall   _SendATCommand
 032A           1227   ;        EFM8_JDY40_test.c:270: SendATCommand("AT+BAUD\r\n");
-032A 90BEA8    1228            mov     dptr,#__str_5
+032A 90BEB8    1228            mov     dptr,#__str_5
 032D 75F080    1229            mov     b,#0x80
 0330 120000    1230            lcall   _SendATCommand
 0333           1231   ;        EFM8_JDY40_test.c:271: SendATCommand("AT+RFID\r\n");
-0333 90BEE8    1232            mov     dptr,#__str_6
+0333 90BEF8    1232            mov     dptr,#__str_6
 0336 75F080    1233            mov     b,#0x80
 0339 120000    1234            lcall   _SendATCommand
 033C           1235   ;        EFM8_JDY40_test.c:272: SendATCommand("AT+DVID\r\n");
-033C 90BF28    1236            mov     dptr,#__str_7
+033C 90BF38    1236            mov     dptr,#__str_7
 033F 75F080    1237            mov     b,#0x80
 0342 120000    1238            lcall   _SendATCommand
-0345           1239   ;        EFM8_JDY40_test.c:273: SendATCommand("AT+RFC\r\n");
-0345 90BF68    1240            mov     dptr,#__str_8
+0345           1239   ;        EFM8_JDY40_test.c:273: SendATCommand("AT+RFC120\r\n");
+0345 90BF78    1240            mov     dptr,#__str_8
 0348 75F080    1241            mov     b,#0x80
 034B 120000    1242            lcall   _SendATCommand
 034E           1243   ;        EFM8_JDY40_test.c:274: SendATCommand("AT+POWE\r\n");
-034E 90BFA8    1244            mov     dptr,#__str_9
+034E 90BFB8    1244            mov     dptr,#__str_9
 0351 75F080    1245            mov     b,#0x80
 0354 120000    1246            lcall   _SendATCommand
 0357           1247   ;        EFM8_JDY40_test.c:275: SendATCommand("AT+CLSS\r\n");
-0357 90BFE8    1248            mov     dptr,#__str_10
+0357 90C000    1248            mov     dptr,#__str_10
 035A 75F080    1249            mov     b,#0x80
 035D 120000    1250            lcall   _SendATCommand
-0360           1251   ;        EFM8_JDY40_test.c:279: SendATCommand("AT+DVIDABBA\r\n");  
-0360 90C028    1252            mov     dptr,#__str_11
+0360           1251   ;        EFM8_JDY40_test.c:279: SendATCommand("AT+DVIDFFFF\r\n");  
+0360 90C040    1252            mov     dptr,#__str_11
 0363 75F080    1253            mov     b,#0x80
 0366 120000    1254            lcall   _SendATCommand
 0369           1255   ;        EFM8_JDY40_test.c:281: while(1)
@@ -1263,8 +1263,8 @@
 0374 75F040    1263            mov     b,#0x40
 0377 120000    1264            lcall   _getstr1
 037A           1265   ;        EFM8_JDY40_test.c:287: if (strcmp(buff, "1") == 0) sprintf(msg, "rec1\0");
-037A 7500E8    1266            mov     _strcmp_PARM_2,#__str_12
-037D 7501C0    1267            mov     (_strcmp_PARM_2 + 1),#(__str_12 >> 8)
+037A 750000    1266            mov     _strcmp_PARM_2,#__str_12
+037D 7501C1    1267            mov     (_strcmp_PARM_2 + 1),#(__str_12 >> 8)
 0380 750280    1268            mov     (_strcmp_PARM_2 + 2),#0x80
 0383 901530    1269            mov     dptr,#_buff
 0386 75F040    1270            mov     b,#0x40
@@ -1273,7 +1273,7 @@
 038E 8583F0    1273            mov     b,dph
 0391 45F0      1274            orl     a,b
 0393 7000      1275            jnz     L015038?
-0395 74A8      1276            mov     a,#__str_13
+0395 74C0      1276            mov     a,#__str_13
 0397 C0E0      1277            push    acc
 0399 74C1      1278            mov     a,#(__str_13 >> 8)
 039B C0E0      1279            push    acc
@@ -1292,7 +1292,7 @@
 03B6 020000    1292            ljmp    L015039?
 03B9           1293   L015038?:
 03B9           1294   ;        EFM8_JDY40_test.c:288: else if (strcmp(buff, "2") == 0) sprintf(msg, "rec2\n");
-03B9 750068    1295            mov     _strcmp_PARM_2,#__str_14
+03B9 750080    1295            mov     _strcmp_PARM_2,#__str_14
 03BC 7501C2    1296            mov     (_strcmp_PARM_2 + 1),#(__str_14 >> 8)
 03BF 750280    1297            mov     (_strcmp_PARM_2 + 2),#0x80
 03C2 901530    1298            mov     dptr,#_buff
@@ -1302,9 +1302,9 @@
 03CD 8583F0    1302            mov     b,dph
 03D0 45F0      1303            orl     a,b
 03D2 7000      1304            jnz     L015035?
-03D4 74E8      1305            mov     a,#__str_15
+03D4 7400      1305            mov     a,#__str_15
 03D6 C0E0      1306            push    acc
-03D8 74C2      1307            mov     a,#(__str_15 >> 8)
+03D8 74C3      1307            mov     a,#(__str_15 >> 8)
 03DA C0E0      1308            push    acc
 03DC 7480      1309            mov     a,#0x80
 03DE C0E0      1310            push    acc
@@ -1321,7 +1321,7 @@
 03F5 020000    1321            ljmp    L015039?
 03F8           1322   L015035?:
 03F8           1323   ;        EFM8_JDY40_test.c:289: else if (strcmp(buff, "3") == 0) sprintf(msg, "rec3\n");
-03F8 750028    1324            mov     _strcmp_PARM_2,#__str_16
+03F8 750040    1324            mov     _strcmp_PARM_2,#__str_16
 03FB 7501C3    1325            mov     (_strcmp_PARM_2 + 1),#(__str_16 >> 8)
 03FE 750280    1326            mov     (_strcmp_PARM_2 + 2),#0x80
 0401 901530    1327            mov     dptr,#_buff
@@ -1331,7 +1331,7 @@
 040C 8583F0    1331            mov     b,dph
 040F 45F0      1332            orl     a,b
 0411 7000      1333            jnz     L015032?
-0413 74A8      1334            mov     a,#__str_17
+0413 74C0      1334            mov     a,#__str_17
 0415 C0E0      1335            push    acc
 0417 74C3      1336            mov     a,#(__str_17 >> 8)
 0419 C0E0      1337            push    acc
@@ -1350,8 +1350,8 @@
 0434 020000    1350            ljmp    L015039?
 0437           1351   L015032?:
 0437           1352   ;        EFM8_JDY40_test.c:290: else if (strcmp(buff, "4") == 0) sprintf(msg, "rec4\n");
-0437 7500E8    1353            mov     _strcmp_PARM_2,#__str_18
-043A 7501C3    1354            mov     (_strcmp_PARM_2 + 1),#(__str_18 >> 8)
+0437 750000    1353            mov     _strcmp_PARM_2,#__str_18
+043A 7501C4    1354            mov     (_strcmp_PARM_2 + 1),#(__str_18 >> 8)
 043D 750280    1355            mov     (_strcmp_PARM_2 + 2),#0x80
 0440 901530    1356            mov     dptr,#_buff
 0443 75F040    1357            mov     b,#0x40
@@ -1360,7 +1360,7 @@
 044B 8583F0    1360            mov     b,dph
 044E 45F0      1361            orl     a,b
 0450 7000      1362            jnz     L015029?
-0452 7468      1363            mov     a,#__str_19
+0452 7480      1363            mov     a,#__str_19
 0454 C0E0      1364            push    acc
 0456 74C4      1365            mov     a,#(__str_19 >> 8)
 0458 C0E0      1366            push    acc
@@ -1379,7 +1379,7 @@
 0473 020000    1379            ljmp    L015039?
 0476           1380   L015029?:
 0476           1381   ;        EFM8_JDY40_test.c:291: else if (strcmp(buff, "5") == 0) sprintf(msg, "rec5\n");
-0476 7500A8    1382            mov     _strcmp_PARM_2,#__str_20
+0476 7500C0    1382            mov     _strcmp_PARM_2,#__str_20
 0479 7501C4    1383            mov     (_strcmp_PARM_2 + 1),#(__str_20 >> 8)
 047C 750280    1384            mov     (_strcmp_PARM_2 + 2),#0x80
 047F 901530    1385            mov     dptr,#_buff
@@ -1389,7 +1389,7 @@
 048A 8583F0    1389            mov     b,dph
 048D 45F0      1390            orl     a,b
 048F 7000      1391            jnz     L015026?
-0491 7428      1392            mov     a,#__str_21
+0491 7440      1392            mov     a,#__str_21
 0493 C0E0      1393            push    acc
 0495 74C5      1394            mov     a,#(__str_21 >> 8)
 0497 C0E0      1395            push    acc
@@ -1408,7 +1408,7 @@
 04B2 020000    1408            ljmp    L015039?
 04B5           1409   L015026?:
 04B5           1410   ;        EFM8_JDY40_test.c:292: else if (strcmp(buff, "S") == 0)
-04B5 750068    1411            mov     _strcmp_PARM_2,#__str_22
+04B5 750080    1411            mov     _strcmp_PARM_2,#__str_22
 04B8 7501C5    1412            mov     (_strcmp_PARM_2 + 1),#(__str_22 >> 8)
 04BB 750280    1413            mov     (_strcmp_PARM_2 + 2),#0x80
 04BE 901530    1414            mov     dptr,#_buff
@@ -1427,9 +1427,9 @@
 04D6           1427   ;        EFM8_JDY40_test.c:297: P2_5=0; // wheel 2
 04D6 C2A5      1428            clr     _P2_5
 04D8           1429   ;        EFM8_JDY40_test.c:298: sprintf(msg, "recS\n");
-04D8 74E8      1430            mov     a,#__str_23
+04D8 7400      1430            mov     a,#__str_23
 04DA C0E0      1431            push    acc
-04DC 74C5      1432            mov     a,#(__str_23 >> 8)
+04DC 74C6      1432            mov     a,#(__str_23 >> 8)
 04DE C0E0      1433            push    acc
 04E0 7480      1434            mov     a,#0x80
 04E2 C0E0      1435            push    acc
@@ -1446,7 +1446,7 @@
 04F9 020000    1446            ljmp    L015039?
 04FC           1447   L015023?:
 04FC           1448   ;        EFM8_JDY40_test.c:300: else if (strcmp(buff, "F") == 0)
-04FC 750028    1449            mov     _strcmp_PARM_2,#__str_24
+04FC 750040    1449            mov     _strcmp_PARM_2,#__str_24
 04FF 7501C6    1450            mov     (_strcmp_PARM_2 + 1),#(__str_24 >> 8)
 0502 750280    1451            mov     (_strcmp_PARM_2 + 2),#0x80
 0505 901530    1452            mov     dptr,#_buff
@@ -1460,12 +1460,12 @@
 0517 D2B7      1460            setb    _P3_7
 0519           1461   ;        EFM8_JDY40_test.c:303: P3_2=0;  // wheel 1 
 0519 C2B2      1462            clr     _P3_2
-051B           1463   ;        EFM8_JDY40_test.c:304: P3_0=1; // wheel 2
-051B D2B0      1464            setb    _P3_0
-051D           1465   ;        EFM8_JDY40_test.c:305: P2_5=0; // wheel 2
-051D C2A5      1466            clr     _P2_5
+051B           1463   ;        EFM8_JDY40_test.c:304: P3_0=0; // wheel 2
+051B C2B0      1464            clr     _P3_0
+051D           1465   ;        EFM8_JDY40_test.c:305: P2_5=1; // wheel 2
+051D D2A5      1466            setb    _P2_5
 051F           1467   ;        EFM8_JDY40_test.c:306: sprintf(msg, "recF\n");
-051F 74A8      1468            mov     a,#__str_25
+051F 74C0      1468            mov     a,#__str_25
 0521 C0E0      1469            push    acc
 0523 74C6      1470            mov     a,#(__str_25 >> 8)
 0525 C0E0      1471            push    acc
@@ -1484,8 +1484,8 @@
 0540 020000    1484            ljmp    L015039?
 0543           1485   L015020?:
 0543           1486   ;        EFM8_JDY40_test.c:309: else if (strcmp(buff, "B") == 0)
-0543 7500E8    1487            mov     _strcmp_PARM_2,#__str_26
-0546 7501C6    1488            mov     (_strcmp_PARM_2 + 1),#(__str_26 >> 8)
+0543 750000    1487            mov     _strcmp_PARM_2,#__str_26
+0546 7501C7    1488            mov     (_strcmp_PARM_2 + 1),#(__str_26 >> 8)
 0549 750280    1489            mov     (_strcmp_PARM_2 + 2),#0x80
 054C 901530    1490            mov     dptr,#_buff
 054F 75F040    1491            mov     b,#0x40
@@ -1498,12 +1498,12 @@
 055E C2B7      1498            clr     _P3_7
 0560           1499   ;        EFM8_JDY40_test.c:312: P3_2=1;  // wheel 1 
 0560 D2B2      1500            setb    _P3_2
-0562           1501   ;        EFM8_JDY40_test.c:313: P3_0=0; // wheel 2
-0562 C2B0      1502            clr     _P3_0
-0564           1503   ;        EFM8_JDY40_test.c:314: P2_5=1; // wheel 2
-0564 D2A5      1504            setb    _P2_5
+0562           1501   ;        EFM8_JDY40_test.c:313: P3_0=1; // wheel 2
+0562 D2B0      1502            setb    _P3_0
+0564           1503   ;        EFM8_JDY40_test.c:314: P2_5=0; // wheel 2
+0564 C2A5      1504            clr     _P2_5
 0566           1505   ;        EFM8_JDY40_test.c:315: sprintf(msg, "recB\n");
-0566 7468      1506            mov     a,#__str_27
+0566 7480      1506            mov     a,#__str_27
 0568 C0E0      1507            push    acc
 056A 74C7      1508            mov     a,#(__str_27 >> 8)
 056C C0E0      1509            push    acc
@@ -1522,7 +1522,7 @@
 0587 020000    1522            ljmp    L015039?
 058A           1523   L015017?:
 058A           1524   ;        EFM8_JDY40_test.c:317: else if (strcmp(buff, "L") == 0)
-058A 7500A8    1525            mov     _strcmp_PARM_2,#__str_28
+058A 7500C0    1525            mov     _strcmp_PARM_2,#__str_28
 058D 7501C7    1526            mov     (_strcmp_PARM_2 + 1),#(__str_28 >> 8)
 0590 750280    1527            mov     (_strcmp_PARM_2 + 2),#0x80
 0593 901530    1528            mov     dptr,#_buff
@@ -1541,7 +1541,7 @@
 05AB           1541   ;        EFM8_JDY40_test.c:322: P2_5=0; // wheel 2
 05AB C2A5      1542            clr     _P2_5
 05AD           1543   ;        EFM8_JDY40_test.c:323: sprintf(msg, "recL\n");
-05AD 7428      1544            mov     a,#__str_29
+05AD 7440      1544            mov     a,#__str_29
 05AF C0E0      1545            push    acc
 05B1 74C8      1546            mov     a,#(__str_29 >> 8)
 05B3 C0E0      1547            push    acc
@@ -1560,7 +1560,7 @@
 05CE 020000    1560            ljmp    L015039?
 05D1           1561   L015014?:
 05D1           1562   ;        EFM8_JDY40_test.c:325: else if (strcmp(buff, "R") == 0)
-05D1 750068    1563            mov     _strcmp_PARM_2,#__str_30
+05D1 750080    1563            mov     _strcmp_PARM_2,#__str_30
 05D4 7501C8    1564            mov     (_strcmp_PARM_2 + 1),#(__str_30 >> 8)
 05D7 750280    1565            mov     (_strcmp_PARM_2 + 2),#0x80
 05DA 901530    1566            mov     dptr,#_buff
@@ -1570,18 +1570,18 @@
 05E5 8583F0    1570            mov     b,dph
 05E8 45F0      1571            orl     a,b
 05EA 7000      1572            jnz     L015011?
-05EC           1573   ;        EFM8_JDY40_test.c:327: P3_7=1;  //wheel 1
-05EC D2B7      1574            setb    _P3_7
-05EE           1575   ;        EFM8_JDY40_test.c:328: P3_2=0;  // wheel 1 
-05EE C2B2      1576            clr     _P3_2
+05EC           1573   ;        EFM8_JDY40_test.c:327: P3_7=0;  //wheel 1
+05EC C2B7      1574            clr     _P3_7
+05EE           1575   ;        EFM8_JDY40_test.c:328: P3_2=1;  // wheel 1 
+05EE D2B2      1576            setb    _P3_2
 05F0           1577   ;        EFM8_JDY40_test.c:329: P3_0=0; // wheel 2
 05F0 C2B0      1578            clr     _P3_0
 05F2           1579   ;        EFM8_JDY40_test.c:330: P2_5=0; // wheel 2
 05F2 C2A5      1580            clr     _P2_5
 05F4           1581   ;        EFM8_JDY40_test.c:331: sprintf(msg, "recR\n");
-05F4 74E8      1582            mov     a,#__str_31
+05F4 7400      1582            mov     a,#__str_31
 05F6 C0E0      1583            push    acc
-05F8 74C8      1584            mov     a,#(__str_31 >> 8)
+05F8 74C9      1584            mov     a,#(__str_31 >> 8)
 05FA C0E0      1585            push    acc
 05FC 7480      1586            mov     a,#0x80
 05FE C0E0      1587            push    acc
@@ -1598,7 +1598,7 @@
 0615 020000    1598            ljmp    L015039?
 0618           1599   L015011?:
 0618           1600   ;        EFM8_JDY40_test.c:333: else if (strcmp(buff, "P") == 0) sprintf(msg, "recP\n");
-0618 750028    1601            mov     _strcmp_PARM_2,#__str_32
+0618 750040    1601            mov     _strcmp_PARM_2,#__str_32
 061B 7501C9    1602            mov     (_strcmp_PARM_2 + 1),#(__str_32 >> 8)
 061E 750280    1603            mov     (_strcmp_PARM_2 + 2),#0x80
 0621 901530    1604            mov     dptr,#_buff
@@ -1608,7 +1608,7 @@
 062C 8583F0    1608            mov     b,dph
 062F 45F0      1609            orl     a,b
 0631 7000      1610            jnz     L015008?
-0633 74A8      1611            mov     a,#__str_33
+0633 74C0      1611            mov     a,#__str_33
 0635 C0E0      1612            push    acc
 0637 74C9      1613            mov     a,#(__str_33 >> 8)
 0639 C0E0      1614            push    acc
@@ -1627,8 +1627,8 @@
 0654 020000    1627            ljmp    L015039?
 0657           1628   L015008?:
 0657           1629   ;        EFM8_JDY40_test.c:334: else if (strcmp(buff, "D") == 0) sprintf(msg, "recD\n");
-0657 7500E8    1630            mov     _strcmp_PARM_2,#__str_34
-065A 7501C9    1631            mov     (_strcmp_PARM_2 + 1),#(__str_34 >> 8)
+0657 750000    1630            mov     _strcmp_PARM_2,#__str_34
+065A 7501CA    1631            mov     (_strcmp_PARM_2 + 1),#(__str_34 >> 8)
 065D 750280    1632            mov     (_strcmp_PARM_2 + 2),#0x80
 0660 901530    1633            mov     dptr,#_buff
 0663 75F040    1634            mov     b,#0x40
@@ -1637,7 +1637,7 @@
 066B 8583F0    1637            mov     b,dph
 066E 45F0      1638            orl     a,b
 0670 7000      1639            jnz     L015005?
-0672 7468      1640            mov     a,#__str_35
+0672 7480      1640            mov     a,#__str_35
 0674 C0E0      1641            push    acc
 0676 74CA      1642            mov     a,#(__str_35 >> 8)
 0678 C0E0      1643            push    acc
@@ -1656,7 +1656,7 @@
 0693 8000      1656            sjmp    L015039?
 0695           1657   L015005?:
 0695           1658   ;        EFM8_JDY40_test.c:335: else if (strcmp(buff, "X") == 0) sprintf(msg, "recX\n");
-0695 7500A8    1659            mov     _strcmp_PARM_2,#__str_36
+0695 7500C0    1659            mov     _strcmp_PARM_2,#__str_36
 0698 7501CA    1660            mov     (_strcmp_PARM_2 + 1),#(__str_36 >> 8)
 069B 750280    1661            mov     (_strcmp_PARM_2 + 2),#0x80
 069E 901530    1662            mov     dptr,#_buff
@@ -1666,7 +1666,7 @@
 06A9 8583F0    1666            mov     b,dph
 06AC 45F0      1667            orl     a,b
 06AE 7000      1668            jnz     L015002?
-06B0 7428      1669            mov     a,#__str_37
+06B0 7440      1669            mov     a,#__str_37
 06B2 C0E0      1670            push    acc
 06B4 74CB      1671            mov     a,#(__str_37 >> 8)
 06B6 C0E0      1672            push    acc
@@ -1685,7 +1685,7 @@
 06D1 8000      1685            sjmp    L015039?
 06D3           1686   L015002?:
 06D3           1687   ;        EFM8_JDY40_test.c:336: else sprintf(msg, "k\n");
-06D3 7468      1688            mov     a,#__str_38
+06D3 7480      1688            mov     a,#__str_38
 06D5 C0E0      1689            push    acc
 06D7 74CB      1690            mov     a,#(__str_38 >> 8)
 06D9 C0E0      1691            push    acc
@@ -1772,126 +1772,127 @@
 006E 0A        1756            db 0x0A
 006F 00        1757            db 0x00
 0070           1758   __str_8:
-0070 41542B52  1759            db 'AT+RFC'
-     4643
-0076 0D        1760            db 0x0D
-0077 0A        1761            db 0x0A
-0078 00        1762            db 0x00
-0079           1763   __str_9:
-0079 41542B50  1764            db 'AT+POWE'
+0070 41542B52  1759            db 'AT+RFC120'
+     46433132
+     30
+0079 0D        1760            db 0x0D
+007A 0A        1761            db 0x0A
+007B 00        1762            db 0x00
+007C           1763   __str_9:
+007C 41542B50  1764            db 'AT+POWE'
      4F5745
-0080 0D        1765            db 0x0D
-0081 0A        1766            db 0x0A
-0082 00        1767            db 0x00
-0083           1768   __str_10:
-0083 41542B43  1769            db 'AT+CLSS'
+0083 0D        1765            db 0x0D
+0084 0A        1766            db 0x0A
+0085 00        1767            db 0x00
+0086           1768   __str_10:
+0086 41542B43  1769            db 'AT+CLSS'
      4C5353
-008A 0D        1770            db 0x0D
-008B 0A        1771            db 0x0A
-008C 00        1772            db 0x00
-008D           1773   __str_11:
-008D 41542B44  1774            db 'AT+DVIDABBA'
-     56494441
-     424241
-0098 0D        1775            db 0x0D
-0099 0A        1776            db 0x0A
-009A 00        1777            db 0x00
-009B           1778   __str_12:
-009B 31        1779            db '1'
-009C 00        1780            db 0x00
-009D           1781   __str_13:
-009D 72656331  1782            db 'rec1'
-00A1 00        1783            db 0x00
-00A2 00        1784            db 0x00
-00A3           1785   __str_14:
-00A3 32        1786            db '2'
-00A4 00        1787            db 0x00
-00A5           1788   __str_15:
-00A5 72656332  1789            db 'rec2'
-00A9 0A        1790            db 0x0A
-00AA 00        1791            db 0x00
-00AB           1792   __str_16:
-00AB 33        1793            db '3'
-00AC 00        1794            db 0x00
-00AD           1795   __str_17:
-00AD 72656333  1796            db 'rec3'
-00B1 0A        1797            db 0x0A
-00B2 00        1798            db 0x00
-00B3           1799   __str_18:
-00B3 34        1800            db '4'
-00B4 00        1801            db 0x00
-00B5           1802   __str_19:
-00B5 72656334  1803            db 'rec4'
-00B9 0A        1804            db 0x0A
-00BA 00        1805            db 0x00
-00BB           1806   __str_20:
-00BB 35        1807            db '5'
-00BC 00        1808            db 0x00
-00BD           1809   __str_21:
-00BD 72656335  1810            db 'rec5'
-00C1 0A        1811            db 0x0A
-00C2 00        1812            db 0x00
-00C3           1813   __str_22:
-00C3 53        1814            db 'S'
-00C4 00        1815            db 0x00
-00C5           1816   __str_23:
-00C5 72656353  1817            db 'recS'
-00C9 0A        1818            db 0x0A
-00CA 00        1819            db 0x00
-00CB           1820   __str_24:
-00CB 46        1821            db 'F'
-00CC 00        1822            db 0x00
-00CD           1823   __str_25:
-00CD 72656346  1824            db 'recF'
-00D1 0A        1825            db 0x0A
-00D2 00        1826            db 0x00
-00D3           1827   __str_26:
-00D3 42        1828            db 'B'
-00D4 00        1829            db 0x00
-00D5           1830   __str_27:
-00D5 72656342  1831            db 'recB'
-00D9 0A        1832            db 0x0A
-00DA 00        1833            db 0x00
-00DB           1834   __str_28:
-00DB 4C        1835            db 'L'
-00DC 00        1836            db 0x00
-00DD           1837   __str_29:
-00DD 7265634C  1838            db 'recL'
-00E1 0A        1839            db 0x0A
-00E2 00        1840            db 0x00
-00E3           1841   __str_30:
-00E3 52        1842            db 'R'
-00E4 00        1843            db 0x00
-00E5           1844   __str_31:
-00E5 72656352  1845            db 'recR'
-00E9 0A        1846            db 0x0A
-00EA 00        1847            db 0x00
-00EB           1848   __str_32:
-00EB 50        1849            db 'P'
-00EC 00        1850            db 0x00
-00ED           1851   __str_33:
-00ED 72656350  1852            db 'recP'
-00F1 0A        1853            db 0x0A
-00F2 00        1854            db 0x00
-00F3           1855   __str_34:
-00F3 44        1856            db 'D'
-00F4 00        1857            db 0x00
-00F5           1858   __str_35:
-00F5 72656344  1859            db 'recD'
-00F9 0A        1860            db 0x0A
-00FA 00        1861            db 0x00
-00FB           1862   __str_36:
-00FB 58        1863            db 'X'
-00FC 00        1864            db 0x00
-00FD           1865   __str_37:
-00FD 72656358  1866            db 'recX'
-0101 0A        1867            db 0x0A
-0102 00        1868            db 0x00
-0103           1869   __str_38:
-0103 6B        1870            db 'k'
-0104 0A        1871            db 0x0A
-0105 00        1872            db 0x00
-0106           1873   
+008D 0D        1770            db 0x0D
+008E 0A        1771            db 0x0A
+008F 00        1772            db 0x00
+0090           1773   __str_11:
+0090 41542B44  1774            db 'AT+DVIDFFFF'
+     56494446
+     464646
+009B 0D        1775            db 0x0D
+009C 0A        1776            db 0x0A
+009D 00        1777            db 0x00
+009E           1778   __str_12:
+009E 31        1779            db '1'
+009F 00        1780            db 0x00
+00A0           1781   __str_13:
+00A0 72656331  1782            db 'rec1'
+00A4 00        1783            db 0x00
+00A5 00        1784            db 0x00
+00A6           1785   __str_14:
+00A6 32        1786            db '2'
+00A7 00        1787            db 0x00
+00A8           1788   __str_15:
+00A8 72656332  1789            db 'rec2'
+00AC 0A        1790            db 0x0A
+00AD 00        1791            db 0x00
+00AE           1792   __str_16:
+00AE 33        1793            db '3'
+00AF 00        1794            db 0x00
+00B0           1795   __str_17:
+00B0 72656333  1796            db 'rec3'
+00B4 0A        1797            db 0x0A
+00B5 00        1798            db 0x00
+00B6           1799   __str_18:
+00B6 34        1800            db '4'
+00B7 00        1801            db 0x00
+00B8           1802   __str_19:
+00B8 72656334  1803            db 'rec4'
+00BC 0A        1804            db 0x0A
+00BD 00        1805            db 0x00
+00BE           1806   __str_20:
+00BE 35        1807            db '5'
+00BF 00        1808            db 0x00
+00C0           1809   __str_21:
+00C0 72656335  1810            db 'rec5'
+00C4 0A        1811            db 0x0A
+00C5 00        1812            db 0x00
+00C6           1813   __str_22:
+00C6 53        1814            db 'S'
+00C7 00        1815            db 0x00
+00C8           1816   __str_23:
+00C8 72656353  1817            db 'recS'
+00CC 0A        1818            db 0x0A
+00CD 00        1819            db 0x00
+00CE           1820   __str_24:
+00CE 46        1821            db 'F'
+00CF 00        1822            db 0x00
+00D0           1823   __str_25:
+00D0 72656346  1824            db 'recF'
+00D4 0A        1825            db 0x0A
+00D5 00        1826            db 0x00
+00D6           1827   __str_26:
+00D6 42        1828            db 'B'
+00D7 00        1829            db 0x00
+00D8           1830   __str_27:
+00D8 72656342  1831            db 'recB'
+00DC 0A        1832            db 0x0A
+00DD 00        1833            db 0x00
+00DE           1834   __str_28:
+00DE 4C        1835            db 'L'
+00DF 00        1836            db 0x00
+00E0           1837   __str_29:
+00E0 7265634C  1838            db 'recL'
+00E4 0A        1839            db 0x0A
+00E5 00        1840            db 0x00
+00E6           1841   __str_30:
+00E6 52        1842            db 'R'
+00E7 00        1843            db 0x00
+00E8           1844   __str_31:
+00E8 72656352  1845            db 'recR'
+00EC 0A        1846            db 0x0A
+00ED 00        1847            db 0x00
+00EE           1848   __str_32:
+00EE 50        1849            db 'P'
+00EF 00        1850            db 0x00
+00F0           1851   __str_33:
+00F0 72656350  1852            db 'recP'
+00F4 0A        1853            db 0x0A
+00F5 00        1854            db 0x00
+00F6           1855   __str_34:
+00F6 44        1856            db 'D'
+00F7 00        1857            db 0x00
+00F8           1858   __str_35:
+00F8 72656344  1859            db 'recD'
+00FC 0A        1860            db 0x0A
+00FD 00        1861            db 0x00
+00FE           1862   __str_36:
+00FE 58        1863            db 'X'
+00FF 00        1864            db 0x00
+0100           1865   __str_37:
+0100 72656358  1866            db 'recX'
+0104 0A        1867            db 0x0A
+0105 00        1868            db 0x00
+0106           1869   __str_38:
+0106 6B        1870            db 'k'
+0107 0A        1871            db 0x0A
+0108 00        1872            db 0x00
+0109           1873   
 0003           1874            CSEG
 0003           1875   
 0003           1876   end
