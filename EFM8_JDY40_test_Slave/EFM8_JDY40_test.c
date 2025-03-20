@@ -379,13 +379,13 @@ void main (void)
 	SendATCommand("AT+BAUD\r\n");
 	SendATCommand("AT+RFID\r\n");
 	SendATCommand("AT+DVID\r\n");
-	SendATCommand("AT+RFC\r\n");
+	SendATCommand("AT+RFC120\r\n");
 	SendATCommand("AT+POWE\r\n");
 	SendATCommand("AT+CLSS\r\n");
 
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
-	SendATCommand("AT+DVIDABBA\r\n");  
+	SendATCommand("AT+DVIDFFFF\r\n");  
 	
 	while(1)
 	{	
@@ -499,8 +499,8 @@ void main (void)
 				{
 						P3_7=1;  //wheel 1
 						P3_2=0;	// wheel 1 
-						P3_0=1; // wheel 2
-						P2_5=0; // wheel 2
+						P3_0=0; // wheel 2
+						P2_5=1; // wheel 2
 						sprintf(msg, "recF\n");
 	
 				 }			
@@ -508,8 +508,8 @@ void main (void)
 				{
 						P3_7=0;  //wheel 1
 						P3_2=1;	// wheel 1 
-						P3_0=0; // wheel 2
-						P2_5=1; // wheel 2
+						P3_0=1; // wheel 2
+						P2_5=0; // wheel 2
 						sprintf(msg, "recB\n");
 				}
 				else if (strcmp(buff, "L") == 0)
@@ -522,8 +522,8 @@ void main (void)
 				}
 				else if (strcmp(buff, "R") == 0)
 				{
-						P3_7=1;  //wheel 1
-						P3_2=0;	// wheel 1 
+						P3_7=0;  //wheel 1
+						P3_2=1;	// wheel 1 
 						P3_0=0; // wheel 2
 						P2_5=0; // wheel 2
 						sprintf(msg, "recR\n");

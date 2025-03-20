@@ -444,13 +444,13 @@ void main(void)
 	SendATCommand("AT+BAUD\r\n");
 	SendATCommand("AT+RFID\r\n");
 	SendATCommand("AT+DVID\r\n");
-	SendATCommand("AT+RFC\r\n");
+	SendATCommand("AT+RFC120\r\n");
 	SendATCommand("AT+POWE\r\n");
 	SendATCommand("AT+CLSS\r\n");
 
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
-	SendATCommand("AT+DVIDABBA\r\n");
+	SendATCommand("AT+DVIDFFFF\r\n");
 	LCDprint("5 little monkeys", 1, 1);
 	LCDprint("jumping on a bed", 2, 1);
 
@@ -500,9 +500,12 @@ void main(void)
 		gets(sendbuff);
 		SerialTransmit1(sendbuff);
 		
-while (1) {
-if(U1STAbits.URXDA) break;
-}
+		while (1) 
+		{
+			if(U1STAbits.URXDA) break;
+			if(++timeout_cnt>250) break; // Wait up to 25ms for the repply
+			delayus(100); 
+		}
 		
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 		{
