@@ -459,6 +459,26 @@ void PrintNumber(long int val, int Base, int digits)
 	eputs(&buff[j+1]);
 }
 
+unsigned long GetFrequency (long int c)
+{
+	long int f = 0;
+
+	if(c>0)
+	{
+			f=(SYSCLK*200.0)/(c*12);
+			eputs("f=");
+			PrintNumber(f, 10, 7);
+			eputs("Hz");
+	}
+	
+	else
+	{
+		eputs("NO SIGNAL                     \r");
+	}
+
+	return f;
+}
+
 void main (void)
 {
     unsigned int evilcode=127;
@@ -504,21 +524,10 @@ void main (void)
 	{	
 		/* PERIOD CODE */
 		count=GetPeriod(200);
-		if(count>0)
-		{
-			f=(SYSCLK*200.0)/(count*12);
-			eputs("f=");
-			PrintNumber(f, 10, 7);
-			eputs("Hz, count=");
-			PrintNumber(count, 10, 8);
-			eputs("          \r");
-		}
-		else
-		{
-			eputs("NO SIGNAL                     \r");
-		}
+		f = GetFrequency(count);
 
-		no coin: 56100
+		//condition ? value_if_true : value_if_false;
+
 
 		if(RXU1()) // Something has arrived
 		{
