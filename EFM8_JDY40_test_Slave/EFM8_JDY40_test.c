@@ -18,13 +18,13 @@
 #define PWM_FREQ 10000L
 ////////////timer5 pwm///////////////////////
 volatile unsigned int pwm_counter4=0;
-volatile unsigned int pwm_duty4=65535; //(0–65535)
+volatile unsigned int pwm_duty4=65535; //(0ï¿½65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT4 P3_0
 #define PWMOUT4R P2_5
 ////////////timer2 pwm///////////////////////
 volatile unsigned int pwm_counter2=0;
-volatile unsigned int pwm_duty2=65535; //(0–65535)
+volatile unsigned int pwm_duty2=65535; //(0ï¿½65535)
 volatile int direction=0;
 #define TIMER2_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT2 P3_2
