@@ -250,7 +250,7 @@ void ClearFIFO (void)
 void SendATCommand (char * s)
 {
 	char buff[40];
-//	printf("Command: %s", s);
+	printf("Command: %s", s);
 	LATB &= ~(1<<14); // 'SET' pin of JDY40 to 0 is 'AT' mode.
 	delayms(10);
 	SerialTransmit1(s);
@@ -258,7 +258,7 @@ void SendATCommand (char * s)
 	SerialReceive1(buff, sizeof(buff)-1);
 	LATB |= 1<<14; // 'SET' pin of JDY40 to 1 is normal operation mode.
 	delayms(10);
-//	printf("Response: %s\n", buff);
+	printf("Response: %s\n", buff);
 }
 
 void ReceptionOff (void)
@@ -413,6 +413,87 @@ void Set_pwm (unsigned char val)
 {
 	OC1RS = (PR2 + 1) * ((float)val / 256.0);
 }
+
+void ADCConf(void)
+{
+    AD1CON1CLR = 0x8000;    // disable ADC before configuration
+    AD1CON1 = 0x00E0;       // internal counter ends sampling and starts conversion (auto-convert), manual sample
+    AD1CON2 = 0;            // AD1CON2<15:13> set voltage reference to pins AVSS/AVDD
+    AD1CON3 = 0x0f01;       // TAD = 4*TPB, acquisition time = 15*TAD 
+    AD1CON1SET=0x8000;      // Enable ADC
+}
+
+int ADCRead(char analogPIN)
+{
+    AD1CHS = analogPIN << 16;    // AD1CHS<16:19> controls which analog pin goes to the ADC
+ 
+    AD1CON1bits.SAMP = 1;        // Begin sampling
+    while(AD1CON1bits.SAMP);     // wait until acquisition is done
+    while(!AD1CON1bits.DONE);    // wait until conversion done
+ 
+    return ADC1BUF0;             // result stored in ADC1BUF0
+}
+
+void ConfigurePins(void)
+{
+    // Configure pins as analog inputs
+    ANSELBbits.ANSB2 = 1;   // set RB2 (AN4, pin 6 of DIP28) as analog pin
+    TRISBbits.TRISB2 = 1;   // set RB2 as an input
+    ANSELBbits.ANSB1 = 1;	// set rb1 an3 as analog pin
+	TRISBbits.TRISB1 = 1;   // set rb1 as an input
+  /*
+    ANSELBbits.ANSB3 = 1;   // set RB3 (AN5, pin 7 of DIP28) as analog pin
+    TRISBbits.TRISB3 = 1;   // set RB3 as an input
+    
+	// Configure digital input pin to measure signal period
+	ANSELB &= ~(1<<5); // Set RB5 as a digital I/O (pin 14 of DIP28)
+    TRISB |= (1<<5);   // configure pin RB5 as input
+    CNPUB |= (1<<5);   // Enable pull-up resistor for RB5
+    
+    // We can do the three lines above using this instead:
+    // ANSELBbits.ANSELB5=0;  Not needed because RB5 can not be analog input?
+    // TRISBbits.TRISB5=1;
+    // CNPUBbits.CNPUB5=1;
+    
+    // Configure output pins
+	TRISAbits.TRISA0 = 0; // pin  2 of DIP28
+	TRISAbits.TRISA1 = 0; // pin  3 of DIP28
+	TRISBbits.TRISB0 = 0; // pin  4 of DIP28
+	TRISBbits.TRISB1 = 0; // pin  5 of DIP28
+	TRISAbits.TRISA2 = 0; // pin  9 of DIP28
+	TRISAbits.TRISA3 = 0; // pin 10 of DIP28
+	TRISBbits.TRISB4 = 0; // pin 11 of DIP28
+	INTCONbits.MVEC = 1;
+*/
+}
+
+void uart_puts(char * s)
+{
+	while(*s)
+	{
+		putchar(*s);
+		s++;
+	}
+}
+
+char HexDigit[]="0123456789ABCDEF";
+void PrintNumber(long int val, int Base, int digits)
+{ 
+	int j;
+	#define NBITS 32
+	char buff[NBITS+1];
+	buff[NBITS]=0;
+
+	j=NBITS-1;
+	while ( (val>0) | (digits>0) )
+	{
+		buff[j--]=HexDigit[val%Base];
+		val/=Base;
+		if(digits!=0) digits--;
+	}
+	uart_puts(&buff[j+1]);
+}
+
 void main(void)
 {
 	char buff[80];
@@ -421,15 +502,19 @@ void main(void)
     int cont1=0, cont2=100;
 	volatile unsigned long t=0;
 	unsigned char myduty=0;
+	int adcval4;
+	int adcval3;
+	unsigned int pwmadcval4;
+	unsigned int pwmadcval3;	
     
 	DDPCON = 0;
 	CFGCON = 0;
-//	Init_pwm(1500L);
+	Init_pwm(1500L);
 	LCD_4BIT();
     UART2Configure(115200);  // Configure UART2 for a baud rate of 115200
     UART1Configure(9600);  // Configure UART1 to communicate with JDY40 with a baud rate of 9600
  
-//	delayms(500); // Give putty time to start before we send stuff.
+	delayms(500); // Give putty time to start before we send stuff.
     printf("PIC32 MASTER REMOTE CONTROL TEST\r\n");
 
 	// RB14 is connected to the 'SET' pin of the JDY40.  Configure as output:
@@ -438,7 +523,8 @@ void main(void)
 	LATB |= (1<<14);    // 'SET' pin of JDY40 to 1 is normal operation mode
 
 	ReceptionOff();
-
+	ConfigurePins();
+ 	ADCConf(); // Configure ADC
 	// To check configuration
 	SendATCommand("AT+VER\r\n");
 	SendATCommand("AT+BAUD\r\n");
@@ -456,7 +542,7 @@ void main(void)
 
 	while(1)
 	{
-//  		Set_pwm(20);
+  		Set_pwm(20);
 /*		sprintf(buff, "%03d,%03d\n", cont1, cont2); // Construct a test message
 		putc1('!'); // Send a message to the slave. First send the 'attention' character which is '!'
 		// Wait a bit so the slave has a chance to get ready
@@ -478,7 +564,7 @@ void main(void)
 		SerialTransmit1(sendbuff);
 */
 		delayms(10);
-		
+/*		
 		printf("\r\n");
 		printf("1) Pulse width for servo 1.\r\n");
 		printf("2) Pulse width for servo 2.\r\n");
@@ -496,16 +582,25 @@ void main(void)
 		printf("\r\n");
 		printf("X) Exit.\r\n");
 		printf("\r\nCommand:\r\n\r ");
-		
-		gets(sendbuff);
-		SerialTransmit1(sendbuff);
-		
-		while (1) 
-		{
-			if(U1STAbits.URXDA) break;
-			if(++timeout_cnt>250) break; // Wait up to 25ms for the repply
-			delayus(100); 
-		}
+		adcval = ADCRead(4);
+		printf("%d", adcval);
+//		gets(sendbuff);
+//		SerialTransmit1(sendbuff);
+*/		adcval4 = ADCRead(4);
+		adcval3 = ( ADCRead(3));
+//		pwmadcval4 = ADCtoPWM(adcval4);
+//		pwmadcval3 = ADCtoPWM(adcval3);
+		sprintf(buff, "S%uT%u\n", adcval3, adcval4);
+		SerialTransmit1(buff);
+		printf("buff = %s adcval4(x) = %d adcval3(y) = %d \r\n", buff, adcval4, adcval3);
+//		printf("%u, %u\n\r", pwmadcval4, pwmadcval3);
+//		delayms(500);
+//		while (1) 
+//		{
+//			if(U1STAbits.URXDA) break;
+//			if(++timeout_cnt>250) break; // Wait up to 25ms f	or the repply
+//			delayus(100); 
+//		}
 		
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 		{
@@ -515,10 +610,10 @@ void main(void)
 				printf("\nSlave says: %s\r\n", buff);
 			} else printf("%s\r\n", buff);
 		}
-		else // Timed out waiting for reply
-		{
-			printf("NO RESPONSE\r\n", buff);
-		}
+//		else // Timed out waiting for reply
+//		{
+//			printf("NO RESPONSE\r\n", buff);
+//		}
 		
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
 	}

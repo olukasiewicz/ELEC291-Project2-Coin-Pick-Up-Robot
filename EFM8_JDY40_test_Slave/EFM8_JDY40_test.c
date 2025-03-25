@@ -8,6 +8,28 @@
 #define BAUDRATE 115200L
 
 #define SARCLK 18000000L // needed for initializing the ADC
+/*
+						P3_7=0;  //wheel 1
+						P3_2=0;	// wheel 1 
+						P3_0=0; // wheel 2
+						P2_5=0; // wheel 2
+*/
+////////////timer//////////////////////////
+#define PWM_FREQ 10000L
+////////////timer5 pwm///////////////////////
+volatile unsigned int pwm_counter4=0;
+volatile unsigned int pwm_duty4=65535; //(0–65535)
+#define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
+#define PWMOUT4 P3_0
+#define PWMOUT4R P2_5
+////////////timer2 pwm///////////////////////
+volatile unsigned int pwm_counter2=0;
+volatile unsigned int pwm_duty2=65535; //(0–65535)
+volatile int direction=0;
+#define TIMER2_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
+#define PWMOUT2 P3_2
+#define PWMOUT2R P3_7
+//////////////////////////////////////////////////
 
 //SlAVE FILE FOR EFM8 
 //mommy farts
@@ -69,6 +91,10 @@ char _c51_external_startup (void)
 	XBR1     = 0X00;
 	XBR2     = 0x41; // Enable crossbar and uart 1
 
+	P3MDOUT |= 0b10000101;
+	XBR2     = 0x41; // existing line
+	P3MDOUT |= 0b10000101;  // <== Add this
+
 	// Configure Uart 0
 	#if (((SYSCLK/BAUDRATE)/(2L*12L))>0xFFL)
 		#error Timer 0 reload value is incorrect because (SYSCLK/BAUDRATE)/(2L*12L) > 0xFF
@@ -81,8 +107,25 @@ char _c51_external_startup (void)
 	TR1 = 1; // START Timer1
 	TI = 1;  // Indicate TX0 ready
   	
-  	P2_0=1; // 'set' pin to 1 is normal operation mode.
-
+	
+	// Initialize timer 4 for periodic interrupts
+	SFRPAGE=0x10;
+	TMR4CN0=0x00;   // Stop Timer4; Clear TF4; WARNING: lives in SFR page 0x10
+	CKCON1|=0b_0000_0001; // Timer 4 uses the system clock
+	TMR4RL = TIMER4_RELOAD;
+	TMR4=0xffff;   // Set to reload immediately
+	EIE2|=0b_0000_0100;     // Enable Timer4 interrupts
+	TR4=1;
+	EA=1;
+	
+		// Initialize timer 2 for periodic interrupts
+	TMR2CN0=0x00;   // Stop Timer2; Clear TF2;
+	CKCON0|=0b_0001_0000; // Timer 2 uses the system clock
+	TMR2RL=TIMER2_RELOAD; // Initialize reload value
+	TMR2=0xffff;   // Set to reload immediately
+	ET2=1;         // Enable Timer2 interrupts
+	TR2=1;         // Start Timer2 (TMR2CN is bit addressable)
+	SFRPAGE=0x00;
 	return 0;
 }
 
@@ -350,19 +393,99 @@ float Volts_at_Pin(unsigned char pin)
 	 return ((ADC_at_Pin(pin)*VDD)/0b_0011_1111_1111_1111);
 }
 
+// loser timer setup for pwm signal ?
+void Timer4_ISR (void) interrupt INTERRUPT_TIMER4
+{
+	SFRPAGE=0x10;
+	TF4H = 0; 
+
+	pwm_counter4 += 256; // counting steps
+	if ( direction == 1) {
+	PWMOUT4 = (pwm_counter4 < pwm_duty4) ? 1 : 0;
+	}
+	if ( direction  == 0 ) {
+	PWMOUT4R = (pwm_counter4 < pwm_duty4) ? 1 : 0;
+	}
+}
+
+void Timer2_ISR (void) interrupt INTERRUPT_TIMER2
+{
+	SFRPAGE=0x0;
+	TF2H = 0; // Clear Timer2 interrupt flag
+	pwm_counter2 += 256; // counting steps
+	if ( direction == 1) {
+	PWMOUT2 = (pwm_counter2 < pwm_duty2) ? 1 : 0; ////////////////////////change this to pwm_duty2 later on 
+	}
+	if (direction == 0 ){
+	PWMOUT2R = (pwm_counter2 < pwm_duty2) ? 1 : 0;
+	}
+}
+// unconverts a value from 0 - 1023 to unsigned int that goes from 0 - 65535
+unsigned int ADCtoPWM(int adc_value)
+{
+//	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
+//    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
+
+    return (unsigned int)((adc_value * 65535UL) / 1023UL);
+}
+
+/*
+returns 2 ADCvalues to convert to pwm signals
+hopes does the ratio properly
+fornite skibbi balls 
+*/
+void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2) 
+{
+
+	// joystick in the middle hover over these values 
+	int centersteering = steering - 507;
+	int centerspeed = speed - 504;
+	float steeringFactor;
+	int baseSpeed;
+	int wheel1Speed;
+	int wheel2Speed;
+	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
+	 baseSpeed = abs(centerspeed);
+	 if ( baseSpeed < 5 ) 
+	 {
+	 	*ADCwheel1 = 0;
+	 	*ADCwheel2 = 0;
+	 	return;
+	} 	
+	 	
+	 steeringFactor = (float)centersteering / 507; // ranges from -1.0 (full left) to +1.0 (full right)
+	
+	
+	    // Calculate
+	    		
+	 wheel1Speed = baseSpeed + (int)(baseSpeed * steeringFactor);
+	 wheel2Speed = baseSpeed - (int)(baseSpeed * steeringFactor);
+	if (wheel1Speed > 508) wheel1Speed = 507;
+	if (wheel1Speed < 0) wheel1Speed = 0;
+	
+	if (wheel2Speed > 507) wheel2Speed = 507;
+	if (wheel2Speed < 0) wheel2Speed = 0;
+	
+	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
+	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
+
+}
+
 void main (void)
 {
-    unsigned int evilcode=127;
+    unsigned int evilcode, evilcode1;
 	unsigned int timeout=10000;
-    char c;
+	float pulse_width = 20;
+	float pulse_width1 = 10;
+	int speed, steering;
+	unsigned int adcwheel1, adcwheel2;
+ //   char c;
 
 	// initialization for the period code (& adc code)
 	float period;
 
 	// initialization for the perimeter code
-	float v[2];
-	float period_P2_1;
-	float period_P2_2;
+	//float v[2];
 	
 	waitms(500);
 	printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
@@ -372,9 +495,9 @@ void main (void)
 
 	TIMER0_Init(); 
 
-	InitPinADC(2, 1); // Configure P2.1 as analog input
-	InitPinADC(2, 2); // Configure P2.2 as analog input
-	InitADC();
+//	InitPinADC(2, 1); // Configure P2.1 as analog input
+//	InitPinADC(2, 2); // Configure P2.2 as analog input
+//	InitADC();
 
 	// To check configuration
 	SendATCommand("AT+VER\r\n");
@@ -393,6 +516,7 @@ void main (void)
 	{	
 		/* PERIOD CODE */
 		// Reset the counter
+		/*
 		TL0=0; 
 		TH0=0;
 		TF0=0;
@@ -400,7 +524,7 @@ void main (void)
 		
 		while(P0_7!=0 && timeout!=0){
 			timeout--;
-		}
+		
 		} // Wait for the signal to be zero
 		while(P0_7!=1); // Wait for the signal to be one
 		TR0=1; // Start the timer
@@ -422,127 +546,36 @@ void main (void)
 		}
 		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
 		period=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
-
-		/* ADC CODE */
-		v[0] = Volts_at_Pin(QFP32_MUX_P2_1); // ref voltage 1 peak
-		v[1] = Volts_at_Pin(QFP32_MUX_P2_2);
-
-		// Measuring the period of P2_1
-		TL0=0; 
-		TH0=0;
-		TF0=0;
-		overflow_count=0;
-		
-		while(P2_1!=0); // Wait for the signal to be zero
-		while(P2_1!=1); // Wait for the signal to be one
-		TR0=1; // Start the timer
-		while(P2_1!=0) // Wait for the signal to be zero
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-			}
-		}
-		while(P2_1!=1) // Wait for the signal to be one
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-			}
-		}
-		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
-		period_P2_1=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
-
-		// Measuring the period of P2_2
-		TL0=0; 
-		TH0=0;
-		TF0=0;
-		overflow_count=0;
-		
-		while(P2_2!=0); // Wait for the signal to be zero
-		while(P2_2!=1); // Wait for the signal to be one
-		TR0=1; // Start the timer
-		while(P2_2!=0) // Wait for the signal to be zero
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-			}
-		}
-		while(P2_2!=1) // Wait for the signal to be one
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-			}
-		}
-		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period!
-		period_P2_2=(overflow_count*65536.0+TH0*256.0+TL0)*(12.0/SYSCLK);
-
+		printf( "\rT=%f ms", period*1000.0); // displaying in terminal
+		*/
 		if(RXU1()) // Something has arrived
 		{
+		//agartha will rise again
+			getstr1(buff, sizeof(buff));
+			sscanf(buff, "S%dT%d", &speed, &steering);
+			if (speed < 503 )
+			{ 
+				P2_5 = 0;
+				P3_7=0;
+				direction = 1;
+			}
+			 else 
+			{
+			 P3_2=0;
+			 P3_0=0;
+			 direction = 0;
+			 
+			}
+			ADCsteeringRatio(speed, steering, &adcwheel1, &adcwheel2);
+			
+			pwm_duty4 = ADCtoPWM(adcwheel1);
+			pwm_duty2 = ADCtoPWM(adcwheel2);
+			
+			printf("duty4= %u duty2 = %u buff=%s speed=%u steering=%u\n\r", pwm_duty4, pwm_duty2, buff, adcwheel1, adcwheel2);
 				
-				getstr1(buff, sizeof(buff));
-				if (strcmp(buff, "1") == 0) sprintf(msg, "rec1\0");
-				else if (strcmp(buff, "2") == 0) sprintf(msg, "rec2\n");
-				else if (strcmp(buff, "3") == 0) sprintf(msg, "rec3\n");
-				else if (strcmp(buff, "4") == 0) sprintf(msg, "rec4\n");
-				else if (strcmp(buff, "5") == 0) sprintf(msg, "rec5\n");
-				else if (strcmp(buff, "S") == 0)
-				{
-						P3_7=0;  //wheel 1
-						P3_2=0;	// wheel 1 
-						P3_0=0; // wheel 2
-						P2_5=0; // wheel 2
-						sprintf(msg, "recS\n");
-				 }	
-				else if (strcmp(buff, "F") == 0)
-				{
-						P3_7=1;  //wheel 1
-						P3_2=0;	// wheel 1 
-						P3_0=0; // wheel 2
-						P2_5=1; // wheel 2
-						sprintf(msg, "recF\n");
-	
-				 }			
-				else if (strcmp(buff, "B") == 0)
-				{
-						P3_7=0;  //wheel 1
-						P3_2=1;	// wheel 1 
-						P3_0=1; // wheel 2
-						P2_5=0; // wheel 2
-						sprintf(msg, "recB\n");
-				}
-				else if (strcmp(buff, "L") == 0)
-				{
-						P3_7=0;  //wheel 1
-						P3_2=0;	// wheel 1 
-						P3_0=1; // wheel 2
-						P2_5=0; // wheel 2
-						sprintf(msg, "recL\n");
-				}
-				else if (strcmp(buff, "R") == 0)
-				{
-						P3_7=0;  //wheel 1
-						P3_2=1;	// wheel 1 
-						P3_0=0; // wheel 2
-						P2_5=0; // wheel 2
-						sprintf(msg, "recR\n");
-				}
-				else if (strcmp(buff, "P") == 0) sprintf(msg, "recP\n");
-				else if (strcmp(buff, "D") == 0) sprintf(msg, "recD\n");
-				else if (strcmp(buff, "X") == 0) sprintf(msg, "recX\n");
-				else sprintf(msg, "k\n");
-				sendstr1(msg);
+
 				waitms(5); // The radio seems to need this delay...
 
 		}
-		
-		printf( "\rT=%f ms, T2_1=%.5f, T2_2=%.5f", period*1000.0, period_P2_1*1000.0, period_P2_2*1000.0); // displaying in terminal
-		waitms(450); // i put this wait here
 	}
 }
