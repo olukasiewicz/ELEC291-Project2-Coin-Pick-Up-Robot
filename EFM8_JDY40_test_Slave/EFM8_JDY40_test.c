@@ -8,6 +8,7 @@
 #define SYSCLK 72000000
 #define BAUDRATE 115200L
 #define SARCLK 18000000L // needed for initializing the ADC
+#define VDD 3.3035 // The measured value of VDD in volts
 
 // defining pins
 #define PERIOD_PIN P0_6
@@ -310,8 +311,6 @@ void InitADC (void)
 	ADEN=1; // Enable ADC
 }
 
-#define VDD 3.3035 // The measured value of VDD in volts
-
 void InitPinADC (unsigned char portno, unsigned char pinno)
 {
 	unsigned char mask;
@@ -354,7 +353,7 @@ float Volts_at_Pin(unsigned char pin)
 }
 
 // Measure the period of a square signal at PERIOD_PIN
-unsigned long GetPeriod (int n, int pin)
+unsigned long GetPeriod (int n)
 {
 	unsigned int overflow_count;
 	unsigned char i;
@@ -368,8 +367,6 @@ unsigned long GetPeriod (int n, int pin)
 	TL0=0; TH0=0; TF0=0; overflow_count=0;
 	TR0=1;
 
-	if(pin == 1)
-	{
 		// Reset the counter
 		TR0=0;
 		TL0=0; TH0=0; TF0=0; overflow_count=0;
@@ -430,135 +427,6 @@ unsigned long GetPeriod (int n, int pin)
 			}
 		}
 		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period in clock cycles!
-	} 
-	
-	else if(pin == 2)
-	{
-		// Reset the counter
-		TR0=0;
-		TL0=0; TH0=0; TF0=0; overflow_count=0;
-		TR0=1;
-		while(P2_1!=0) // Wait for the signal to be zero
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-				if(overflow_count==10) // If it overflows too many times assume no signal is present
-				{
-					TR0=0;
-					return 0; // No signal
-				}
-			}
-		}
-		
-		// Reset the counter
-		TR0=0;
-		TL0=0; TH0=0; TF0=0; overflow_count=0;
-		TR0=1;
-		while(P2_1!=1) // Wait for the signal to be one
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-				if(overflow_count==10) // If it overflows too many times assume no signal is present
-				{
-					TR0=0;
-					return 0; // No signal
-				}
-			}
-		}
-		
-		// Reset the counter
-		TR0=0;
-		TL0=0; TH0=0; TF0=0; overflow_count=0;
-		TR0=1; // Start the timer
-		for(i=0; i<n; i++) // Measure the time of 'n' periods
-		{
-			while(P2_1!=0) // Wait for the signal to be zero
-			{
-				if(TF0==1) // Did the 16-bit timer overflow?
-				{
-					TF0=0;
-					overflow_count++;
-				}
-			}
-			while(P2_1!=1) // Wait for the signal to be one
-			{
-				if(TF0==1) // Did the 16-bit timer overflow?
-				{
-					TF0=0;
-					overflow_count++;
-				}
-			}
-		}
-		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period in clock cycles!
-	}
-	
-	else
-	{
-		// Reset the counter
-		TR0=0;
-		TL0=0; TH0=0; TF0=0; overflow_count=0;
-		TR0=1;
-		while(P2_2!=0) // Wait for the signal to be zero
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-				if(overflow_count==10) // If it overflows too many times assume no signal is present
-				{
-					TR0=0;
-					return 0; // No signal
-				}
-			}
-		}
-		
-		// Reset the counter
-		TR0=0;
-		TL0=0; TH0=0; TF0=0; overflow_count=0;
-		TR0=1;
-		while(P2_2!=1) // Wait for the signal to be one
-		{
-			if(TF0==1) // Did the 16-bit timer overflow?
-			{
-				TF0=0;
-				overflow_count++;
-				if(overflow_count==10) // If it overflows too many times assume no signal is present
-				{
-					TR0=0;
-					return 0; // No signal
-				}
-			}
-		}
-		
-		// Reset the counter
-		TR0=0;
-		TL0=0; TH0=0; TF0=0; overflow_count=0;
-		TR0=1; // Start the timer
-		for(i=0; i<n; i++) // Measure the time of 'n' periods
-		{
-			while(P2_2!=0) // Wait for the signal to be zero
-			{
-				if(TF0==1) // Did the 16-bit timer overflow?
-				{
-					TF0=0;
-					overflow_count++;
-				}
-			}
-			while(P2_2!=1) // Wait for the signal to be one
-			{
-				if(TF0==1) // Did the 16-bit timer overflow?
-				{
-					TF0=0;
-					overflow_count++;
-				}
-			}
-		}
-		TR0=0; // Stop timer 0, the 24-bit number [overflow_count-TH0-TL0] has the period in clock cycles!	
-	}
 	
 	return (overflow_count*65536+TH0*256+TL0);
 }
@@ -658,13 +526,12 @@ void main (void)
     char c;
 
 	// initialization for the period code
-	long int count, f_1;
+	long int count, f;
 	int coinPresent = 0;
 
 	// initialization for the perimeter code
-	//float v[2];
-	long int f_P2_1;
-	long int f_P2_2 = 0;
+	long int p_thresh = 2; // this is the voltage threshold to be used when a perimiter is detected
+	float v[2];
 	
 	waitms(500);
 	printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
@@ -674,8 +541,8 @@ void main (void)
 
 	TIMER0_Init(); 
 
-	//InitPinADC(2, 1); // Configure P2.1 as analog input
-	//InitPinADC(2, 2); // Configure P2.2 as analog input
+	InitPinADC(2, 1); // Configure P2.1 as analog input
+	InitPinADC(2, 2); // Configure P2.2 as analog input
 	InitADC();
 
 	// To check configuration
@@ -696,21 +563,39 @@ void main (void)
 	while(1)
 	{	
 		/* PERIOD CODE */
-		count=GetPeriod(200, 1);
-		f_1 = GetFrequency(count, 1);
-		coinPresent = CoinDecider(f_1); // find a way to send this to the master
+		count = GetPeriod(200);
+		f = GetFrequency(count, 1);
+		coinPresent = CoinDecider(f); 
 		if(coinPresent)
 		{
-			sprintf(msg, "%ld", f_1);
+			sprintf(msg, "%ld", f);
 			sendstr1(msg);
 		}
 
-		// Reading freqeucny off of ADC pins, doesn't work yet
-		count=GetPeriod(200, 2);
-		f_P2_1 = GetFrequency(count, 2);
+		/* PERIMETER CODE */
+		v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
+		v[1] = Volts_at_Pin(QFP32_MUX_P2_2);
 
-		/*count=GetPeriod(200, 3);
-		f_P2_2 = GetFrequency(count, 3);*/
+		// must check what the threshold is
+		PrintNumber(v[0], 10, 7);
+		eputs(" ");
+		PrintNumber(v[1], 10, 7);
+
+		/*if((v[0] > p_thresh) || (v[1] > p_thresh))
+		{
+			eputs(" PERIMETER REACHED");
+			PrintNumber(v[0], 10, 7);
+			eputs(" ");
+			PrintNumber(v[1], 10, 7);
+
+			P3_7=0;  //wheel 1
+			P3_2=1;	// wheel 1 
+			P3_0=1; // wheel 2
+			P2_5=0; // wheel 2
+		} else
+		{
+			eputs(" PERIMITER NOT REACHED");
+		}*/
 
 		if(RXU1()) // Something has arrived
 		{
