@@ -11,8 +11,6 @@
 
 // defining pins
 #define PERIOD_PIN P0_6
-#define PERIOD_PIN_2 P2_1
-#define PERIOD_PIN_3 P2_2
 
 //SlAVE FILE FOR EFM8 
 //mommy farts
@@ -370,8 +368,6 @@ unsigned long GetPeriod (int n, int pin)
 	TL0=0; TH0=0; TF0=0; overflow_count=0;
 	TR0=1;
 
-	// condition ? value_if_true : value_if_false;
-
 	if(pin == 1)
 	{
 		// Reset the counter
@@ -442,7 +438,7 @@ unsigned long GetPeriod (int n, int pin)
 		TR0=0;
 		TL0=0; TH0=0; TF0=0; overflow_count=0;
 		TR0=1;
-		while(PERIOD_PIN_2!=0) // Wait for the signal to be zero
+		while(P2_1!=0) // Wait for the signal to be zero
 		{
 			if(TF0==1) // Did the 16-bit timer overflow?
 			{
@@ -460,7 +456,7 @@ unsigned long GetPeriod (int n, int pin)
 		TR0=0;
 		TL0=0; TH0=0; TF0=0; overflow_count=0;
 		TR0=1;
-		while(PERIOD_PIN_2!=1) // Wait for the signal to be one
+		while(P2_1!=1) // Wait for the signal to be one
 		{
 			if(TF0==1) // Did the 16-bit timer overflow?
 			{
@@ -480,7 +476,7 @@ unsigned long GetPeriod (int n, int pin)
 		TR0=1; // Start the timer
 		for(i=0; i<n; i++) // Measure the time of 'n' periods
 		{
-			while(PERIOD_PIN_2!=0) // Wait for the signal to be zero
+			while(P2_1!=0) // Wait for the signal to be zero
 			{
 				if(TF0==1) // Did the 16-bit timer overflow?
 				{
@@ -488,7 +484,7 @@ unsigned long GetPeriod (int n, int pin)
 					overflow_count++;
 				}
 			}
-			while(PERIOD_PIN_2!=1) // Wait for the signal to be one
+			while(P2_1!=1) // Wait for the signal to be one
 			{
 				if(TF0==1) // Did the 16-bit timer overflow?
 				{
@@ -506,7 +502,7 @@ unsigned long GetPeriod (int n, int pin)
 		TR0=0;
 		TL0=0; TH0=0; TF0=0; overflow_count=0;
 		TR0=1;
-		while(PERIOD_PIN_3!=0) // Wait for the signal to be zero
+		while(P2_2!=0) // Wait for the signal to be zero
 		{
 			if(TF0==1) // Did the 16-bit timer overflow?
 			{
@@ -524,7 +520,7 @@ unsigned long GetPeriod (int n, int pin)
 		TR0=0;
 		TL0=0; TH0=0; TF0=0; overflow_count=0;
 		TR0=1;
-		while(PERIOD_PIN_3!=1) // Wait for the signal to be one
+		while(P2_2!=1) // Wait for the signal to be one
 		{
 			if(TF0==1) // Did the 16-bit timer overflow?
 			{
@@ -544,7 +540,7 @@ unsigned long GetPeriod (int n, int pin)
 		TR0=1; // Start the timer
 		for(i=0; i<n; i++) // Measure the time of 'n' periods
 		{
-			while(PERIOD_PIN_3!=0) // Wait for the signal to be zero
+			while(P2_2!=0) // Wait for the signal to be zero
 			{
 				if(TF0==1) // Did the 16-bit timer overflow?
 				{
@@ -552,7 +548,7 @@ unsigned long GetPeriod (int n, int pin)
 					overflow_count++;
 				}
 			}
-			while(PERIOD_PIN_3!=1) // Wait for the signal to be one
+			while(P2_2!=1) // Wait for the signal to be one
 			{
 				if(TF0==1) // Did the 16-bit timer overflow?
 				{
@@ -616,13 +612,13 @@ unsigned long GetFrequency (long int c, int pin)
 	
 	else
 	{
-		eputs("NO SIGNAL                     \r");
+		eputs(" NO SIGNAL                     \r");
 	}
 
 	return f;
 }
 
-bool CoinDecider(long int freq)
+int CoinDecider(long int freq)
 {
 	if(freq>=56300) // detects a coin
 	{
@@ -644,7 +640,7 @@ bool CoinDecider(long int freq)
 			eputs(" LOONIE");
 		}
 
-		return true;
+		return 1;
 	}
 
 	else
@@ -652,7 +648,7 @@ bool CoinDecider(long int freq)
 		eputs(" NO COIN");
 	}
 
-	return false;
+	return 0;
 }
 
 void main (void)
@@ -663,14 +659,12 @@ void main (void)
 
 	// initialization for the period code
 	long int count, f_1;
+	int coinPresent = 0;
 
 	// initialization for the perimeter code
 	//float v[2];
-	long int f_P2_1 = 0;
+	long int f_P2_1;
 	long int f_P2_2 = 0;
-
-	// coin detected
-	bool coinPresent = false;
 	
 	waitms(500);
 	printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
@@ -680,8 +674,8 @@ void main (void)
 
 	TIMER0_Init(); 
 
-	InitPinADC(2, 1); // Configure P2.1 as analog input
-	InitPinADC(2, 2); // Configure P2.2 as analog input
+	//InitPinADC(2, 1); // Configure P2.1 as analog input
+	//InitPinADC(2, 2); // Configure P2.2 as analog input
 	InitADC();
 
 	// To check configuration
@@ -705,12 +699,17 @@ void main (void)
 		count=GetPeriod(200, 1);
 		f_1 = GetFrequency(count, 1);
 		coinPresent = CoinDecider(f_1); // find a way to send this to the master
+		if(coinPresent)
+		{
+			sprintf(msg, "%ld", f_1);
+			sendstr1(msg);
+		}
 
 		// Reading freqeucny off of ADC pins, doesn't work yet
-		/*count=GetPeriod(200, 2);
+		count=GetPeriod(200, 2);
 		f_P2_1 = GetFrequency(count, 2);
 
-		count=GetPeriod(200, 3);
+		/*count=GetPeriod(200, 3);
 		f_P2_2 = GetFrequency(count, 3);*/
 
 		if(RXU1()) // Something has arrived
