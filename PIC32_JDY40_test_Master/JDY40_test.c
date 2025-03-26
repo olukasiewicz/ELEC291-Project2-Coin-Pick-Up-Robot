@@ -494,6 +494,62 @@ void PrintNumber(long int val, int Base, int digits)
 	uart_puts(&buff[j+1]);
 }
 
+unsigned int ADCtoPWM(int adc_value)
+{
+//	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
+//    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
+
+    return (unsigned int)((adc_value * 65535UL) / 1008UL);
+}
+
+/*
+returns 2 ADCvalues to convert to pwm signals
+hopes does the ratio properly
+fornite skibbi balls 
+*/
+void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2) 
+{
+
+	// joystick in the middle hover over these values 
+	int centersteering = steering - 508;
+	int centerspeed;
+	float steeringFactor;
+	int baseSpeed;
+	int baseSteer;
+	int wheel1Speed;
+	int wheel2Speed;
+	
+	centerspeed = speed - 504;
+	
+	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
+	 baseSpeed = abs(centerspeed);
+	 baseSteer = abs(centersteering);
+	 if ( baseSpeed < 5 && baseSteer < 5 ) 
+	 {
+	 	*ADCwheel1 = 0;
+	 	*ADCwheel2 = 0;
+	 	return;
+	} 
+		
+	 	
+	 steeringFactor = (float)centersteering / 508; // ranges from -1.0 (full left) to +1.0 (full right)
+	
+	if ( steeringFactor > 1 ) steeringFactor = 1;
+	
+	    // Calculate
+	    		
+	 wheel1Speed = speed + (int)(speed * steeringFactor);
+	 wheel2Speed = speed - (int)(speed * steeringFactor);
+	if (wheel1Speed > 1008) wheel1Speed = 1008;
+	if (wheel1Speed < 0) wheel1Speed = 0;
+	
+	if (wheel2Speed > 1008) wheel2Speed = 1008;
+	if (wheel2Speed < 0) wheel2Speed = 0;
+	
+	*ADCwheel1 = (unsigned int)(wheel1Speed);
+	*ADCwheel2 = (unsigned int)(wheel2Speed);	
+}
+
 void main(void)
 {
 	char buff[80];
@@ -502,26 +558,32 @@ void main(void)
     int cont1=0, cont2=100;
 	volatile unsigned long t=0;
 	unsigned char myduty=0;
-	int adcval4;
-	int adcval3;
-	unsigned int pwmadcval4;
-	unsigned int pwmadcval3;	
+	float thing;
+	int adcvalx;
+	int adcvaly;
+	int newadcvalx;
+	int newadcvaly;
+	unsigned int pwmadcvalx;
+	unsigned int pwmadcvaly;	
     
 	DDPCON = 0;
 	CFGCON = 0;
-	Init_pwm(1500L);
+	Init_pwm(2000L);
 	LCD_4BIT();
     UART2Configure(115200);  // Configure UART2 for a baud rate of 115200
     UART1Configure(9600);  // Configure UART1 to communicate with JDY40 with a baud rate of 9600
  
 	delayms(500); // Give putty time to start before we send stuff.
     printf("PIC32 MASTER REMOTE CONTROL TEST\r\n");
-
-	// RB14 is connected to the 'SET' pin of the JDY40.  Configure as output:
+	// RB14 is connected to the 'SET' pin of the JDY40.  Configure as output:;
     ANSELB &= ~(1<<14); // Set RB14 as a digital I/O
     TRISB &= ~(1<<14);  // configure pin RB14 as output
 	LATB |= (1<<14);    // 'SET' pin of JDY40 to 1 is normal operation mode
-
+	
+	ANSELB &= ~(1<<10); // Set RB14 as a digital I/O
+    TRISB &= ~(1<<10);  // configure pin RB14 as output
+	LATB |= (1<<10);    // 'SET' pin of JDY40 to 1 is normal operation mode
+	
 	ReceptionOff();
 	ConfigurePins();
  	ADCConf(); // Configure ADC
@@ -533,7 +595,7 @@ void main(void)
 	SendATCommand("AT+RFC120\r\n");
 	SendATCommand("AT+POWE\r\n");
 	SendATCommand("AT+CLSS\r\n");
-
+	TRISBbits.TRISB0 = 1;
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");
@@ -542,7 +604,8 @@ void main(void)
 
 	while(1)
 	{
-  		Set_pwm(20);
+  		Set_pwm(0);
+  		
 /*		sprintf(buff, "%03d,%03d\n", cont1, cont2); // Construct a test message
 		putc1('!'); // Send a message to the slave. First send the 'attention' character which is '!'
 		// Wait a bit so the slave has a chance to get ready
@@ -564,57 +627,31 @@ void main(void)
 		SerialTransmit1(sendbuff);
 */
 		delayms(10);
-/*		
-		printf("\r\n");
-		printf("1) Pulse width for servo 1.\r\n");
-		printf("2) Pulse width for servo 2.\r\n");
-		printf("3) Turn electromagnet on/off.\r\n");
-		printf("4) Display metal detector integer.\r\n");
-		printf("5) Perimeter detectors.\r\n");
-		printf("\r\n");
-		printf("S) Stop.\r\n");
-		printf("F) Forward.\r\n");
-		printf("B) Backward.\r\n");
-		printf("L) Left.\r\n");
-		printf("R) Right.\r\n");
-		printf("P) Pick coin.\r\n");
-		printf("D) Detect and pick.\r\n");
-		printf("\r\n");
-		printf("X) Exit.\r\n");
-		printf("\r\nCommand:\r\n\r ");
-		adcval = ADCRead(4);
-		printf("%d", adcval);
-//		gets(sendbuff);
-//		SerialTransmit1(sendbuff);
-*/		adcval4 = ADCRead(4);
-		adcval3 = ( ADCRead(3));
+		
+		adcvalx = ADCRead(4);
+		adcvaly = ( ADCRead(3));
+		ADCsteeringRatio(adcvaly, adcvalx, &newadcvalx, &newadcvaly);
+		pwmadcvalx = ADCtoPWM(newadcvalx);
+		pwmadcvaly = ADCtoPWM(newadcvaly);
 //		pwmadcval4 = ADCtoPWM(adcval4);
 //		pwmadcval3 = ADCtoPWM(adcval3);
-		sprintf(buff, "S%uT%u\n", adcval3, adcval4);
-		SerialTransmit1(buff);
-		printf("buff = %s adcval4(x) = %d adcval3(y) = %d \r\n", buff, adcval4, adcval3);
-//		printf("%u, %u\n\r", pwmadcval4, pwmadcval3);
-//		delayms(500);
-//		while (1) 
-//		{
-//			if(U1STAbits.URXDA) break;
-//			if(++timeout_cnt>250) break; // Wait up to 25ms f	or the repply
-//			delayus(100); 
-//		}
-		
+		sprintf(sendbuff, "S%uT%u\n", adcvalx, adcvaly);
+		SerialTransmit1(sendbuff);
+		printf("sendbuff = %s adcval4(x) = %d adcval3(y) = %d pwmx = %u pwmy = %u\r\n", sendbuff, adcvalx, adcvaly, pwmadcvalx, pwmadcvaly);
+		thing = PORTB&(1<<10) ? 0 : 1;
+		if( thing == 1 ) {
+		printf ("hello\n\r");
+		sprintf(sendbuff, "A"); 
+		SerialTransmit1(sendbuff);
+		delayms(1500);
+		Set_pwm(127);
+		}
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 		{
 		SerialReceive1_timeout(buff, sizeof(buff)-1); // Get the message from the slave
-			if (strcmp(buff, "k\n") != 0) 
-			{
-				printf("\nSlave says: %s\r\n", buff);
-			} else printf("%s\r\n", buff);
-		}
-//		else // Timed out waiting for reply
-//		{
-//			printf("NO RESPONSE\r\n", buff);
-//		}
 		
+//		printf("hello");
+		}
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
 	}
 }
