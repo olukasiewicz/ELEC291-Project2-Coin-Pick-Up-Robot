@@ -8,7 +8,9 @@
 #define BAUDRATE 115200L
 
 #define SARCLK 18000000L // needed for initializing the ADC
+#define PERIOD_PIN P0_6
 #define VDD 3.3035 // The measured value of VDD in volts
+#define p_thresh 0.1
 /*
 						P3_7=0;  //wheel 1
 						P3_2=0;	// wheel 1 
@@ -467,7 +469,7 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	
 	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
 	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
-
+}
 // Measure the period of a square signal at PERIOD_PIN
 unsigned long GetPeriod (int n)
 {
@@ -609,19 +611,19 @@ int CoinDecider(long int freq)
 		// if frequency is in dime range 10 cents
 		if((freq >= 56200) && (freq < 56400))
 		{
-			eputs(" DIME");
+			printf(" DIME");
 		}
 
 		// nickel 25 cents
 		else if ((freq >= 56400) && (freq < 56700))
 		{
-			eputs(" NICKEL");
+			printf(" NICKEL");
 		}
 
 		// loonie 1 dollar
 		else
 		{
-			eputs(" LOONIE");
+			printf(" LOONIE");
 		}
 
 		return 1;
@@ -629,7 +631,7 @@ int CoinDecider(long int freq)
 
 	else
 	{
-		eputs(" NO COIN");
+		printf(" NO COIN");
 	}
 
 	return 0;
@@ -637,21 +639,23 @@ int CoinDecider(long int freq)
 
 void main (void)
 {
-    unsigned int evilcode, evilcode1;
+    //unsigned int evilcode, evilcode1;
 	unsigned int timeout=10000;
 	float pulse_width = 20;
 	float pulse_width1 = 10;
 	int speed, steering;
 	unsigned int adcwheel1, adcwheel2;
- //   char c;
+ 	//char c;
 
 	// initialization for the period code
 	long int count, f;
 	int coinPresent = 0;
 
 	// initialization for the perimeter code
-	long int p_thresh = 2; // this is the voltage threshold to be used when a perimiter is detected
 	float v[2];
+
+	// automatic mode
+	//int automatic = 0;
 	
 	waitms(500);
 	printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
@@ -686,34 +690,16 @@ void main (void)
 		coinPresent = CoinDecider(f); 
 		if(coinPresent)
 		{
-			sprintf(msg, "%ld", f);
+			sprintf(msg, "%ld", f-55000); // subtracted so that it sends a smaller value
 			sendstr1(msg);
 		}
 
 		/* PERIMETER CODE */
 		v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
-		v[1] = Volts_at_Pin(QFP32_MUX_P2_2);
+		v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 
-		// must check what the threshold is
-		PrintNumber(v[0], 10, 7);
-		eputs(" ");
-		PrintNumber(v[1], 10, 7);
-
-		/*if((v[0] > p_thresh) || (v[1] > p_thresh))
-		{
-			eputs(" PERIMETER REACHED");
-			PrintNumber(v[0], 10, 7);
-			eputs(" ");
-			PrintNumber(v[1], 10, 7);
-
-			P3_7=0;  //wheel 1
-			P3_2=1;	// wheel 1 
-			P3_0=1; // wheel 2
-			P2_5=0; // wheel 2
-		} else
-		{
-			eputs(" PERIMITER NOT REACHED");
-		}*/
+		// printing the voltage at the inductors (if perimeter is reached)
+		printf(" V_P2_1 = %f V_P2_3 = %f ", v[0], v[1]);
 
 		if(RXU1()) // Something has arrived
 		{
@@ -737,12 +723,39 @@ void main (void)
 			
 			pwm_duty4 = ADCtoPWM(adcwheel1);
 			pwm_duty2 = ADCtoPWM(adcwheel2);
-			
-			printf("duty4= %u duty2 = %u buff=%s speed=%u steering=%u\n\r", pwm_duty4, pwm_duty2, buff, adcwheel1, adcwheel2);
-				
 
-				waitms(5); // The radio seems to need this delay...
+			// inductor 1 reaches perimeter (front)
+			/*if (automatic == 1)
+			{
+				while(v[0] > p_thresh)
+				{
+					printf(" PERIMETER REACHED INDUCTOR 1");
+
+					// go backwards
+					P3_7=1;  //wheel 1
+					P3_2=0;	// wheel 1 
+					P3_0=1; // wheel 2
+					P2_5=0; // wheel 2
+				}
+
+				P3_7=0;  //wheel 1
+				P3_2=1;	// wheel 1 
+				P3_0=0; // wheel 2
+				P2_5=0; // wheel 2
+				waitms(1000);
+
+				while(v[1] > p_thresh)
+				{
+					printf(" PERIMETER REACHED INDUCTOR 2");
+				}
+			} */
+
+			//printf("duty4= %u duty2 = %u buff=%s speed=%u steering=%u\n\r", pwm_duty4, pwm_duty2, buff, adcwheel1, adcwheel2);
+				
+			waitms(5); // The radio seems to need this delay...
 
 		}
+
+		eputs("\n");
 	}
 }
