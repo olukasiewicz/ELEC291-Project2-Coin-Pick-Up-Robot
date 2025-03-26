@@ -6,8 +6,6 @@ Archive member included because of file (symbol)
 
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
                               JDY40_test.o (__floatunsisf)
-c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strcmp.o)
-                              JDY40_test.o (strcmp)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
                               JDY40_test.o (strlen)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
@@ -142,10 +140,14 @@ c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/..
                               JDY40_test.o (fpmul)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
                               c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o) (fpadd)
+c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fpcmp.o)
+                              JDY40_test.o (fpcmp)
+c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoli.o)
+                              JDY40_test.o (fptosi)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
                               JDY40_test.o (fptoui)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(sitofp.o)
-                              c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o) (sitofp)
+                              JDY40_test.o (sitofp)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
                               c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo) (__udivdi3)
 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
@@ -164,57 +166,57 @@ Microchip PIC32 Memory-Usage Report
 kseg0 Program-Memory Usage
 section                    address  length [bytes]      (dec)  Description
 -------                 ----------  -------------------------  -----------
-.text                   0x9d000000          0xd2c        3372  App's exec code 
-.text._do_print_cdnopsu 0x9d000d2c          0x6fc        1788   
-.text                   0x9d001428          0x714        1812  App's exec code 
-.text.fpsubadd          0x9d001b3c          0x278         632   
-.text.fp32div           0x9d001db4          0x230         560   
-.text.fp32mul           0x9d001fe4          0x1bc         444   
-.text                   0x9d0021a0          0x168         360  App's exec code 
-.dinit                  0x9d002308          0x140         320   
-.rodata                 0x9d002448          0x134         308  Read-only const 
-.text                   0x9d00257c          0x120         288  App's exec code 
-.rodata                 0x9d00269c          0x100         256  Read-only const 
-.text.general_exception 0x9d00279c           0xdc         220   
-.text.fptoul            0x9d002878           0x7c         124   
-.text._outcnvrt         0x9d0028f4           0x78         120   
-.text._mon_putc         0x9d00296c           0x78         120   
-.text._flsbuf_simple    0x9d0029e4           0x74         116   
-.text.sitofp            0x9d002a58           0x60          96   
-.text.main_entry        0x9d002ab8           0x54          84   
-.text.fputc             0x9d002b0c           0x4c          76   
-.text._bootstrap_except 0x9d002b58           0x48          72   
-.text._general_exceptio 0x9d002ba0           0x48          72   
-.vector_default         0x9d002be8           0x48          72   
-.text                   0x9d002c30           0x44          68  App's exec code 
-.text.repl.constprop.0  0x9d002c74           0x40          64   
-.text._fflush_simple    0x9d002cb4           0x3c          60   
-.text._fwrite_simple    0x9d002cf0           0x3c          60   
-.text._sprintf_cdnopuxX 0x9d002d2c           0x38          56   
-.text.puts              0x9d002d64           0x2c          44   
-.text                   0x9d002d90           0x28          40  App's exec code 
-.text.fputs             0x9d002db8           0x28          40   
-.rodata                 0x9d002de0           0x28          40  Read-only const 
-.text._filbuf_simple    0x9d002e08           0x20          32   
-.text._fsync_simple     0x9d002e28           0x1c          28   
-.text._printf_cdnopsuxX 0x9d002e44           0x1c          28   
-.text._mon_write        0x9d002e60           0x1c          28   
-.text                   0x9d002e7c           0x18          24  App's exec code 
-.rodata                 0x9d002e94           0x14          20  Read-only const 
-.text.putchar           0x9d002ea8           0x14          20   
-.rodata                 0x9d002ebc           0x14          20  Read-only const 
-.text._io_exit          0x9d002ed0           0x20          32   
-.text.putc              0x9d002ef0            0xc          12   
-.text._vfprintf_cdnopsu 0x9d002efc            0xc          12   
-.text._filbuf_string    0x9d002f08            0x8           8   
-.text._on_reset         0x9d002f10            0x4           4   
-.text._on_bootstrap     0x9d002f14            0x4           4   
-.rodata                 0x9d002f18            0x4           4  Read-only const 
-.text._flsbuf_string    0x9d002f1c            0x4           4   
-.text._fflush_string    0x9d002f20            0x4           4   
-.text._fwrite_string    0x9d002f24            0x4           4   
-.text._fsync_string     0x9d002f28            0x4           4   
-      Total kseg0_program_mem used  :      0x2f2c       12076  19.7% of 0xf000
+.text                   0x9d000000          0xee0        3808  App's exec code 
+.text._do_print_cdnopsu 0x9d000ee0          0x6fc        1788   
+.text                   0x9d0015dc          0x714        1812  App's exec code 
+.text.fpsubadd          0x9d001cf0          0x278         632   
+.text.fp32div           0x9d001f68          0x230         560   
+.text.fp32mul           0x9d002198          0x1bc         444   
+.text                   0x9d002354          0x168         360  App's exec code 
+.dinit                  0x9d0024bc          0x140         320   
+.rodata                 0x9d0025fc          0x230         560  Read-only const 
+.text.general_exception 0x9d00282c           0xdc         220   
+.text.fpcmp             0x9d002908           0x9c         156   
+.text.fptoli            0x9d0029a4           0x80         128   
+.text.fptoul            0x9d002a24           0x7c         124   
+.text._outcnvrt         0x9d002aa0           0x78         120   
+.text._mon_putc         0x9d002b18           0x78         120   
+.text._flsbuf_simple    0x9d002b90           0x74         116   
+.text.sitofp            0x9d002c04           0x60          96   
+.text.main_entry        0x9d002c64           0x54          84   
+.text.fputc             0x9d002cb8           0x4c          76   
+.text._bootstrap_except 0x9d002d04           0x48          72   
+.text._general_exceptio 0x9d002d4c           0x48          72   
+.vector_default         0x9d002d94           0x48          72   
+.text                   0x9d002ddc           0x44          68  App's exec code 
+.text.repl.constprop.0  0x9d002e20           0x40          64   
+.text._fflush_simple    0x9d002e60           0x3c          60   
+.text._fwrite_simple    0x9d002e9c           0x3c          60   
+.text._sprintf_cdnopuxX 0x9d002ed8           0x38          56   
+.text.puts              0x9d002f10           0x2c          44   
+.text                   0x9d002f3c           0x28          40  App's exec code 
+.text.fputs             0x9d002f64           0x28          40   
+.rodata                 0x9d002f8c           0x28          40  Read-only const 
+.text._filbuf_simple    0x9d002fb4           0x20          32   
+.text._fsync_simple     0x9d002fd4           0x1c          28   
+.text._printf_cdnopsuxX 0x9d002ff0           0x1c          28   
+.text._mon_write        0x9d00300c           0x1c          28   
+.text                   0x9d003028           0x18          24  App's exec code 
+.rodata                 0x9d003040           0x14          20  Read-only const 
+.text.putchar           0x9d003054           0x14          20   
+.rodata                 0x9d003068           0x14          20  Read-only const 
+.text._io_exit          0x9d00307c           0x20          32   
+.text.putc              0x9d00309c            0xc          12   
+.text._vfprintf_cdnopsu 0x9d0030a8            0xc          12   
+.text._filbuf_string    0x9d0030b4            0x8           8   
+.text._on_reset         0x9d0030bc            0x4           4   
+.text._on_bootstrap     0x9d0030c0            0x4           4   
+.rodata                 0x9d0030c4            0x4           4  Read-only const 
+.text._flsbuf_string    0x9d0030c8            0x4           4   
+.text._fflush_string    0x9d0030cc            0x4           4   
+.text._fwrite_string    0x9d0030d0            0x4           4   
+.text._fsync_string     0x9d0030d4            0x4           4   
+      Total kseg0_program_mem used  :      0x30d8       12504  20.4% of 0xf000
 
 kseg0 Boot-Memory Usage
 section                    address  length [bytes]      (dec)  Description
@@ -278,7 +280,7 @@ section                    address  length [bytes]      (dec)  Description
 .bev_excpt              0xbfc00380           0x10          16  BEV-Exception 
          Total kseg1_boot_mem used  :       0x1f4         500  42.8% of 0x490
         --------------------------------------------------------------------------
-         Total Program Memory used  :      0x3290       12944  19.4% of 0x10490
+         Total Program Memory used  :      0x343c       13372  20.0% of 0x10490
         --------------------------------------------------------------------------
 
 
@@ -313,7 +315,6 @@ Discarded input sections
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
- .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strcmp.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
@@ -378,6 +379,8 @@ Discarded input sections
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
+ .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fpcmp.o)
+ .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoli.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(sitofp.o)
  .reginfo       0x00000000       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
@@ -1053,37 +1056,35 @@ END GROUP
 .stab.indexstr
  *(.stab.indexstr)
 
-.comment        0x00000000      0x34d
+.comment        0x00000000      0x334
  *(.comment)
  .comment       0x00000000       0x3c JDY40_test.o
                                  0x3d (size before relaxing)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
- .comment       0x0000003c       0x19 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strcmp.o)
-                                 0x1a (size before relaxing)
- .comment       0x00000055       0x19 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
+ .comment       0x0000003c       0x19 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
                                  0x1a (size before relaxing)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
- .comment       0x0000006e       0x53 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobdata.o)
+ .comment       0x00000055       0x53 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobdata.o)
                                  0x90 (size before relaxing)
- .comment       0x000000c1       0x54 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+ .comment       0x000000a8       0x54 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
                                  0x91 (size before relaxing)
- .comment       0x00000115       0x50 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+ .comment       0x000000fc       0x50 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
                                  0x8d (size before relaxing)
- .comment       0x00000165       0x50 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+ .comment       0x0000014c       0x50 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
                                  0x8d (size before relaxing)
- .comment       0x000001b5       0x51 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
+ .comment       0x0000019c       0x51 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
                                  0x8e (size before relaxing)
- .comment       0x00000206       0x52 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
+ .comment       0x000001ed       0x52 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
                                  0x8f (size before relaxing)
- .comment       0x00000258       0x4e c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
+ .comment       0x0000023f       0x4e c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
                                  0x8b (size before relaxing)
- .comment       0x000002a6       0x52 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+ .comment       0x0000028d       0x52 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
                                  0x8f (size before relaxing)
- .comment       0x000002f8       0x55 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+ .comment       0x000002df       0x55 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
                                  0x92 (size before relaxing)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
  .comment       0x00000000       0x3d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
@@ -1134,65 +1135,65 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x379f
+.debug_info     0x00000000     0x3954
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x1d3f JDY40_test.o
- .debug_info    0x00001d3f      0x12d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
- .debug_info    0x00001e6c       0xf3 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_info    0x00001f5f       0xcc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
- .debug_info    0x0000202b       0xd4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
- .debug_info    0x000020ff       0xef c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
- .debug_info    0x000021ee       0xe6 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
- .debug_info    0x000022d4      0x853 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
- .debug_info    0x00002b27      0x8b0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
- .debug_info    0x000033d7      0x23a c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
- .debug_info    0x00003611       0xc8 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
- .debug_info    0x000036d9       0xc6 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
+ .debug_info    0x00000000     0x1ef4 JDY40_test.o
+ .debug_info    0x00001ef4      0x12d c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+ .debug_info    0x00002021       0xf3 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_info    0x00002114       0xcc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .debug_info    0x000021e0       0xd4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .debug_info    0x000022b4       0xef c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .debug_info    0x000023a3       0xe6 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .debug_info    0x00002489      0x853 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
+ .debug_info    0x00002cdc      0x8b0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
+ .debug_info    0x0000358c      0x23a c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
+ .debug_info    0x000037c6       0xc8 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
+ .debug_info    0x0000388e       0xc6 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
 
-.debug_abbrev   0x00000000      0x74d
+.debug_abbrev   0x00000000      0x740
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x2c3 JDY40_test.o
- .debug_abbrev  0x000002c3       0x62 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
- .debug_abbrev  0x00000325       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_abbrev  0x0000034d       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
- .debug_abbrev  0x00000375       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
- .debug_abbrev  0x0000039d       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
- .debug_abbrev  0x000003c5       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
- .debug_abbrev  0x000003ed      0x152 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
- .debug_abbrev  0x0000053f      0x16c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
- .debug_abbrev  0x000006ab       0x52 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
- .debug_abbrev  0x000006fd       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
- .debug_abbrev  0x00000725       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
+ .debug_abbrev  0x00000000      0x2b6 JDY40_test.o
+ .debug_abbrev  0x000002b6       0x62 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+ .debug_abbrev  0x00000318       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_abbrev  0x00000340       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .debug_abbrev  0x00000368       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .debug_abbrev  0x00000390       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .debug_abbrev  0x000003b8       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .debug_abbrev  0x000003e0      0x152 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
+ .debug_abbrev  0x00000532      0x16c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
+ .debug_abbrev  0x0000069e       0x52 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
+ .debug_abbrev  0x000006f0       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
+ .debug_abbrev  0x00000718       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
 
-.debug_line     0x00000000      0xaff
+.debug_line     0x00000000      0xb26
  *(.debug_line)
- .debug_line    0x00000000      0x343 JDY40_test.o
- .debug_line    0x00000343       0x98 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
- .debug_line    0x000003db       0xa5 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_line    0x00000480       0x92 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
- .debug_line    0x00000512       0x96 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
- .debug_line    0x000005a8       0xa3 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
- .debug_line    0x0000064b       0xa4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
- .debug_line    0x000006ef      0x137 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
- .debug_line    0x00000826      0x134 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
- .debug_line    0x0000095a       0x8e c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
- .debug_line    0x000009e8       0x8c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
- .debug_line    0x00000a74       0x8b c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
- .debug_line    0x00000aff        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(xc32_uart.o)
+ .debug_line    0x00000000      0x36a JDY40_test.o
+ .debug_line    0x0000036a       0x98 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+ .debug_line    0x00000402       0xa5 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_line    0x000004a7       0x92 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .debug_line    0x00000539       0x96 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .debug_line    0x000005cf       0xa3 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .debug_line    0x00000672       0xa4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .debug_line    0x00000716      0x137 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
+ .debug_line    0x0000084d      0x134 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
+ .debug_line    0x00000981       0x8e c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
+ .debug_line    0x00000a0f       0x8c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
+ .debug_line    0x00000a9b       0x8b c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
+ .debug_line    0x00000b26        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(xc32_uart.o)
 
-.debug_frame    0x00000000      0x50c
+.debug_frame    0x00000000      0x548
  *(.debug_frame)
- .debug_frame   0x00000000      0x388 JDY40_test.o
- .debug_frame   0x00000388       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
- .debug_frame   0x000003b0       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
- .debug_frame   0x000003dc       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
- .debug_frame   0x000003fc       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
- .debug_frame   0x0000041c       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
- .debug_frame   0x00000448       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
- .debug_frame   0x00000468       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
- .debug_frame   0x00000490       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
- .debug_frame   0x000004b8       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
- .debug_frame   0x000004e4       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
+ .debug_frame   0x00000000      0x3c4 JDY40_test.o
+ .debug_frame   0x000003c4       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+ .debug_frame   0x000003ec       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .debug_frame   0x00000418       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .debug_frame   0x00000438       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .debug_frame   0x00000458       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .debug_frame   0x00000484       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .debug_frame   0x000004a4       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
+ .debug_frame   0x000004cc       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
+ .debug_frame   0x000004f4       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
+ .debug_frame   0x00000520       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
 
 .debug_str      0x00000000       0x54
  *(.debug_str)
@@ -1379,426 +1380,432 @@ LOAD data_init
  .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
 
 .bss%z17        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoli.o)
 
 .data%z18       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoli.o)
 
 .bss%z19        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fpcmp.o)
 
 .data%z20       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fpcmp.o)
 
 .bss%z21        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
 
 .data%z22       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
 
 .bss%z23        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
 
 .data%z24       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
 
 .bss%z25        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
 
 .data%z26       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
 
 .bss%z27        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .data%z28       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .bss%z29        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
 .data%z30       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
 .bss%z31        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
 
 .data%z32       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
 
 .bss%z33        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
 
 .data%z34       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
 
 .bss%z35        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
 
 .data%z36       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
 
 .bss%z37        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
 
 .data%z38       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
 
 .bss%z39        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
 
 .data%z40       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
 
 .bss%z41        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
 
 .data%z42       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
 
 .bss%z43        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector43.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
 
 .data%z44       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector43.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
 
 .bss%z45        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector42.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
 
 .data%z46       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector42.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
 
 .bss%z47        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector41.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector43.o)
 
 .data%z48       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector41.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector43.o)
 
 .bss%z49        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector40.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector42.o)
 
 .data%z50       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector40.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector42.o)
 
 .bss%z51        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector39.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector41.o)
 
 .data%z52       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector39.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector41.o)
 
 .bss%z53        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector38.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector40.o)
 
 .data%z54       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector38.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector40.o)
 
 .bss%z55        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector37.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector39.o)
 
 .data%z56       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector37.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector39.o)
 
 .bss%z57        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector36.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector38.o)
 
 .data%z58       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector36.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector38.o)
 
 .bss%z59        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector35.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector37.o)
 
 .data%z60       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector35.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector37.o)
 
 .bss%z61        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector34.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector36.o)
 
 .data%z62       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector34.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector36.o)
 
 .bss%z63        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector33.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector35.o)
 
 .data%z64       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector33.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector35.o)
 
 .bss%z65        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector32.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector34.o)
 
 .data%z66       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector32.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector34.o)
 
 .bss%z67        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector31.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector33.o)
 
 .data%z68       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector31.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector33.o)
 
 .bss%z69        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector30.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector32.o)
 
 .data%z70       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector30.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector32.o)
 
 .bss%z71        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector29.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector31.o)
 
 .data%z72       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector29.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector31.o)
 
 .bss%z73        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector28.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector30.o)
 
 .data%z74       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector28.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector30.o)
 
 .bss%z75        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector27.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector29.o)
 
 .data%z76       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector27.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector29.o)
 
 .bss%z77        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector26.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector28.o)
 
 .data%z78       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector26.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector28.o)
 
 .bss%z79        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector25.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector27.o)
 
 .data%z80       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector25.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector27.o)
 
 .bss%z81        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector24.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector26.o)
 
 .data%z82       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector24.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector26.o)
 
 .bss%z83        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector23.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector25.o)
 
 .data%z84       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector23.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector25.o)
 
 .bss%z85        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector22.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector24.o)
 
 .data%z86       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector22.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector24.o)
 
 .bss%z87        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector21.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector23.o)
 
 .data%z88       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector21.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector23.o)
 
 .bss%z89        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector20.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector22.o)
 
 .data%z90       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector20.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector22.o)
 
 .bss%z91        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector19.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector21.o)
 
 .data%z92       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector19.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector21.o)
 
 .bss%z93        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector18.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector20.o)
 
 .data%z94       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector18.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector20.o)
 
 .bss%z95        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector17.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector19.o)
 
 .data%z96       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector17.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector19.o)
 
 .bss%z97        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector16.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector18.o)
 
 .data%z98       0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector16.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector18.o)
 
 .bss%z99        0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector15.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector17.o)
 
 .data%z100      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector15.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector17.o)
 
 .bss%z101       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector14.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector16.o)
 
 .data%z102      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector14.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector16.o)
 
 .bss%z103       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector13.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector15.o)
 
 .data%z104      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector13.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector15.o)
 
 .bss%z105       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector12.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector14.o)
 
 .data%z106      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector12.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector14.o)
 
 .bss%z107       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector11.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector13.o)
 
 .data%z108      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector11.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector13.o)
 
 .bss%z109       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector10.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector12.o)
 
 .data%z110      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector10.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector12.o)
 
 .bss%z111       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector9.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector11.o)
 
 .data%z112      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector9.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector11.o)
 
 .bss%z113       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector8.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector10.o)
 
 .data%z114      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector8.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector10.o)
 
 .bss%z115       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector7.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector9.o)
 
 .data%z116      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector7.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector9.o)
 
 .bss%z117       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector6.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector8.o)
 
 .data%z118      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector6.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector8.o)
 
 .bss%z119       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector5.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector7.o)
 
 .data%z120      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector5.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector7.o)
 
 .bss%z121       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector4.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector6.o)
 
 .data%z122      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector4.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector6.o)
 
 .bss%z123       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector3.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector5.o)
 
 .data%z124      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector3.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector5.o)
 
 .bss%z125       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector2.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector4.o)
 
 .data%z126      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector2.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector4.o)
 
 .bss%z127       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector1.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector3.o)
 
 .data%z128      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector1.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector3.o)
 
 .bss%z129       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector0.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector2.o)
 
 .data%z130      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector0.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector2.o)
 
 .bss%z131       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector1.o)
 
 .data%z132      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector1.o)
 
 .bss%z133       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-nmi-handler.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector0.o)
 
 .data%z134      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-nmi-handler.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector0.o)
 
 .bss%z135       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
 
 .data%z136      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
 
 .bss%z137       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-nmi-handler.o)
 
 .data%z138      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-nmi-handler.o)
 
 .bss%z139       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
 
 .data%z140      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
 
 .bss%z141       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
 
 .data%z142      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
 
 .bss%z143       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strcmp.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
 
 .data%z144      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strcmp.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
 
 .bss%z145       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
 
 .data%z146      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
 
 .bss%z147       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
 
 .data%z148      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
 
 .bss%z149       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
 
 .data%z150      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
 
 .bss%z151       0x00000000        0x0
- .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\default_isr_vectors.o
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
 
 .data%z152      0x00000000        0x0
- .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\default_isr_vectors.o
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
 
 .bss%z153       0x00000000        0x0
+ .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\default_isr_vectors.o
+
+.data%z154      0x00000000        0x0
+ .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\default_isr_vectors.o
+
+.bss%z155       0x00000000        0x0
  .bss           0x00000000        0x0 JDY40_test.o
 
-.bss%z154       0x00000000        0x0
+.bss%z156       0x00000000        0x0
  .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\debug-exception-return.o
 
-.data%z155      0x00000000        0x0
+.data%z157      0x00000000        0x0
  .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\debug-exception-return.o
 
-.bss%z156       0x00000000        0x0
+.bss%z158       0x00000000        0x0
  .bss           0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B/crt0_mips32r2.o
 
-.data%z157      0x00000000        0x0
+.data%z159      0x00000000        0x0
  .data          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B/crt0_mips32r2.o
 
 ._debug_exception
@@ -1807,8 +1814,8 @@ LOAD data_init
                 0xbfc00480       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\debug-exception-return.o
                 0xbfc00480                __DbgExecReturn
 
-.text           0x9d000000      0xd2c
- .text          0x9d000000      0xd2c JDY40_test.o
+.text           0x9d000000      0xee0
+ .text          0x9d000000      0xee0 JDY40_test.o
                 0x9d000001                UART2Configure
                 0x9d000079                _mon_getc
                 0x9d0000f1                UART1Configure
@@ -1837,475 +1844,493 @@ LOAD data_init
                 0x9d000a65                ConfigurePins
                 0x9d000aa1                uart_puts
                 0x9d000ad1                PrintNumber
-                0x9d000b51                main
+                0x9d000b51                ADCtoPWM
+                0x9d000b75                ADCsteeringRatio
+                0x9d000c71                main
 
 .text._do_print_cdnopsuxX
-                0x9d000d2c      0x6fc
+                0x9d000ee0      0x6fc
  .text._do_print_cdnopsuxX
-                0x9d000d2c      0x6fc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
-                0x9d000d2d                _do_print_cdnopsuxX
-                0x9d000d2d                _do_print_cdnopuxX
-                0x9d000d2d                _do_print_0
-                0x9d000d2d                _do_print_s
+                0x9d000ee0      0x6fc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+                0x9d000ee1                _do_print_cdnopsuxX
+                0x9d000ee1                _do_print_cdnopuxX
+                0x9d000ee1                _do_print_0
+                0x9d000ee1                _do_print_s
 
-.text           0x9d001428      0x714
- .text          0x9d001428      0x3b8 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
-                0x9d001429                __udivdi3
- .text          0x9d0017e0      0x35c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
-                0x9d0017e1                __umoddi3
+.text           0x9d0015dc      0x714
+ .text          0x9d0015dc      0x3b8 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_udivdi3.o)
+                0x9d0015dd                __udivdi3
+ .text          0x9d001994      0x35c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_umoddi3.o)
+                0x9d001995                __umoddi3
 
-.text.fpsubadd  0x9d001b3c      0x278
+.text.fpsubadd  0x9d001cf0      0x278
  .text.fpsubadd
-                0x9d001b3c      0x278 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
-                0x9d001b3c                fpsub
-                0x9d001b3c                __subsf3
-                0x9d001b44                __addsf3
-                0x9d001b44                fpadd
+                0x9d001cf0      0x278 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
+                0x9d001cf0                fpsub
+                0x9d001cf0                __subsf3
+                0x9d001cf8                __addsf3
+                0x9d001cf8                fpadd
 
-.text.fp32div   0x9d001db4      0x230
- .text.fp32div  0x9d001db4      0x230 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
-                0x9d001db4                fpdiv
-                0x9d001db4                __divsf3
+.text.fp32div   0x9d001f68      0x230
+ .text.fp32div  0x9d001f68      0x230 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
+                0x9d001f68                fpdiv
+                0x9d001f68                __divsf3
 
-.text.fp32mul   0x9d001fe4      0x1bc
- .text.fp32mul  0x9d001fe4      0x1bc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
-                0x9d001fe4                fpmul
-                0x9d001fe4                __mulsf3
+.text.fp32mul   0x9d002198      0x1bc
+ .text.fp32mul  0x9d002198      0x1bc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
+                0x9d002198                fpmul
+                0x9d002198                __mulsf3
 
-.text           0x9d0021a0      0x168
- .text          0x9d0021a0      0x168 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
-                0x9d0021a0                strlen
+.text           0x9d002354      0x168
+ .text          0x9d002354      0x168 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strlen.o)
+                0x9d002354                strlen
 
-.dinit          0x9d002308      0x140
- .dinit         0x9d002308      0x140 data_init
+.dinit          0x9d0024bc      0x140
+ .dinit         0x9d0024bc      0x140 data_init
 
-.rodata         0x9d002448      0x134
- .rodata        0x9d002448      0x134 JDY40_test.o
-
-.text           0x9d00257c      0x120
- .text          0x9d00257c      0x120 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(strcmp.o)
-                0x9d00257c                strcmp
-
-.rodata         0x9d00269c      0x100
- .rodata        0x9d00269c      0x100 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
-                0x9d00269c                __clz_tab
+.rodata         0x9d0025fc      0x230
+ .rodata        0x9d0025fc      0x130 JDY40_test.o
+ .rodata        0x9d00272c      0x100 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
+                0x9d00272c                __clz_tab
 
 .text.general_exception
-                0x9d00279c       0xdc
+                0x9d00282c       0xdc
  .text.general_exception
-                0x9d00279c       0xdc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
-                0x9d00279c                _general_exception_context
+                0x9d00282c       0xdc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
+                0x9d00282c                _general_exception_context
 
-.text.fptoul    0x9d002878       0x7c
- .text.fptoul   0x9d002878       0x7c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
-                0x9d002878                __fixunssfsi
-                0x9d002878                fptoul
-                0x9d002878                fptoui
+.text.fpcmp     0x9d002908       0x9c
+ .text.fpcmp    0x9d002908       0x9c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fpcmp.o)
+                0x9d002908                __nesf2
+                0x9d002908                __gtsf2
+                0x9d002908                __eqsf2
+                0x9d002908                __ltsf2
+                0x9d002908                fpcmp
+                0x9d002908                __gesf2
+                0x9d002908                __lesf2
+
+.text.fptoli    0x9d0029a4       0x80
+ .text.fptoli   0x9d0029a4       0x80 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoli.o)
+                0x9d0029a4                fptoli
+                0x9d0029a4                fptosi
+                0x9d0029a4                __fixsfsi
+
+.text.fptoul    0x9d002a24       0x7c
+ .text.fptoul   0x9d002a24       0x7c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
+                0x9d002a24                __fixunssfsi
+                0x9d002a24                fptoul
+                0x9d002a24                fptoui
 
 .text._outcnvrt
-                0x9d0028f4       0x78
+                0x9d002aa0       0x78
  .text._outcnvrt
-                0x9d0028f4       0x78 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+                0x9d002aa0       0x78 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
 .text._mon_putc
-                0x9d00296c       0x78
+                0x9d002b18       0x78
  .text._mon_putc
-                0x9d00296c       0x78 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
-                0x9d00296d                _mon_putc
+                0x9d002b18       0x78 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
+                0x9d002b19                _mon_putc
 
 .text._flsbuf_simple
-                0x9d0029e4       0x74
+                0x9d002b90       0x74
  .text._flsbuf_simple
-                0x9d0029e4       0x74 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
-                0x9d0029e5                _flsbuf_simple
+                0x9d002b90       0x74 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+                0x9d002b91                _flsbuf_simple
 
-.text.sitofp    0x9d002a58       0x60
- .text.sitofp   0x9d002a58       0x60 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(sitofp.o)
-                0x9d002a58                __floatsisf
-                0x9d002a58                litofp
-                0x9d002a58                sitofp
+.text.sitofp    0x9d002c04       0x60
+ .text.sitofp   0x9d002c04       0x60 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(sitofp.o)
+                0x9d002c04                __floatsisf
+                0x9d002c04                litofp
+                0x9d002c04                sitofp
 
 .text.main_entry
-                0x9d002ab8       0x54
+                0x9d002c64       0x54
  .text.main_entry
-                0x9d002ab8       0x54 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B/crt0_mips32r2.o
-                0x9d002aec                __crt0_exit
+                0x9d002c64       0x54 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B/crt0_mips32r2.o
+                0x9d002c98                __crt0_exit
 
-.text.fputc     0x9d002b0c       0x4c
- .text.fputc    0x9d002b0c       0x4c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
-                0x9d002b0d                fputc
+.text.fputc     0x9d002cb8       0x4c
+ .text.fputc    0x9d002cb8       0x4c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+                0x9d002cb9                fputc
 
 .text._bootstrap_exception_handler
-                0x9d002b58       0x48
+                0x9d002d04       0x48
  .text._bootstrap_exception_handler
-                0x9d002b58       0x48 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
-                0x9d002b58                _bootstrap_exception_handler
+                0x9d002d04       0x48 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+                0x9d002d04                _bootstrap_exception_handler
 
 .text._general_exception_handler
-                0x9d002ba0       0x48
+                0x9d002d4c       0x48
  .text._general_exception_handler
-                0x9d002ba0       0x48 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
-                0x9d002ba0                _general_exception_handler
+                0x9d002d4c       0x48 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+                0x9d002d4c                _general_exception_handler
 
 .vector_default
-                0x9d002be8       0x48
+                0x9d002d94       0x48
  .vector_default
-                0x9d002be8       0x48 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
-                0x9d002be8                _DefaultInterrupt
+                0x9d002d94       0x48 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+                0x9d002d94                _DefaultInterrupt
 
-.text           0x9d002c30       0x44
- .text          0x9d002c30       0x44 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
-                0x9d002c30                __pic32_software_reset
+.text           0x9d002ddc       0x44
+ .text          0x9d002ddc       0x44 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\pic32_software_reset.o
+                0x9d002ddc                __pic32_software_reset
 
 .text.repl.constprop.0
-                0x9d002c74       0x40
+                0x9d002e20       0x40
  .text.repl.constprop.0
-                0x9d002c74       0x40 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+                0x9d002e20       0x40 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
 .text._fflush_simple
-                0x9d002cb4       0x3c
+                0x9d002e60       0x3c
  .text._fflush_simple
-                0x9d002cb4       0x3c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
-                0x9d002cb5                _fflush_simple
+                0x9d002e60       0x3c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+                0x9d002e61                _fflush_simple
 
 .text._fwrite_simple
-                0x9d002cf0       0x3c
+                0x9d002e9c       0x3c
  .text._fwrite_simple
-                0x9d002cf0       0x3c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
-                0x9d002cf1                _fwrite_simple
+                0x9d002e9c       0x3c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+                0x9d002e9d                _fwrite_simple
 
 .text._sprintf_cdnopuxX
-                0x9d002d2c       0x38
+                0x9d002ed8       0x38
  .text._sprintf_cdnopuxX
-                0x9d002d2c       0x38 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
-                0x9d002d2d                _sprintf_cdnopuxX
+                0x9d002ed8       0x38 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
+                0x9d002ed9                _sprintf_cdnopuxX
 
-.text.puts      0x9d002d64       0x2c
- .text.puts     0x9d002d64       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
-                0x9d002d65                puts
+.text.puts      0x9d002f10       0x2c
+ .text.puts     0x9d002f10       0x2c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+                0x9d002f11                puts
 
-.text           0x9d002d90       0x28
- .text          0x9d002d90       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
-                0x9d002d91                __floatunsisf
+.text           0x9d002f3c       0x28
+ .text          0x9d002f3c       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(floatunsisf.o)
+                0x9d002f3d                __floatunsisf
 
-.text.fputs     0x9d002db8       0x28
- .text.fputs    0x9d002db8       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
-                0x9d002db9                fputs
+.text.fputs     0x9d002f64       0x28
+ .text.fputs    0x9d002f64       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+                0x9d002f65                fputs
 
-.rodata         0x9d002de0       0x28
- .rodata        0x9d002de0       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+.rodata         0x9d002f8c       0x28
+ .rodata        0x9d002f8c       0x28 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
 .text._filbuf_simple
-                0x9d002e08       0x20
+                0x9d002fb4       0x20
  .text._filbuf_simple
-                0x9d002e08       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
-                0x9d002e09                _filbuf_simple
+                0x9d002fb4       0x20 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+                0x9d002fb5                _filbuf_simple
 
 .text._fsync_simple
-                0x9d002e28       0x1c
+                0x9d002fd4       0x1c
  .text._fsync_simple
-                0x9d002e28       0x1c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
-                0x9d002e29                _fsync_simple
+                0x9d002fd4       0x1c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+                0x9d002fd5                _fsync_simple
 
 .text._printf_cdnopsuxX
-                0x9d002e44       0x1c
+                0x9d002ff0       0x1c
  .text._printf_cdnopsuxX
-                0x9d002e44       0x1c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
-                0x9d002e45                _printf_s
-                0x9d002e45                _printf_0
-                0x9d002e45                _printf_cdnopsuxX
+                0x9d002ff0       0x1c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
+                0x9d002ff1                _printf_s
+                0x9d002ff1                _printf_0
+                0x9d002ff1                _printf_cdnopsuxX
 
 .text._mon_write
-                0x9d002e60       0x1c
+                0x9d00300c       0x1c
  .text._mon_write
-                0x9d002e60       0x1c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
-                0x9d002e61                _mon_write
+                0x9d00300c       0x1c c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
+                0x9d00300d                _mon_write
 
-.text           0x9d002e7c       0x18
- .text          0x9d002e7c       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-nmi-handler.o)
-                0x9d002e7c                _nmi_handler
+.text           0x9d003028       0x18
+ .text          0x9d003028       0x18 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-nmi-handler.o)
+                0x9d003028                _nmi_handler
 
-.rodata         0x9d002e94       0x14
- .rodata        0x9d002e94       0x14 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobdata.o)
-                0x9d002e94                _io_funcs
+.rodata         0x9d003040       0x14
+ .rodata        0x9d003040       0x14 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobdata.o)
+                0x9d003040                _io_funcs
 
-.text.putchar   0x9d002ea8       0x14
- .text.putchar  0x9d002ea8       0x14 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
-                0x9d002ea9                putchar
+.text.putchar   0x9d003054       0x14
+ .text.putchar  0x9d003054       0x14 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+                0x9d003055                putchar
 
-.rodata         0x9d002ebc       0x14
- .rodata        0x9d002ebc       0x14 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
-                0x9d002ebc                _io_strfuncs
+.rodata         0x9d003068       0x14
+ .rodata        0x9d003068       0x14 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+                0x9d003068                _io_strfuncs
 
-.text._io_exit  0x9d002ed0       0x20
+.text._io_exit  0x9d00307c       0x20
  .text._io_exit
-                0x9d002ed0       0x10 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
-                0x9d002ed1                _io_exit
+                0x9d00307c       0x10 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+                0x9d00307d                _io_exit
  .text._io_exit
-                0x9d002ee0       0x10 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+                0x9d00308c       0x10 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
-.text.putc      0x9d002ef0        0xc
- .text.putc     0x9d002ef0        0xc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
-                0x9d002ef1                putc
+.text.putc      0x9d00309c        0xc
+ .text.putc     0x9d00309c        0xc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+                0x9d00309d                putc
 
 .text._vfprintf_cdnopsuxX
-                0x9d002efc        0xc
+                0x9d0030a8        0xc
  .text._vfprintf_cdnopsuxX
-                0x9d002efc        0xc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
-                0x9d002efd                _vfprintf_cdnopsuxX
+                0x9d0030a8        0xc c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+                0x9d0030a9                _vfprintf_cdnopsuxX
 
 .text._filbuf_string
-                0x9d002f08        0x8
+                0x9d0030b4        0x8
  .text._filbuf_string
-                0x9d002f08        0x8 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+                0x9d0030b4        0x8 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .text._on_reset
-                0x9d002f10        0x4
+                0x9d0030bc        0x4
  .text._on_reset
-                0x9d002f10        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
-                0x9d002f11                _on_reset
+                0x9d0030bc        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+                0x9d0030bd                _on_reset
 
 .text._on_bootstrap
-                0x9d002f14        0x4
+                0x9d0030c0        0x4
  .text._on_bootstrap
-                0x9d002f14        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
-                0x9d002f15                _on_bootstrap
+                0x9d0030c0        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+                0x9d0030c1                _on_bootstrap
 
-.rodata         0x9d002f18        0x4
- .rodata        0x9d002f18        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+.rodata         0x9d0030c4        0x4
+ .rodata        0x9d0030c4        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
 
 .text._flsbuf_string
-                0x9d002f1c        0x4
+                0x9d0030c8        0x4
  .text._flsbuf_string
-                0x9d002f1c        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+                0x9d0030c8        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .text._fflush_string
-                0x9d002f20        0x4
+                0x9d0030cc        0x4
  .text._fflush_string
-                0x9d002f20        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+                0x9d0030cc        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .text._fwrite_string
-                0x9d002f24        0x4
+                0x9d0030d0        0x4
  .text._fwrite_string
-                0x9d002f24        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+                0x9d0030d0        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .text._fsync_string
-                0x9d002f28        0x4
+                0x9d0030d4        0x4
  .text._fsync_string
-                0x9d002f28        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
-
-.text%z158      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(xc32_uart.o)
-
-.text%z159      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
+                0x9d0030d4        0x4 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .text%z160      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(xc32_uart.o)
 
 .text%z161      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_putc.o)
 
 .text%z162      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(sitofp.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(_mon_write.o)
 
 .text%z163      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/mips16\libgcc.a(_clz.o)
 
 .text%z164      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(sitofp.o)
 
 .text%z165      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoul.o)
 
 .text%z166      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fptoli.o)
 
 .text%z167      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fpcmp.o)
 
 .text%z168      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32subadd.o)
 
 .text%z169      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32mul.o)
 
 .text%z170      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libm.a(fp32div.o)
 
 .text%z171      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobstring.o)
 
 .text%z172      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_doprnt_cdnopsuxX.eo)
 
 .text%z173      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(errno.o)
 
 .text%z174      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(sprintf_cdnopuxX.eo)
 
 .text%z175      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobdata.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(printf_cdnopsuxX.eo)
 
 .text%z176      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputs.o)
 
 .text%z177      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(fputc.o)
 
 .text%z178      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector43.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobfuncs.o)
 
 .text%z179      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector42.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\liblega-c.a(_iobdata.o)
 
 .text%z180      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector41.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(defaultinterrupt.o)
 
 .text%z181      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector40.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-general-exception-handler.o)
 
 .text%z182      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector39.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector43.o)
 
 .text%z183      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector38.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector42.o)
 
 .text%z184      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector37.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector41.o)
 
 .text%z185      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector36.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector40.o)
 
 .text%z186      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector35.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector39.o)
 
 .text%z187      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector34.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector38.o)
 
 .text%z188      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector33.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector37.o)
 
 .text%z189      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector32.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector36.o)
 
 .text%z190      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector31.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector35.o)
 
 .text%z191      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector30.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector34.o)
 
 .text%z192      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector29.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector33.o)
 
 .text%z193      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector28.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector32.o)
 
 .text%z194      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector27.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector31.o)
 
 .text%z195      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector26.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector30.o)
 
 .text%z196      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector25.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector29.o)
 
 .text%z197      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector24.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector28.o)
 
 .text%z198      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector23.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector27.o)
 
 .text%z199      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector22.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector26.o)
 
 .text%z200      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector21.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector25.o)
 
 .text%z201      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector20.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector24.o)
 
 .text%z202      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector19.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector23.o)
 
 .text%z203      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector18.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector22.o)
 
 .text%z204      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector17.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector21.o)
 
 .text%z205      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector16.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector20.o)
 
 .text%z206      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector15.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector19.o)
 
 .text%z207      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector14.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector18.o)
 
 .text%z208      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector13.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector17.o)
 
 .text%z209      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector12.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector16.o)
 
 .text%z210      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector11.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector15.o)
 
 .text%z211      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector10.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector14.o)
 
 .text%z212      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector9.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector13.o)
 
 .text%z213      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector8.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector12.o)
 
 .text%z214      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector7.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector11.o)
 
 .text%z215      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector6.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector10.o)
 
 .text%z216      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector5.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector9.o)
 
 .text%z217      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector4.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector8.o)
 
 .text%z218      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector3.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector7.o)
 
 .text%z219      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector2.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector6.o)
 
 .text%z220      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector1.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector5.o)
 
 .text%z221      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector0.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector4.o)
 
 .text%z222      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector3.o)
 
 .text%z223      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector2.o)
 
 .text%z224      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector1.o)
 
 .text%z225      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(vector0.o)
 
 .text%z226      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(general-exception.o)
 
 .text%z227      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\default_isr_vectors.o
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-bootstrap.o)
 
 .text%z228      0x00000000        0x0
- .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\debug-exception-return.o
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-on-reset.o)
 
 .text%z229      0x00000000        0x0
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\libpic32.a(default-bootstrap-exception-handler.o)
+
+.text%z230      0x00000000        0x0
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\processor.o
+
+.text%z231      0x00000000        0x0
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B\default_isr_vectors.o
+
+.text%z232      0x00000000        0x0
+ .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/mips16\debug-exception-return.o
+
+.text%z233      0x00000000        0x0
  .text          0x00000000        0x0 c:/users/syafi/downloads/xc32_v2.05/v2.05/bin/bin/../../lib/gcc/pic32mx/4.8.3/../../../../pic32mx/lib/./proc/32MX130F064B/crt0_mips32r2.o

@@ -23,6 +23,7 @@ volatile unsigned int pwm_duty4=65535; //(0�65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT4 P3_0
 #define PWMOUT4R P2_5
+#define PERIOD_PIN P2_6
 ////////////timer2 pwm///////////////////////
 volatile unsigned int pwm_counter2=0;
 volatile unsigned int pwm_duty2=65535; //(0�65535)
@@ -425,7 +426,7 @@ unsigned int ADCtoPWM(int adc_value)
 //	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
 //    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
 
-    return (unsigned int)((adc_value * 65535UL) / 1023UL);
+    return (unsigned int)((adc_value * 65535UL) / 1008UL);
 }
 
 /*
@@ -437,37 +438,44 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 {
 
 	// joystick in the middle hover over these values 
-	int centersteering = steering - 507;
-	int centerspeed = speed - 504;
+	int centersteering = steering - 508;
+	int centerspeed;
 	float steeringFactor;
 	int baseSpeed;
+	int baseSteer;
 	int wheel1Speed;
 	int wheel2Speed;
+	
+	centerspeed = speed - 504;
+	
 	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
 	 baseSpeed = abs(centerspeed);
-	 if ( baseSpeed < 5 ) 
+	 baseSteer = abs(centersteering);
+	 if ( baseSpeed < 5 && baseSteer < 5 ) 
 	 {
 	 	*ADCwheel1 = 0;
 	 	*ADCwheel2 = 0;
 	 	return;
-	} 	
+	} 
+		
 	 	
-	 steeringFactor = (float)centersteering / 507; // ranges from -1.0 (full left) to +1.0 (full right)
+	 steeringFactor = (float)centersteering / 508; // ranges from -1.0 (full left) to +1.0 (full right)
 	
+	if ( steeringFactor > 1 ) steeringFactor = 1;
 	
 	    // Calculate
 	    		
-	 wheel1Speed = baseSpeed + (int)(baseSpeed * steeringFactor);
-	 wheel2Speed = baseSpeed - (int)(baseSpeed * steeringFactor);
-	if (wheel1Speed > 508) wheel1Speed = 507;
+	 wheel1Speed = speed + (int)(speed * steeringFactor);
+	 wheel2Speed = speed - (int)(speed * steeringFactor);
+	if (wheel1Speed > 1008) wheel1Speed = 1008;
 	if (wheel1Speed < 0) wheel1Speed = 0;
 	
-	if (wheel2Speed > 507) wheel2Speed = 507;
+	if (wheel2Speed > 1008) wheel2Speed = 1008;
 	if (wheel2Speed < 0) wheel2Speed = 0;
 	
-	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
-	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
-
+	*ADCwheel1 = (unsigned int)(wheel1Speed);
+	*ADCwheel2 = (unsigned int)(wheel2Speed);	
+}
 // Measure the period of a square signal at PERIOD_PIN
 unsigned long GetPeriod (int n)
 {
@@ -596,7 +604,7 @@ unsigned long GetFrequency (long int c, int pin)
 	
 	else
 	{
-		eputs(" NO SIGNAL                     \r");
+//		eputs(" NO SIGNAL                     \r");
 	}
 
 	return f;
@@ -629,7 +637,7 @@ int CoinDecider(long int freq)
 
 	else
 	{
-		eputs(" NO COIN");
+//		eputs(" NO COIN");
 	}
 
 	return 0;
@@ -695,9 +703,9 @@ void main (void)
 		v[1] = Volts_at_Pin(QFP32_MUX_P2_2);
 
 		// must check what the threshold is
-		PrintNumber(v[0], 10, 7);
-		eputs(" ");
-		PrintNumber(v[1], 10, 7);
+//		PrintNumber(v[0], 10, 7);
+//		eputs(" ");
+//		PrintNumber(v[1], 10, 7);
 
 		/*if((v[0] > p_thresh) || (v[1] > p_thresh))
 		{
