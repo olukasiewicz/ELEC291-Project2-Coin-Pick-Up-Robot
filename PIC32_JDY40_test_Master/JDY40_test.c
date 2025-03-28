@@ -499,7 +499,7 @@ unsigned int ADCtoPWM(int adc_value)
 //	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
 //    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
 
-    return (unsigned int)((adc_value * 65535UL) / 1008UL);
+    return (unsigned int)((adc_value * 65535UL) / 1023UL);
 }
 
 /*
@@ -524,7 +524,7 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
 	 baseSpeed = abs(centerspeed);
 	 baseSteer = abs(centersteering);
-	 if ( baseSpeed < 5 && baseSteer < 5 ) 
+	 if ( baseSpeed < 3 && baseSteer < 3 ) 
 	 {
 	 	*ADCwheel1 = 0;
 	 	*ADCwheel2 = 0;
@@ -538,27 +538,40 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	
 	    // Calculate
 	    		
-	 wheel1Speed = speed + (int)(speed * steeringFactor);
-	 wheel2Speed = speed - (int)(speed * steeringFactor);
-	if (wheel1Speed > 1008) wheel1Speed = 1008;
+	 wheel1Speed = baseSpeed + (int)(baseSpeed * steeringFactor);
+	 wheel2Speed = baseSpeed - (int)(baseSpeed * steeringFactor);
+	if (wheel1Speed > 507) wheel1Speed = 507;
 	if (wheel1Speed < 0) wheel1Speed = 0;
 	
-	if (wheel2Speed > 1008) wheel2Speed = 1008;
+	if (wheel2Speed > 507) wheel2Speed = 507;
 	if (wheel2Speed < 0) wheel2Speed = 0;
 	
-	*ADCwheel1 = (unsigned int)(wheel1Speed);
-	*ADCwheel2 = (unsigned int)(wheel2Speed);	
+	if ( baseSpeed < 3 && baseSteer > 3 ) 
+	{
+		
+		wheel1Speed = 507 + centersteering;
+		wheel2Speed = 507 - centersteering;	
+		
+		if (wheel1Speed > 507) wheel1Speed = 507;
+		if (wheel1Speed < 0) wheel1Speed = 0;
+		
+		if (wheel2Speed > 507) wheel2Speed = 507;
+		if (wheel2Speed < 0) wheel2Speed = 0;
+	}
+	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
+	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
 }
 
 void main(void)
 {
 	char buff[80];
 	char sendbuff[80];
-    int timeout_cnt=0;
+    int timeout_cnt=0, pwmalarm;
     int cont1=0, cont2=100;
+    unsigned char evilcode;
 	volatile unsigned long t=0;
 	unsigned char myduty=0;
-	float thing;
+	unsigned int thing, thing1;
 	int adcvalx;
 	int adcvaly;
 	int newadcvalx;
@@ -583,6 +596,10 @@ void main(void)
 	ANSELB &= ~(1<<10); // Set RB14 as a digital I/O
     TRISB &= ~(1<<10);  // configure pin RB14 as output
 	LATB |= (1<<10);    // 'SET' pin of JDY40 to 1 is normal operation mode
+	
+	ANSELB &= ~(1<<0); // Set RB14 as a digital I/O
+    TRISB &= ~(1<<0);  // configure pin RB14 as output
+	LATB |= (1<<0);    // 'SET' pin of JDY40 to 1 is normal operation mode
 	
 	ReceptionOff();
 	ConfigurePins();
@@ -644,13 +661,19 @@ void main(void)
 		sprintf(sendbuff, "A"); 
 		SerialTransmit1(sendbuff);
 		delayms(1500);
-		Set_pwm(127);
+		}
+		
+		thing1 = PORTB&(1<<0) ? 0 : 1;
+		if( thing1 == 1 ) {
+		printf ("hellomama\n\r");
+		delayms(1500);
 		}
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 		{
-		SerialReceive1_timeout(buff, sizeof(buff)-1); // Get the message from the slave
-		
-//		printf("hello");
+		SerialReceive1_timeout(buff, sizeof(buff)); // Get the message from the slave
+//		sscanf(buff, "%d", &pwmalarm);
+//		pwmalarm = (unsigned char )(pwmalarm*255 / 1700);
+//		Set_pwm(evilcode);
 		}
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
 	}
