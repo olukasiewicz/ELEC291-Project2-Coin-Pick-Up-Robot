@@ -671,9 +671,8 @@ void main(void)
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 		{
 		SerialReceive1_timeout(buff, sizeof(buff)); // Get the message from the slave
-		sscanf(buff, "%d", &pwmalarm);
-		pwmalarm = (unsigned char )(pwmalarm*255 / 1700);
-		Set_pwm(pwmalarm);
+		printf("%s", buff);
+
 		}
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
 	}
