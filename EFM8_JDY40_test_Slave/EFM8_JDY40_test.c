@@ -21,21 +21,19 @@
 #define PWM_FREQ 10000L
 ////////////timer5 pwm///////////////////////
 volatile unsigned int pwm_counter4=0;
-volatile unsigned int pwm_duty4=65535; //(0�65535)
+volatile unsigned int pwm_duty4=65535; //(0?65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT4 P3_0
 #define PWMOUT4R P2_5
 ////////////timer2 pwm///////////////////////
 volatile unsigned int pwm_counter2=0;
-volatile unsigned int pwm_duty2=65535; //(0�65535)
+volatile unsigned int pwm_duty2=65535; //(0?65535)
 volatile int direction=0;
 volatile int peggingsidnatu=0;
 #define TIMER2_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT2 P3_2
 #define PWMOUT2R P3_7
-////////////custom chars and LCD////////////////////////////
-unsigned char customMouth[] = {0x00,0x00,0x00,0x11,0x15,0x0A,0x00,0x00};
-unsigned char customEye[] = {0x00,0x0E,0x19,0x19,0x1F,0x17,0x0E,0x00};
+//////////////////////////////////////////////////
 
 #define LCD_RS P1_7
 // #define LCD_RW Px_x // Not used in this code.  Connect to GND
@@ -45,6 +43,7 @@ unsigned char customEye[] = {0x00,0x0E,0x19,0x19,0x1F,0x17,0x0E,0x00};
 #define LCD_D6 P1_1
 #define LCD_D7 P1_0
 #define CHARS_PER_LINE 16
+const unsigned char customSparkle[] = {0x04,0x04,0x0A,0x11,0x0A,0x04,0x04,0x00};
 
 //SlAVE FILE FOR EFM8 
 //mommy farts
@@ -638,7 +637,7 @@ unsigned long GetFrequency (long int c, int pin)
 	
 	else
 	{
-		eputs(" NO SIGNAL                     \r");
+//		eputs(" NO SIGNAL                     \r");
 	}
 
 	return f;
@@ -752,9 +751,6 @@ void automaticmode(float fowardper, float sideper)
 
 }
 
-
-////////////////////////////////// LCD //////////////////////////////////////////
-
 void LCD_pulse (void)
 {
 	LCD_E=1;
@@ -811,7 +807,6 @@ void LCD_4BIT (void)
 	waitms(20); // Wait for clear screen command to finsih.
 }
 
-//////////////////////////////////
 
 void main (void)
 {
@@ -821,14 +816,15 @@ void main (void)
 	float pulse_width1 = 10;
 	int speed, steering;
 	int adcwheel1, adcwheel2;
- 	//char c;
+	unsigned char customMouth0,customMouth1, customMouth2,customMouth3,customMouth4,customMouth5,customMouth6,customMouth7;
+		
+	unsigned char customEye0,customEye1, customEye2,customEye3,customEye4,customEye5,customEye6,customEye7;
 
-	int i = 0;
+ 	int i = 0;
 
 	// initialization for the period code
 	long int count, f;
 	int coinPresent = 0;
-	int moneyCount = 0;
 
 	// initialization for the perimeter code
 	float v[2];
@@ -841,14 +837,15 @@ void main (void)
 	UART1_Init(9600);
 
 	ReceptionOff();
+	LCD_4BIT();
 
 	TIMER0_Init(); 
 
 	InitPinADC(2, 1); // Configure P2.1 as analog input
 	InitPinADC(2, 3); // Configure P2.1 as analog input
 	InitADC();
-
-	LCD_4BIT(); // LCD initialization
+	
+	
 
 	// To check configuration
 	SendATCommand("AT+VER\r\n");
@@ -861,21 +858,37 @@ void main (void)
 
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
-	SendATCommand("AT+DVIDFFFF\r\n");  
+	SendATCommand("AT+DVIDFFFF\r\n"); 
 	
 	WriteCommand(0x40);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMouth[i]);
-	}
-	
-	WriteCommand(0x48);
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customEye[i]);
-	}
+ 	WriteData(customMouth0 = 0x00);
+ 	WriteData(customMouth1 = 0x00);
+ 	WriteData(customMouth2 = 0x00);
+ 	WriteData(customMouth3 = 0x11);
+ 	WriteData(customMouth4 = 0x15);
+ 	WriteData(customMouth5 = 0x0A);
+ 	WriteData(customMouth6 = 0x00);
+ 	WriteData(customMouth7 = 0x00);
+ 	
+ 	WriteCommand(0x48);
+ 	WriteData(customEye0 = 0x00);
+ 	WriteData(customEye1 = 0x0E);	
+ 	WriteData(customEye2 = 0x19);
+  	WriteData(customEye3 = 0x19);
+   	WriteData(customEye4 = 0x1F);
+    WriteData(customEye5 = 0x17);
+    WriteData(customEye6 = 0x0E);
+    WriteData(customEye7 = 0x00);
+   
+   WriteCommand(0x56);
+    for(i=0; i<8; i++) {
 
-	WriteCommand(0x89);
+         WriteData(customSparkle[i]);
+    }
+    
+    
+    
+   	WriteCommand(0x89);
 	WriteData(0);
 		
 	WriteCommand(0x8b);
@@ -883,7 +896,6 @@ void main (void)
 		
 	WriteCommand(0xca);
 	WriteData(1);
-	
 	while(1)
 	{	
 		/* PERIOD CODE */

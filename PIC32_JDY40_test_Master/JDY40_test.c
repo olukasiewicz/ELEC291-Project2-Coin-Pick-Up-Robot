@@ -672,7 +672,7 @@ void main(void)
 		{
 		SerialReceive1_timeout(buff, sizeof(buff)); // Get the message from the slave
 		printf("%s", buff);
-
+		
 		}
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
 	}
