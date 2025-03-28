@@ -25,11 +25,11 @@ volatile unsigned int pwm_duty4=65535; //(0�65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT4 P3_0
 #define PWMOUT4R P2_5
-#define PERIOD_PIN P2_6
 ////////////timer2 pwm///////////////////////
 volatile unsigned int pwm_counter2=0;
 volatile unsigned int pwm_duty2=65535; //(0�65535)
 volatile int direction=0;
+volatile int peggingsidnatu=0;
 #define TIMER2_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT2 P3_2
 #define PWMOUT2R P3_7
@@ -408,6 +408,9 @@ void Timer4_ISR (void) interrupt INTERRUPT_TIMER4
 	if ( direction  == 0 ) {
 	PWMOUT4R = (pwm_counter4 < pwm_duty4) ? 1 : 0;
 	}
+	if ( direction == 3 ) 
+	{
+	}
 }
 
 void Timer2_ISR (void) interrupt INTERRUPT_TIMER2
@@ -421,14 +424,17 @@ void Timer2_ISR (void) interrupt INTERRUPT_TIMER2
 	if (direction == 0 ){
 	PWMOUT2R = (pwm_counter2 < pwm_duty2) ? 1 : 0;
 	}
+	if ( direction == 3 ) 
+	{
+	}
 }
-// unconverts a value from 0 - 1023 to unsigned int that goes from 0 - 65535
+
 unsigned int ADCtoPWM(int adc_value)
 {
 //	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
 //    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
 
-    return (unsigned int)((adc_value * 65535UL) / 1008UL);
+    return (unsigned int)((adc_value * 65535UL) / 1023UL);
 }
 
 /*
@@ -440,20 +446,21 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 {
 
 	// joystick in the middle hover over these values 
-	int centersteering = steering - 508;
-	int centerspeed;
-	float steeringFactor;
-	int baseSpeed;
-	int baseSteer;
-	int wheel1Speed;
-	int wheel2Speed;
+	idata int centersteering = steering - 508;
+	xdata int centerspeed;
+	idata float steeringFactor;
+	xdata int baseSpeed;
+	idata int baseSteer;
+	xdata int wheel1Speed;
+	idata int wheel2Speed;
+	xdata int delta;
 	
 	centerspeed = speed - 504;
 	
 	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
 	 baseSpeed = abs(centerspeed);
 	 baseSteer = abs(centersteering);
-	 if ( baseSpeed < 5 && baseSteer < 5 ) 
+	 if ( baseSpeed < 3 && baseSteer < 3 ) 
 	 {
 	 	*ADCwheel1 = 0;
 	 	*ADCwheel2 = 0;
@@ -466,18 +473,32 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	if ( steeringFactor > 1 ) steeringFactor = 1;
 	
 	    // Calculate
+	delta = baseSpeed * steeringFactor;
 	    		
-	 wheel1Speed = speed + (int)(speed * steeringFactor);
-	 wheel2Speed = speed - (int)(speed * steeringFactor);
-	if (wheel1Speed > 1008) wheel1Speed = 1008;
+	 wheel1Speed = baseSpeed + delta;
+	 wheel2Speed = baseSpeed - delta;
+	if (wheel1Speed > 507) wheel1Speed = 507;
 	if (wheel1Speed < 0) wheel1Speed = 0;
 	
-	if (wheel2Speed > 1008) wheel2Speed = 1008;
+	if (wheel2Speed > 507) wheel2Speed = 507;
 	if (wheel2Speed < 0) wheel2Speed = 0;
 	
-	*ADCwheel1 = (unsigned int)(wheel1Speed);
-	*ADCwheel2 = (unsigned int)(wheel2Speed);	
+	if ( baseSpeed < 3 && baseSteer > 3 ) 
+	{
+		
+		wheel1Speed = 507 + centersteering;
+		wheel2Speed = 507 - centersteering;	
+		
+		if (wheel1Speed > 507) wheel1Speed = 507;
+		if (wheel1Speed < 0) wheel1Speed = 0;
+		
+		if (wheel2Speed > 507) wheel2Speed = 507;
+		if (wheel2Speed < 0) wheel2Speed = 0;
+	}
+	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
+	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
 }
+
 // Measure the period of a square signal at PERIOD_PIN
 unsigned long GetPeriod (int n)
 {
@@ -639,11 +660,87 @@ int CoinDecider(long int freq)
 
 	else
 	{
-		printf(" NO COIN");
+//		printf(" NO COIN");
 	}
 
 	return 0;
 }
+
+/*
+automaticmode
+move foward untill dectects per
+*/
+
+void automaticmode(float fowardper, float sideper)
+{
+	int control = 0;
+	direction = 3;
+	//move fowawrd
+	P3_7=1;  //wheel 1
+	P3_2=0;	// wheel 1 
+	P3_0=0; // wheel 2
+	P2_5=1; // wheel 2
+
+	//foward per logic 
+	if ( fowardper >= p_thresh)
+	{
+		P3_7=0;  //wheel 1
+		P3_2=1;	// wheel 1 
+		P3_0=1; // wheel 2
+		P2_5=0; // wheel 2
+		waitms(1500);
+		if ( peggingsidnatu == 0 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=1;	// wheel 1 
+			P3_0=0; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(1500);
+			peggingsidnatu = 1;
+			return;
+			
+		}
+		if ( peggingsidnatu == 1 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=0;	// wheel 1 
+			P3_0=1; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(1500);
+			peggingsidnatu = 0;
+			return;
+		}
+	}
+	
+	
+	if ( sideper >= p_thresh)
+	{
+		if ( peggingsidnatu == 0 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=1;	// wheel 1 
+			P3_0=0; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(1500);
+			control = 1;
+			return;
+			
+		}
+		if ( peggingsidnatu == 1 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=0;	// wheel 1 
+			P3_0=1; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(1500);
+			control = 0;
+			return;
+		}
+	}
+	
+
+}
+
 
 void main (void)
 {
@@ -652,7 +749,7 @@ void main (void)
 	float pulse_width = 20;
 	float pulse_width1 = 10;
 	int speed, steering;
-	unsigned int adcwheel1, adcwheel2;
+	int adcwheel1, adcwheel2;
  	//char c;
 
 	// initialization for the period code
@@ -674,7 +771,7 @@ void main (void)
 	TIMER0_Init(); 
 
 	InitPinADC(2, 1); // Configure P2.1 as analog input
-	InitPinADC(2, 2); // Configure P2.2 as analog input
+	InitPinADC(2, 3); // Configure P2.1 as analog input
 	InitADC();
 
 	// To check configuration
@@ -707,13 +804,38 @@ void main (void)
 		v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 
 		// printing the voltage at the inductors (if perimeter is reached)
-		printf(" V_P2_1 = %f V_P2_3 = %f ", v[0], v[1]);
-
+//		printf(" V_P2_1 = %f V_P2_3 = %f ", v[0], v[1]);
+		
+		
 		if(RXU1()) // Something has arrived
 		{
 		//agartha will rise again
 			getstr1(buff, sizeof(buff));
+			if ( strcmp(buff, "A") == 0 )
+			{
+				waitms(500);
+				while(1)
+				{
+					direction=3; 
+								
+					v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
+					v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
+					automaticmode(v[0], v[1]);
+					printf("michelle and xinyi sitting in a tree\n\r");
+			
+				if(RXU1())
+				{
+					getstr1(buff, sizeof(buff));
+					if (strcmp(buff, "A") == 0 ) break;
+				}
+					 
+				}
+				
+					
+			}
+		
 			sscanf(buff, "S%dT%d", &speed, &steering);
+		
 			if (speed < 503 )
 			{ 
 				P2_5 = 0;
@@ -731,35 +853,9 @@ void main (void)
 			
 			pwm_duty4 = ADCtoPWM(adcwheel1);
 			pwm_duty2 = ADCtoPWM(adcwheel2);
-
-			// inductor 1 reaches perimeter (front)
-			/*if (automatic == 1)
-			{
-				while(v[0] > p_thresh)
-				{
-					printf(" PERIMETER REACHED INDUCTOR 1");
-
-					// go backwards
-					P3_7=1;  //wheel 1
-					P3_2=0;	// wheel 1 
-					P3_0=1; // wheel 2
-					P2_5=0; // wheel 2
-				}
-
-				P3_7=0;  //wheel 1
-				P3_2=1;	// wheel 1 
-				P3_0=0; // wheel 2
-				P2_5=0; // wheel 2
-				waitms(1000);
-
-				while(v[1] > p_thresh)
-				{
-					printf(" PERIMETER REACHED INDUCTOR 2");
-				}
-			} */
-
-			//printf("duty4= %u duty2 = %u buff=%s speed=%u steering=%u\n\r", pwm_duty4, pwm_duty2, buff, adcwheel1, adcwheel2);
-				
+			
+			printf("pwm_duty4 = %u pwm_duty3 = %u adcwheel1=%u adcwheel2=%u speed = %d steering = %d", pwm_duty4, pwm_duty2, adcwheel1, adcwheel2, speed, steering);
+			
 			waitms(5); // The radio seems to need this delay...
 
 		}
