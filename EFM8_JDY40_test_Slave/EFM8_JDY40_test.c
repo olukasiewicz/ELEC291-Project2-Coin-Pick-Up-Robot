@@ -823,6 +823,8 @@ void main (void)
 	int adcwheel1, adcwheel2;
  	//char c;
 
+	int i = 0;
+
 	// initialization for the period code
 	long int count, f;
 	int coinPresent = 0;
