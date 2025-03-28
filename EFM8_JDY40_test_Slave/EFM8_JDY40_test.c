@@ -25,7 +25,6 @@ volatile unsigned int pwm_duty4=65535; //(0�65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT4 P3_0
 #define PWMOUT4R P2_5
-#define PERIOD_PIN P2_6
 ////////////timer2 pwm///////////////////////
 volatile unsigned int pwm_counter2=0;
 volatile unsigned int pwm_duty2=65535; //(0�65535)
@@ -33,7 +32,18 @@ volatile int direction=0;
 #define TIMER2_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT2 P3_2
 #define PWMOUT2R P3_7
-//////////////////////////////////////////////////
+////////////custom chars and LCD////////////////////////////
+unsigned char customMouth[] = {0x00,0x00,0x00,0x11,0x15,0x0A,0x00,0x00};
+unsigned char customEye[] = {0x00,0x0E,0x19,0x19,0x1F,0x17,0x0E,0x00};
+
+#define LCD_RS P1_7
+// #define LCD_RW Px_x // Not used in this code.  Connect to GND
+#define LCD_E  P2_0
+#define LCD_D4 P1_3
+#define LCD_D5 P1_2
+#define LCD_D6 P1_1
+#define LCD_D7 P1_0
+#define CHARS_PER_LINE 16
 
 //SlAVE FILE FOR EFM8 
 //mommy farts
@@ -606,7 +616,7 @@ unsigned long GetFrequency (long int c, int pin)
 	
 	else
 	{
-//		eputs(" NO SIGNAL                     \r");
+		eputs(" NO SIGNAL                     \r");
 	}
 
 	return f;
@@ -645,6 +655,66 @@ int CoinDecider(long int freq)
 	return 0;
 }
 
+////////////////////////////////// LCD //////////////////////////////////////////
+
+void LCD_pulse (void)
+{
+	LCD_E=1;
+	Timer3us(40);
+	LCD_E=0;
+}
+
+void LCD_byte (unsigned char x)
+{
+	// The accumulator in the C8051Fxxx is bit addressable!
+	ACC=x; //Send high nible
+	LCD_D7=ACC_7;
+	LCD_D6=ACC_6;
+	LCD_D5=ACC_5;
+	LCD_D4=ACC_4;
+	LCD_pulse();
+	Timer3us(40);
+	ACC=x; //Send low nible
+	LCD_D7=ACC_3;
+	LCD_D6=ACC_2;
+	LCD_D5=ACC_1;
+	LCD_D4=ACC_0;
+	LCD_pulse();
+}
+
+void WriteData (unsigned char x)
+{
+	LCD_RS=1;
+	LCD_byte(x);
+	waitms(2);
+}
+
+void WriteCommand (unsigned char x)
+{
+	LCD_RS=0;
+	LCD_byte(x);
+	waitms(5);
+}
+
+void LCD_4BIT (void)
+{
+	LCD_E=0; // Resting state of LCD's enable is zero
+	// LCD_RW=0; // We are only writing to the LCD in this program
+	waitms(20);
+	// First make sure the LCD is in 8-bit mode and then change to 4-bit mode
+	WriteCommand(0x33);
+	WriteCommand(0x33);
+	WriteCommand(0x32); // Change to 4-bit mode
+
+	// Configure the LCD
+	WriteCommand(0x28);
+	WriteCommand(0x0c);
+	WriteCommand(0x01); // Clear screen command (takes some time)
+	waitms(20); // Wait for clear screen command to finsih.
+}
+
+//////////////////////////////////
+
 void main (void)
 {
     //unsigned int evilcode, evilcode1;
@@ -653,11 +723,11 @@ void main (void)
 	float pulse_width1 = 10;
 	int speed, steering;
 	unsigned int adcwheel1, adcwheel2;
- 	//char c;
 
 	// initialization for the period code
 	long int count, f;
 	int coinPresent = 0;
+	int moneyCount = 0;
 
 	// initialization for the perimeter code
 	float v[2];
@@ -677,6 +747,8 @@ void main (void)
 	InitPinADC(2, 2); // Configure P2.2 as analog input
 	InitADC();
 
+	LCD_4BIT(); // LCD initialization
+
 	// To check configuration
 	SendATCommand("AT+VER\r\n");
 	SendATCommand("AT+BAUD\r\n");
@@ -689,6 +761,27 @@ void main (void)
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");  
+	
+	WriteCommand(0x40);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customMouth[i]);
+	}
+	
+	WriteCommand(0x48);
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customEye[i]);
+	}
+
+	WriteCommand(0x89);
+	WriteData(0);
+		
+	WriteCommand(0x8b);
+	WriteData(0);
+		
+	WriteCommand(0xca);
+	WriteData(1);
 	
 	while(1)
 	{	
