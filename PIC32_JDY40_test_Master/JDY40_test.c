@@ -493,7 +493,7 @@ void PrintNumber(long int val, int Base, int digits)
 	}
 	uart_puts(&buff[j+1]);
 }
-
+/*
 unsigned int ADCtoPWM(int adc_value)
 {
 //	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
@@ -506,7 +506,7 @@ unsigned int ADCtoPWM(int adc_value)
 returns 2 ADCvalues to convert to pwm signals
 hopes does the ratio properly
 fornite skibbi balls 
-*/
+
 void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2) 
 {
 
@@ -561,17 +561,125 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
 	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
 }
+*/
+
+unsigned int ADCtoPWM(int adc_value)
+{
+//	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
+//    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
+
+    return (unsigned int)((adc_value * 65535UL) / 1023UL);
+}
+
+/*
+returns 2 ADCvalues to convert to pwm signals
+hopes does the ratio properly
+fornite skibbi balls 
+*/
+void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2) 
+{
+
+	// joystick in the middle hover over these values 
+	 int centersteering = steering - 508;
+	 int centerspeed;
+	 float steeringFactor;
+	 int baseSpeed;
+	 int baseSteer;
+	 int wheel1Speed;
+	 int wheel2Speed;
+	 int delta;
+	
+	centerspeed = speed - 504;
+	
+	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
+	 baseSpeed = abs(centerspeed);
+	 baseSteer = abs(centersteering);
+	 if ( baseSpeed < 3 && baseSteer < 3 ) 
+	 {
+	 	*ADCwheel1 = 0;
+	 	*ADCwheel2 = 0;
+	 	return;
+	} 
+		
+	 	
+	 steeringFactor = (float)centersteering / 508; // ranges from -1.0 (full left) to +1.0 (full right)
+	
+	if ( steeringFactor > 1 ) steeringFactor = 1;
+	
+	    // Calculate
+	delta = ((int)(baseSpeed * steeringFactor));
+	    		
+	 wheel1Speed = baseSpeed - delta;
+	 wheel2Speed = baseSpeed + delta;
+	if (wheel1Speed > 507) wheel1Speed = 507;
+	if (wheel1Speed < 0) wheel1Speed = 0;
+	
+	if (wheel2Speed > 507) wheel2Speed = 507;
+	if (wheel2Speed < 0) wheel2Speed = 0;
+	
+	if ( baseSpeed < 3 && baseSteer > 3 ) 
+	{
+		
+		wheel1Speed = 507 - centersteering;
+		wheel2Speed = 507 + centersteering;	
+		
+		if (wheel1Speed > 507) wheel1Speed = 507;
+		if (wheel1Speed < 0) wheel1Speed = 0;
+		
+		if (wheel2Speed > 507) wheel2Speed = 507;
+		if (wheel2Speed < 0) wheel2Speed = 0;
+	}
+	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
+	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
+}
+
+
+int CoinDecider(long int freq)
+{
+	if(freq>=56300) // detects a coin
+	{
+		// if frequency is in dime range 10 cents
+		if((freq >= 56200) && (freq < 56400))
+		{
+			printf(" DIME");
+			return 1;
+		}
+
+		// nickel 25 cents
+		else if ((freq >= 56400) && (freq < 56700))
+		{
+			printf(" NICKEL");
+			return 1;
+		}
+
+		// loonie 1 dollar
+		else
+		{
+			printf(" LOONIE");
+		}
+
+		return 1;
+	}
+
+	else
+	{
+//		printf(" NO COIN");
+	}
+
+	return 0;
+}
 
 void main(void)
 {
 	char buff[80];
 	char sendbuff[80];
-    int timeout_cnt=0, pwmalarm;
+    int timeout_cnt=0, coindecide, coinflag;
     int cont1=0, cont2=100;
     unsigned char evilcode;
 	volatile unsigned long t=0;
 	unsigned char myduty=0;
 	unsigned int thing, thing1;
+	float stringtobuff;
 	int adcvalx;
 	int adcvaly;
 	int newadcvalx;
@@ -596,10 +704,7 @@ void main(void)
 	ANSELB &= ~(1<<10); // Set RB14 as a digital I/O
     TRISB &= ~(1<<10);  // configure pin RB14 as output
 	LATB |= (1<<10);    // 'SET' pin of JDY40 to 1 is normal operation mode
-	
-	ANSELB &= ~(1<<0); // Set RB14 as a digital I/O
-    TRISB &= ~(1<<0);  // configure pin RB14 as output
-	LATB |= (1<<0);    // 'SET' pin of JDY40 to 1 is normal operation mode
+	   // 'SET' pin of JDY40 to 1 is normal operation mode
 	
 	ReceptionOff();
 	ConfigurePins();
@@ -654,26 +759,39 @@ void main(void)
 //		pwmadcval3 = ADCtoPWM(adcval3);
 		sprintf(sendbuff, "S%uT%u\n", adcvalx, adcvaly);
 		SerialTransmit1(sendbuff);
-		printf("sendbuff = %s adcval4(x) = %d adcval3(y) = %d pwmx = %u pwmy = %u\r\n", sendbuff, adcvalx, adcvaly, pwmadcvalx, pwmadcvaly);
+//		printf("sendbuff = %s adcval4(x) = %d adcval3(y) = %d pwmx = %u pwmy = %u\r\n", sendbuff, adcvalx, adcvaly, pwmadcvalx, pwmadcvaly);
 		thing = PORTB&(1<<10) ? 0 : 1;
-		if( thing == 1 ) {
-		printf ("hello\n\r");
-		sprintf(sendbuff, "A"); 
-		SerialTransmit1(sendbuff);
-		delayms(1500);
-		}
+			if( thing == 1 ) 
+			{
+				printf ("hello\n\r");
+				sprintf(sendbuff, "A"); 
+				SerialTransmit1(sendbuff);
+				delayms(1500);
+			}
 		
-		thing1 = PORTB&(1<<0) ? 0 : 1;
-		if( thing1 == 1 ) {
-		printf ("hellomama\n\r");
-		delayms(1500);
-		}
-		if(U1STAbits.URXDA) // Something has arrived from the slave
-		{
-		SerialReceive1_timeout(buff, sizeof(buff)); // Get the message from the slave
-		printf("%s", buff);
-		
-		}
+			if(U1STAbits.URXDA) // Something has arrived from the slave
+			{
+				SerialReceive1_timeout(buff, sizeof(buff)); // Get the message from the slave
+				LCDprint(buff, 1,1);
+				stringtobuff = atof(buff);
+				coindecide = stringtobuff;
+				coinflag = CoinDecider(coindecide);
+				printf("%s %f %d %d", buff, stringtobuff, coindecide, coinflag);
+				printf("asdnsa");
+					if ( coinflag == 1 ) 
+					{
+						evilcode = 255*(stringtobuff-55000) / 1700;
+						printf("%u", evilcode);
+						if ( evilcode > 255) evilcode = 255;
+						Set_pwm(evilcode);
+						LCDprint("COIN FOUND", 2,1);
+						delayms(150);
+					}
+					else
+					{
+					LCDprint("NO COIN", 2,1);
+					}
+			}
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
 	}
 }

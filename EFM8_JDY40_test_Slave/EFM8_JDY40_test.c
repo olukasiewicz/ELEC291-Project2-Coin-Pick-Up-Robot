@@ -8,7 +8,7 @@
 #define BAUDRATE 115200L
 
 #define SARCLK 18000000L // needed for initializing the ADC
-#define PERIOD_PIN P0_6
+#define PERIOD_PIN P1_7
 #define VDD 3.3035 // The measured value of VDD in volts
 #define p_thresh 0.1
 /*
@@ -19,7 +19,7 @@
 */
 ////////////timer//////////////////////////
 #define PWM_FREQ 10000L
-////////////timer5 pwm///////////////////////
+////////////timer4 pwm///////////////////////
 volatile unsigned int pwm_counter4=0;
 volatile unsigned int pwm_duty4=65535; //(0?65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
@@ -35,6 +35,7 @@ volatile int peggingsidnatu=0;
 #define PWMOUT2R P3_7
 //////////////////////////////////////////////////
 
+//#define LCD_RS P1_7 CHANGED TO P0_2
 #define LCD_RS P1_7
 // #define LCD_RW Px_x // Not used in this code.  Connect to GND
 #define LCD_E  P2_0
@@ -44,6 +45,26 @@ volatile int peggingsidnatu=0;
 #define LCD_D7 P1_0
 #define CHARS_PER_LINE 16
 const unsigned char customSparkle[] = {0x04,0x04,0x0A,0x11,0x0A,0x04,0x04,0x00};
+const unsigned char customSad[] = {
+  0x00,
+  0x00,
+  0x00,
+  0x11,
+  0x11,
+  0x0E,
+  0x00,
+  0x00
+};
+const unsigned char customFrown[] = {
+  0x00,
+  0x00,
+  0x00,
+  0x0E,
+  0x11,
+  0x11,
+  0x00,
+  0x00
+};
 
 //SlAVE FILE FOR EFM8 
 //mommy farts
@@ -438,7 +459,6 @@ void Timer2_ISR (void) interrupt INTERRUPT_TIMER2
 	{
 	}
 }
-
 unsigned int ADCtoPWM(int adc_value)
 {
 //	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
@@ -454,20 +474,19 @@ fornite skibbi balls
 */
 void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2) 
 {
-
-	// joystick in the middle hover over these values 
-	idata int centersteering = steering - 508;
-	xdata int centerspeed;
-	idata float steeringFactor;
-	xdata int baseSpeed;
-	idata int baseSteer;
-	xdata int wheel1Speed;
-	idata int wheel2Speed;
-	xdata int delta;
+	 int centersteering;
+	 int centerspeed;
+	 xdata float steeringFactor;
+	 xdata int baseSpeed;
+	 xdata int baseSteer;
+	 xdata int wheel1Speed;
+	 xdata int wheel2Speed;
+	 int delta;
 	
-	centerspeed = speed - 504;
 	
-	// incase is 1 or something but lowkey idk is low enough the pwm singal wont turn it
+	 centersteering = steering - 508;
+	 centerspeed = speed - 504;
+	// incase is 1 or something but lowkey idk is low enough the pwm signal wont turn it
 	 baseSpeed = abs(centerspeed);
 	 baseSteer = abs(centersteering);
 	 if ( baseSpeed < 3 && baseSteer < 3 ) 
@@ -475,7 +494,7 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	 	*ADCwheel1 = 0;
 	 	*ADCwheel2 = 0;
 	 	return;
-	} 
+	 } 
 		
 	 	
 	 steeringFactor = (float)centersteering / 508; // ranges from -1.0 (full left) to +1.0 (full right)
@@ -483,10 +502,10 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	if ( steeringFactor > 1 ) steeringFactor = 1;
 	
 	    // Calculate
-	delta = baseSpeed * steeringFactor;
+	delta = ((int)(baseSpeed * steeringFactor));
 	    		
-	 wheel1Speed = baseSpeed + delta;
-	 wheel2Speed = baseSpeed - delta;
+	 wheel1Speed = baseSpeed - delta;
+	 wheel2Speed = baseSpeed + delta;
 	if (wheel1Speed > 507) wheel1Speed = 507;
 	if (wheel1Speed < 0) wheel1Speed = 0;
 	
@@ -496,8 +515,8 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	if ( baseSpeed < 3 && baseSteer > 3 ) 
 	{
 		
-		wheel1Speed = 507 + centersteering;
-		wheel2Speed = 507 - centersteering;	
+		wheel1Speed = 507 - centersteering;
+		wheel2Speed = 507 + centersteering;	
 		
 		if (wheel1Speed > 507) wheel1Speed = 507;
 		if (wheel1Speed < 0) wheel1Speed = 0;
@@ -508,6 +527,7 @@ void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2)
 	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
 	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
 }
+
 
 // Measure the period of a square signal at PERIOD_PIN
 unsigned long GetPeriod (int n)
@@ -643,38 +663,6 @@ unsigned long GetFrequency (long int c, int pin)
 	return f;
 }
 
-int CoinDecider(long int freq)
-{
-	if(freq>=56300) // detects a coin
-	{
-		// if frequency is in dime range 10 cents
-		if((freq >= 56200) && (freq < 56400))
-		{
-			printf(" DIME");
-		}
-
-		// nickel 25 cents
-		else if ((freq >= 56400) && (freq < 56700))
-		{
-			printf(" NICKEL");
-		}
-
-		// loonie 1 dollar
-		else
-		{
-			printf(" LOONIE");
-		}
-
-		return 1;
-	}
-
-	else
-	{
-//		printf(" NO COIN");
-	}
-
-	return 0;
-}
 
 /*
 automaticmode
@@ -749,6 +737,8 @@ void automaticmode(float fowardper, float sideper)
 	}
 	
 
+	
+
 }
 
 void LCD_pulse (void)
@@ -808,6 +798,56 @@ void LCD_4BIT (void)
 }
 
 
+int CoinDecider(long int freq)
+{
+	if(freq>=56300) // detects a coin
+	{
+		// if frequency is in dime range 10 cents
+		if((freq >= 56200) && (freq < 56400))
+		{
+			printf(" DIME");
+		}
+
+		// nickel 25 cents
+		else if ((freq >= 56400) && (freq < 56700))
+		{
+			printf(" NICKEL");
+		}
+
+		// loonie 1 dollar
+		else
+		{
+			printf(" LOONIE");
+		}
+	WriteCommand(0x89);
+    WriteData(0);
+
+    WriteCommand(0x8b);
+    WriteData(0);
+
+    WriteCommand(0xca);
+    WriteData(1);
+    waitms(1000);
+   	WriteCommand(0x89);
+    WriteData(2);
+
+    WriteCommand(0x8b);
+    WriteData(2);
+
+    WriteCommand(0xca);
+    WriteData(1);
+
+		return 1;
+	}
+
+	else
+	{
+//		printf(" NO COIN");
+	}
+
+	return 0;
+}
+
 void main (void)
 {
     //unsigned int evilcode, evilcode1;
@@ -819,7 +859,6 @@ void main (void)
 	unsigned char customMouth0,customMouth1, customMouth2,customMouth3,customMouth4,customMouth5,customMouth6,customMouth7;
 		
 	unsigned char customEye0,customEye1, customEye2,customEye3,customEye4,customEye5,customEye6,customEye7;
-
  	int i = 0;
 
 	// initialization for the period code
@@ -896,26 +935,41 @@ void main (void)
 		
 	WriteCommand(0xca);
 	WriteData(1);
+	
+	WriteCommand(0x64);
+    for(i=0; i<8; i++) {
+
+         WriteData(customSad[i]);
+    }
+	WriteCommand(0x72);
+    for(i=0; i<8; i++) {
+
+         WriteData(customFrown[i]);
+    }
 	while(1)
 	{	
-		/* PERIOD CODE */
+	
+
+//////////////////////* PERIOD CODE */////////////////////////////
 		count = GetPeriod(200);
 		f = GetFrequency(count, 1);
 		coinPresent = CoinDecider(f); 
-		if(coinPresent)
-		{
-			sprintf(msg, "%ld", f-55000); // subtracted so that it sends a smaller value
-			sendstr1(msg);
-		}
+		sprintf(msg, "%ld", f); // subtracted so that it sends a smaller value
+		sendstr1(msg);
 
 		/* PERIMETER CODE */
 		v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 		v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 
 		// printing the voltage at the inductors (if perimeter is reached)
-//		printf(" V_P2_1 = %f V_P2_3 = %f ", v[0], v[1]);
+//		printf(" V_P2_1 = %f V_P2_3 = %f d ", v[0], v[1]);
+		printf("%ld", f);
 		
-		
+//////////////////////////////////////////////////////////////////////////////
+
+	
+//////////////////CHECKING AUTOMATIC MODE//////////////////////////////////	
+	
 		if(RXU1()) // Something has arrived
 		{
 		//agartha will rise again
@@ -925,46 +979,49 @@ void main (void)
 				waitms(500);
 				while(1)
 				{
-					direction=3; 
-								
+					direction=3; 			
 					v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 					v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 					automaticmode(v[0], v[1]);
 					printf("michelle and xinyi sitting in a tree\n\r");
-			
-				if(RXU1())
-				{
-					getstr1(buff, sizeof(buff));
-					if (strcmp(buff, "A") == 0 ) break;
+					if  (RXU1())
+					{
+						getstr1(buff, sizeof(buff));
+						if ( strcmp(buff, "A") == 0 ) break;
+					}
 				}
-					 
-				}
-				
-					
+				if ( strcmp(buff, "S") == 0 )	
+					{
+						printf("this should be the motor function");
+						waitms(500);
+					}	
 			}
 		
-			sscanf(buff, "S%dT%d", &speed, &steering);
-		
-			if (speed < 503 )
+			sscanf(buff, "S%dT%d", &steering, &speed);
+////////////////////////////////////////////////////////////////////////
+
+	
+/////////////////////////////CAR CONTROLS/////////////////////////////////
+			if (speed < 480 )
 			{ 
 				P2_5 = 0;
 				P3_7=0;
 				direction = 1;
 			}
-			 else 
+			else 
 			{
 			 P3_2=0;
 			 P3_0=0;
 			 direction = 0;
-			 
 			}
-			ADCsteeringRatio(speed, steering, &adcwheel1, &adcwheel2);
 			
+			ADCsteeringRatio(speed, steering, &adcwheel1, &adcwheel2);
 			pwm_duty4 = ADCtoPWM(adcwheel1);
 			pwm_duty2 = ADCtoPWM(adcwheel2);
 			
-			printf("pwm_duty4 = %u pwm_duty3 = %u adcwheel1=%u adcwheel2=%u speed = %d steering = %d", pwm_duty4, pwm_duty2, adcwheel1, adcwheel2, speed, steering);
-			
+//			printf("pwm_duty4 = %u pwm_duty3 = %u adcwheel1=%u adcwheel2=%u speed = %d steering = %d", pwm_duty4, pwm_duty2, adcwheel1, adcwheel2, speed, steering)
+///////////////////////////////////////////////////////////////////////
+
 			waitms(5); // The radio seems to need this delay...
 
 		}
