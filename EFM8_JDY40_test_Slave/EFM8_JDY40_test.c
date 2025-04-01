@@ -624,8 +624,7 @@ void servomotion(void)
 	servo1 = 150;
 	waitms(100);
 	
-	P1_5 = 1;
-	
+	P1_5 = 1;	
 
 	// sweeping motion of servo2
 	for(j=250; j>180; j-=5) 
@@ -646,7 +645,7 @@ void servomotion(void)
 	waitms(1000);
 	
 	// move servo2 to bring arm over coin bucket
-	for(j=180; j > 60; j-=5){
+	for(j=180; j > 90; j-=5){
 		servo2 = j;
 		waitms(20);
 	}
