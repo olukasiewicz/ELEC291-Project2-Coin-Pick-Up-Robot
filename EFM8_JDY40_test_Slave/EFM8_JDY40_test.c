@@ -805,6 +805,15 @@ void main (void)
 		/* PERIOD CODE */
 		count = GetPeriod(200);
 		f = GetFrequency(count);
+<<<<<<< HEAD
+=======
+//		coinPresent = CoinDecider(f); 
+//		if(coinPresent)
+//		{
+//			sprintf(msg, "%ld", f-55000); // subtracted so that it sends a smaller value
+//			sendstr1(msg);
+//		}
+>>>>>>> 9f3d00fd8684da6548fdc3eb46f2b7a34f1299fc
 
 		/* PERIMETER CODE */
 		v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
@@ -877,7 +886,11 @@ void main (void)
 
 			
 //			printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
+<<<<<<< HEAD
 		//	printf("%ld\n\r", f);
+=======
+			printf("%ld\n\r", f);
+>>>>>>> 9f3d00fd8684da6548fdc3eb46f2b7a34f1299fc
 	//		PrintNumber(pwm_duty2, 10, 6);
 	//		eputs("\n\r");
 			waitms(5); // The radio seems to need this delay...
