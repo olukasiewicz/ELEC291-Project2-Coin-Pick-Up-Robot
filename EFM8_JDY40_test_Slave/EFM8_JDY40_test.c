@@ -1068,8 +1068,12 @@ void main (void)
 			pwm_duty2 = adcwheel1;
 
 			
-	//		printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
+//			printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
+<<<<<<< HEAD
+		//	printf("%ld\n\r", f);
+=======
 			printf("%ld\n\r", f);
+>>>>>>> 9f3d00fd8684da6548fdc3eb46f2b7a34f1299fc
 	//		PrintNumber(pwm_duty2, 10, 6);
 	//		eputs("\n\r");
 			waitms(5); // The radio seems to need this delay...
