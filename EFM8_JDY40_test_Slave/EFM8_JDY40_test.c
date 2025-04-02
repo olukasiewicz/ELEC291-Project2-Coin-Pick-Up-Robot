@@ -8,9 +8,28 @@
 #define BAUDRATE 115200L
 
 #define SARCLK 18000000L // needed for initializing the ADC
-#define PERIOD_PIN P1_7
+#define PERIOD_PIN P0_6
 #define VDD 3.3035 // The measured value of VDD in volts
 #define p_thresh 0.1
+//////////////LCD/////////////
+
+#define LCD_RS P2_6
+//#define LCD_RW Px_x // Not used in this code.  Connect to GND
+#define LCD_E  P2_5
+#define LCD_D4 P2_4
+#define LCD_D5 P2_3
+#define LCD_D6 P2_2
+#define LCD_D7 P2_1
+#define CHARS_PER_LINE 16
+
+const unsigned char customMouth[8] = {0x0E,0x04,0x00,0x00,0x11,0x15,0x0A,0x00};
+const unsigned char customEye[8] = {0x00,0x0E,0x19,0x19,0x1F,0x17,0x0E,0x00};
+const unsigned char customOpenMouth[8] = {0x0E,0x04,0x00,0x0E,0x11,0x11,0x0E,0x00};
+const unsigned char customSparkle [8] = {0x04,0x04,0x0A,0x11,0x0A,0x04,0x04,0x00};
+const unsigned char customMoney [8] = {0x04,0x0E,0x15,0x14,0x0E,0x05,0x15,0x0E};
+const unsigned char customHappyMouth [8] = {0x0E,0x04,0x00,0x15,0x0A,0x0A,0x0E,0x00};
+
+//////////////////////////////
 /*
 						P3_7=0;  //wheel 1
 						P3_2=0;	// wheel 1 
@@ -19,7 +38,7 @@
 */
 ////////////timer//////////////////////////
 #define PWM_FREQ 10000L
-////////////timer4 pwm///////////////////////
+////////////timer5 pwm///////////////////////
 volatile unsigned int pwm_counter4=0;
 volatile unsigned int pwm_duty4=65535; //(0?65535)
 #define TIMER4_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
@@ -33,38 +52,17 @@ volatile int peggingsidnatu=0;
 #define TIMER2_RELOAD (0x10000L - (SYSCLK/(12L*PWM_FREQ)))
 #define PWMOUT2 P3_2
 #define PWMOUT2R P3_7
-//////////////////////////////////////////////////
 
-//#define LCD_RS P1_7 CHANGED TO P0_2
-#define LCD_RS P1_7
-// #define LCD_RW Px_x // Not used in this code.  Connect to GND
-#define LCD_E  P2_0
-#define LCD_D4 P1_3
-#define LCD_D5 P1_2
-#define LCD_D6 P1_1
-#define LCD_D7 P1_0
-#define CHARS_PER_LINE 16
-const unsigned char customSparkle[] = {0x04,0x04,0x0A,0x11,0x0A,0x04,0x04,0x00};
-const unsigned char customSad[] = {
-  0x00,
-  0x00,
-  0x00,
-  0x11,
-  0x11,
-  0x0E,
-  0x00,
-  0x00
-};
-const unsigned char customFrown[] = {
-  0x00,
-  0x00,
-  0x00,
-  0x0E,
-  0x11,
-  0x11,
-  0x00,
-  0x00
-};
+//////////////////SERVO pins//////////////////////
+#define SERVO1   P1_3 // top servo
+#define SERVO2   P1_4 // bottom servo
+#define EMAGNET  P1_5 // magnet
+
+volatile unsigned int servo_counter=0;
+volatile unsigned char servo1=250, servo2=250;
+
+	
+/////////////////////////////////////////////////
 
 //SlAVE FILE FOR EFM8 
 //mommy farts
@@ -161,7 +159,48 @@ char _c51_external_startup (void)
 	ET2=1;         // Enable Timer2 interrupts
 	TR2=1;         // Start Timer2 (TMR2CN is bit addressable)
 	SFRPAGE=0x00;
+	
+	// Initialize timer 5 for periodic interrupts
+	SFRPAGE=0x10;
+	TMR5CN0=0x00;
+	TMR5=0xffff;   // Set to reload immediately
+	EIE2|=0b_0000_1000; // Enable Timer5 interrupts
+	TR5=1;         // Start Timer5 (TMR5CN0 is bit addressable)
+	
+	EA=1;
+	
+	SFRPAGE=0x00;
+	
+
 	return 0;
+}
+
+void Timer5_ISR (void) interrupt INTERRUPT_TIMER5
+{
+	SFRPAGE=0x10;
+	TF5H = 0; // Clear Timer5 interrupt flag
+	TMR5RL=(0x10000L-(SYSCLK/(12L*100000L)));
+	servo_counter++;
+	if(servo_counter==2000)
+	{
+		servo_counter=0;
+	}
+	if(servo1>=servo_counter)
+	{
+		SERVO1=1;
+	}
+	else
+	{
+		SERVO1=0;
+	}
+	if(servo2>=servo_counter)
+	{
+		SERVO2=1;
+	}
+	else
+	{
+		SERVO2=0;
+	}
 }
 
 // Uses Timer3 to delay <us> micro-seconds. 
@@ -183,6 +222,7 @@ void Timer3us(unsigned char us)
 	}
 	TMR3CN0 = 0 ;                   // Stop Timer3 and clear overflow flag
 }
+
 
 void waitms (unsigned int ms)
 {
@@ -459,74 +499,6 @@ void Timer2_ISR (void) interrupt INTERRUPT_TIMER2
 	{
 	}
 }
-unsigned int ADCtoPWM(int adc_value)
-{
-//	if ( adc_value == 503 || adc_value == 504 ) adc_value = 0;
-//    else if(adc_value > 1023) adc_value = 1023; // Protection against overflow
-
-    return (unsigned int)((adc_value * 65535UL) / 1023UL);
-}
-
-/*
-returns 2 ADCvalues to convert to pwm signals
-hopes does the ratio properly
-fornite skibbi balls 
-*/
-void ADCsteeringRatio(int speed, int steering, int *ADCwheel1, int *ADCwheel2) 
-{
-	 int centersteering;
-	 int centerspeed;
-	 xdata float steeringFactor;
-	 xdata int baseSpeed;
-	 xdata int baseSteer;
-	 xdata int wheel1Speed;
-	 xdata int wheel2Speed;
-	 int delta;
-	
-	
-	 centersteering = steering - 508;
-	 centerspeed = speed - 504;
-	// incase is 1 or something but lowkey idk is low enough the pwm signal wont turn it
-	 baseSpeed = abs(centerspeed);
-	 baseSteer = abs(centersteering);
-	 if ( baseSpeed < 3 && baseSteer < 3 ) 
-	 {
-	 	*ADCwheel1 = 0;
-	 	*ADCwheel2 = 0;
-	 	return;
-	 } 
-		
-	 	
-	 steeringFactor = (float)centersteering / 508; // ranges from -1.0 (full left) to +1.0 (full right)
-	
-	if ( steeringFactor > 1 ) steeringFactor = 1;
-	
-	    // Calculate
-	delta = ((int)(baseSpeed * steeringFactor));
-	    		
-	 wheel1Speed = baseSpeed - delta;
-	 wheel2Speed = baseSpeed + delta;
-	if (wheel1Speed > 507) wheel1Speed = 507;
-	if (wheel1Speed < 0) wheel1Speed = 0;
-	
-	if (wheel2Speed > 507) wheel2Speed = 507;
-	if (wheel2Speed < 0) wheel2Speed = 0;
-	
-	if ( baseSpeed < 3 && baseSteer > 3 ) 
-	{
-		
-		wheel1Speed = 507 - centersteering;
-		wheel2Speed = 507 + centersteering;	
-		
-		if (wheel1Speed > 507) wheel1Speed = 507;
-		if (wheel1Speed < 0) wheel1Speed = 0;
-		
-		if (wheel2Speed > 507) wheel2Speed = 507;
-		if (wheel2Speed < 0) wheel2Speed = 0;
-	}
-	*ADCwheel1 = (unsigned int)((wheel1Speed * 1023L) / 507L);
-	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
-}
 
 
 // Measure the period of a square signal at PERIOD_PIN
@@ -641,105 +613,30 @@ void PrintNumber(long int val, int Base, int digits)
 	eputs(&buff[j+1]);
 }
 
-unsigned long GetFrequency (long int c, int pin)
+unsigned long GetFrequency (long int c)
 {
 	long int f = 0;
 
 	if(c>0)
 	{
 			f=(SYSCLK*200.0)/(c*12);
-			eputs(" f");
-			PrintNumber(pin, 10, 1);
-			eputs(" = ");
-			PrintNumber(f, 10, 7);
-			eputs("Hz");
+//			eputs(" f");
+//			PrintNumber(pin, 10, 1);
+//			eputs(" = ");
+//			PrintNumber(f, 10, 7);
+//			eputs("Hz");
 	}
 	
 	else
 	{
-//		eputs(" NO SIGNAL                     \r");
+		eputs(" NO SIGNAL                     \r");
 	}
 
 	return f;
 }
 
 
-/*
-automaticmode
-move foward untill dectects per
-*/
-
-void automaticmode(float fowardper, float sideper)
-{
-	int control = 0;
-	direction = 3;
-	//move fowawrd
-	P3_7=1;  //wheel 1
-	P3_2=0;	// wheel 1 
-	P3_0=0; // wheel 2
-	P2_5=1; // wheel 2
-
-	//foward per logic 
-	if ( fowardper >= p_thresh)
-	{
-		P3_7=0;  //wheel 1
-		P3_2=1;	// wheel 1 
-		P3_0=1; // wheel 2
-		P2_5=0; // wheel 2
-		waitms(1500);
-		if ( peggingsidnatu == 0 )
-		{
-			P3_7=0;  //wheel 1
-			P3_2=1;	// wheel 1 
-			P3_0=0; // wheel 2
-			P2_5=0; // wheel 2
-			waitms(1500);
-			peggingsidnatu = 1;
-			return;
-			
-		}
-		if ( peggingsidnatu == 1 )
-		{
-			P3_7=0;  //wheel 1
-			P3_2=0;	// wheel 1 
-			P3_0=1; // wheel 2
-			P2_5=0; // wheel 2
-			waitms(1500);
-			peggingsidnatu = 0;
-			return;
-		}
-	}
-	
-	
-	if ( sideper >= p_thresh)
-	{
-		if ( peggingsidnatu == 0 )
-		{
-			P3_7=0;  //wheel 1
-			P3_2=1;	// wheel 1 
-			P3_0=0; // wheel 2
-			P2_5=0; // wheel 2
-			waitms(1500);
-			control = 1;
-			return;
-			
-		}
-		if ( peggingsidnatu == 1 )
-		{
-			P3_7=0;  //wheel 1
-			P3_2=0;	// wheel 1 
-			P3_0=1; // wheel 2
-			P2_5=0; // wheel 2
-			waitms(1500);
-			control = 0;
-			return;
-		}
-	}
-	
-
-	
-
-}
+////////////////////////////////// LCD //////////////////////////////////////////
 
 void LCD_pulse (void)
 {
@@ -797,55 +694,198 @@ void LCD_4BIT (void)
 	waitms(20); // Wait for clear screen command to finsih.
 }
 
+//////////////////////////////////
 
-int CoinDecider(long int freq)
+
+void servomotion(void)
 {
-	if(freq>=56300) // detects a coin
+	unsigned char j;
+	int i;
+	
+	WriteCommand(0x40);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customMouth[i]);
+	}
+	
+	WriteCommand(0x48);
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customEye[i]);
+	}
+	
+	WriteCommand(0x50);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customOpenMouth[i]);
+	}
+	
+	WriteCommand(0x58);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customSparkle[i]);
+	}
+	
+	WriteCommand(0x60);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customMoney[i]);
+	}
+	
+	WriteCommand(0x68);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customHappyMouth[i]);
+	}
+	
+	WriteCommand(0x83);
+	WriteData(3);
+			
+	WriteCommand(0x85);
+	WriteData(3);
+			
+	WriteCommand(0xC4);
+	WriteData(2);
+	
+	waitms(500);
+	servo1 = 150;
+	waitms(100);
+	
+	P1_5 = 1;
+	
+
+	// sweeping motion of servo2
+	for(j=250; j>180; j-=5) 
 	{
-		// if frequency is in dime range 10 cents
-		if((freq >= 56200) && (freq < 56400))
-		{
-			printf(" DIME");
-		}
-
-		// nickel 25 cents
-		else if ((freq >= 56400) && (freq < 56700))
-		{
-			printf(" NICKEL");
-		}
-
-		// loonie 1 dollar
-		else
-		{
-			printf(" LOONIE");
-		}
-	WriteCommand(0x89);
-    WriteData(0);
-
-    WriteCommand(0x8b);
-    WriteData(0);
-
-    WriteCommand(0xca);
-    WriteData(1);
-    waitms(1000);
-   	WriteCommand(0x89);
-    WriteData(2);
-
-    WriteCommand(0x8b);
-    WriteData(2);
-
-    WriteCommand(0xca);
-    WriteData(1);
-
-		return 1;
+		servo2 = j;
+		waitms(20);
+	}
+	
+	waitms(1000);
+	
+	// lift servo1 to lift up coin
+	for(j=150; j<250; j+=5) 
+	{
+		servo1 = j;
+		waitms(20);
+	}
+	
+	waitms(1000);
+	
+	// move servo2 to bring arm over coin bucket
+	for(j=180; j > 60; j-=5){
+		servo2 = j;
+		waitms(20);
 	}
 
-	else
+	// drop coin
+	//waitms(1000);
+	P1_5 = 0;
+	
+	waitms(150);
+	servo1 = 250;
+	servo2 = 250; 
+	EMAGNET=0;
+	
+	WriteCommand(0x83);
+	WriteData(1);
+			
+	WriteCommand(0x85);
+	WriteData(1);
+			
+	WriteCommand(0xC4);
+	WriteData(0);
+
+}
+/*
+automaticmode
+move foward untill dectects per
+*/
+
+void automaticmode(float fowardper, float sideper, float freq)
+{
+	int control = 0;
+	
+	direction = 3;
+	//move fowawrd
+	P3_7=1;  //wheel 1
+	P3_2=0;	// wheel 1 
+	P3_0=0; // wheel 2
+	P2_5=1; // wheel 2
+	printf("%ld\n\r", freq);
+		if ( freq >= 64000)  //100000    63750   65000
 	{
-//		printf(" NO COIN");
+		P3_7=0;  //wheel 1
+		P3_2=1;	// wheel 1 
+		P3_0=1; // wheel 2
+		P2_5=0; // wheel 2
+		waitms(150);
+		P3_7=0;  //wheel 1
+		P3_2=0;	// wheel 1 
+		P3_0=0; // wheel 2
+		P2_5=0; // wheel 2
+	servomotion();
 	}
 
-	return 0;
+	//foward per logic 
+	if ( fowardper >= p_thresh)
+	{
+		P3_7=0;  //wheel 1
+		P3_2=1;	// wheel 1 
+		P3_0=1; // wheel 2
+		P2_5=0; // wheel 2
+		waitms(300);
+		if ( peggingsidnatu == 0 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=1;	// wheel 1 
+			P3_0=0; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(750);
+			peggingsidnatu = 1;
+			return;
+			
+		}
+		if ( peggingsidnatu == 1 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=0;	// wheel 1 
+			P3_0=1; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(750);
+			peggingsidnatu = 0;
+			return;
+		}
+	}
+	
+	
+	if ( sideper >= p_thresh)
+	{
+		if ( peggingsidnatu == 0 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=1;	// wheel 1 
+			P3_0=0; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(750);
+			control = 1;
+			return;
+			
+		}
+		if ( peggingsidnatu == 1 )
+		{
+			P3_7=0;  //wheel 1
+			P3_2=0;	// wheel 1 
+			P3_0=1; // wheel 2
+			P2_5=0; // wheel 2
+			waitms(750);
+			control = 0;
+			return;
+		}
+	}
+	
+	
+
 }
 
 void main (void)
@@ -854,17 +894,13 @@ void main (void)
 	unsigned int timeout=10000;
 	float pulse_width = 20;
 	float pulse_width1 = 10;
-	int speed, steering;
 	int adcwheel1, adcwheel2;
-	unsigned char customMouth0,customMouth1, customMouth2,customMouth3,customMouth4,customMouth5,customMouth6,customMouth7;
-		
-	unsigned char customEye0,customEye1, customEye2,customEye3,customEye4,customEye5,customEye6,customEye7;
- 	int i = 0;
+	int which;
+	int i;
+ 	//char c;
 
 	// initialization for the period code
 	long int count, f;
-	int coinPresent = 0;
-
 	// initialization for the perimeter code
 	float v[2];
 
@@ -876,6 +912,7 @@ void main (void)
 	UART1_Init(9600);
 
 	ReceptionOff();
+
 	LCD_4BIT();
 
 	TIMER0_Init(); 
@@ -883,8 +920,7 @@ void main (void)
 	InitPinADC(2, 1); // Configure P2.1 as analog input
 	InitPinADC(2, 3); // Configure P2.1 as analog input
 	InitADC();
-	
-	
+
 
 	// To check configuration
 	SendATCommand("AT+VER\r\n");
@@ -897,135 +933,149 @@ void main (void)
 
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
-	SendATCommand("AT+DVIDFFFF\r\n"); 
+	SendATCommand("AT+DVIDFFFF\r\n");  
 	
 	WriteCommand(0x40);  // Set CGRAM address
- 	WriteData(customMouth0 = 0x00);
- 	WriteData(customMouth1 = 0x00);
- 	WriteData(customMouth2 = 0x00);
- 	WriteData(customMouth3 = 0x11);
- 	WriteData(customMouth4 = 0x15);
- 	WriteData(customMouth5 = 0x0A);
- 	WriteData(customMouth6 = 0x00);
- 	WriteData(customMouth7 = 0x00);
- 	
- 	WriteCommand(0x48);
- 	WriteData(customEye0 = 0x00);
- 	WriteData(customEye1 = 0x0E);	
- 	WriteData(customEye2 = 0x19);
-  	WriteData(customEye3 = 0x19);
-   	WriteData(customEye4 = 0x1F);
-    WriteData(customEye5 = 0x17);
-    WriteData(customEye6 = 0x0E);
-    WriteData(customEye7 = 0x00);
-   
-   WriteCommand(0x56);
-    for(i=0; i<8; i++) {
-
-         WriteData(customSparkle[i]);
-    }
-    
-    
-    
-   	WriteCommand(0x89);
-	WriteData(0);
-		
-	WriteCommand(0x8b);
-	WriteData(0);
-		
-	WriteCommand(0xca);
-	WriteData(1);
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customMouth[i]);
+	}
 	
-	WriteCommand(0x64);
-    for(i=0; i<8; i++) {
-
-         WriteData(customSad[i]);
-    }
-	WriteCommand(0x72);
-    for(i=0; i<8; i++) {
-
-         WriteData(customFrown[i]);
-    }
+	WriteCommand(0x48);
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customEye[i]);
+	}
+	
+	WriteCommand(0x50);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customOpenMouth[i]);
+	}
+	
+	WriteCommand(0x58);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customSparkle[i]);
+	}
+	
+	WriteCommand(0x60);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customMoney[i]);
+	}
+	
+	WriteCommand(0x68);  // Set CGRAM address
+	for(i=0; i<8; i++) {
+        
+	 	WriteData(customHappyMouth[i]);
+	}
+	
+	WriteCommand(0x83);
+	WriteData(1);
+			
+	WriteCommand(0x85);
+	WriteData(1);
+			
+	WriteCommand(0xC4);
+	WriteData(0);
+	
+	P1_5 = 0;
 	while(1)
 	{	
-	
-
-//////////////////////* PERIOD CODE */////////////////////////////
+		EMAGNET = 0;
+		/* PERIOD CODE */
 		count = GetPeriod(200);
-		f = GetFrequency(count, 1);
-		coinPresent = CoinDecider(f); 
-		sprintf(msg, "%ld", f); // subtracted so that it sends a smaller value
-		sendstr1(msg);
+		f = GetFrequency(count);
+//		coinPresent = CoinDecider(f); 
+//		if(coinPresent)
+//		{
+//			sprintf(msg, "%ld", f-55000); // subtracted so that it sends a smaller value
+//			sendstr1(msg);
+//		}
 
 		/* PERIMETER CODE */
 		v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 		v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
-
-		// printing the voltage at the inductors (if perimeter is reached)
-//		printf(" V_P2_1 = %f V_P2_3 = %f d ", v[0], v[1]);
-		printf("%ld", f);
 		
-//////////////////////////////////////////////////////////////////////////////
-
-	
-//////////////////CHECKING AUTOMATIC MODE//////////////////////////////////	
-	
+		
+		// printing the voltage at the inductors (if perimeter is reached)
+//		printf(" V_P2_1 = %f V_P2_3 = %f %ld\n\r", v[0], v[1], f);
 		if(RXU1()) // Something has arrived
 		{
 		//agartha will rise again
 			getstr1(buff, sizeof(buff));
+			
 			if ( strcmp(buff, "A") == 0 )
 			{
 				waitms(500);
 				while(1)
 				{
-					direction=3; 			
+					waitms(5);
+					direction=3; 
+//					printf(" V_P2_1 = %f V_P2_3 = %f %ld\n\r", v[0], v[1], f);
+								
 					v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 					v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
-					automaticmode(v[0], v[1]);
-					printf("michelle and xinyi sitting in a tree\n\r");
-					if  (RXU1())
-					{
-						getstr1(buff, sizeof(buff));
-						if ( strcmp(buff, "A") == 0 ) break;
-					}
+					count = GetPeriod(200);
+					f = GetFrequency(count);
+					automaticmode(v[0], v[1], f);
+			
+				if(RXU1())
+				{
+					getstr1(buff, sizeof(buff));
+					if (strcmp(buff, "A") == 0 ) break;
 				}
-				if ( strcmp(buff, "S") == 0 )	
+					 
+				}
+				
+					
+			}
+			
+							if ( strcmp(buff, "S") == 0 )	
 					{
+					
+						
+						servomotion();
+						
 						printf("this should be the motor function");
 						waitms(500);
-					}	
-			}
-		
-			sscanf(buff, "S%dT%d", &steering, &speed);
-////////////////////////////////////////////////////////////////////////
 
-	
-/////////////////////////////CAR CONTROLS/////////////////////////////////
-			if (speed < 480 )
+					}	
+
+		
+			sscanf(buff, "K%uW%uG%d\n", &adcwheel1, &adcwheel2, &which);
+		
+			if (which == 0 )
 			{ 
 				P2_5 = 0;
 				P3_7=0;
 				direction = 1;
 			}
-			else 
+			 else 
 			{
 			 P3_2=0;
 			 P3_0=0;
 			 direction = 0;
+			 
 			}
-			
-			ADCsteeringRatio(speed, steering, &adcwheel1, &adcwheel2);
-			pwm_duty4 = ADCtoPWM(adcwheel1);
-			pwm_duty2 = ADCtoPWM(adcwheel2);
-			
-//			printf("pwm_duty4 = %u pwm_duty3 = %u adcwheel1=%u adcwheel2=%u speed = %d steering = %d", pwm_duty4, pwm_duty2, adcwheel1, adcwheel2, speed, steering)
-///////////////////////////////////////////////////////////////////////
+		
+			pwm_duty4 = adcwheel2;
+			if ( adcwheel1 == 5535 ) adcwheel1 = 65535;
+			if ( adcwheel1 == 5086 ) adcwheel1 = 65535;
+			if ( adcwheel1 == 535 ) adcwheel1 = 65535;
+			if ( adcwheel1 == 86 ) adcwheel1 = 65535;
+			pwm_duty2 = adcwheel1;
 
+			
+	//		printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
+			printf("%ld\n\r", f);
+	//		PrintNumber(pwm_duty2, 10, 6);
+	//		eputs("\n\r");
 			waitms(5); // The radio seems to need this delay...
 
 		}
 
-		eputs("\n");
+
 	}
 }
