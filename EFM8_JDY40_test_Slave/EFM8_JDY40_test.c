@@ -40,7 +40,23 @@ volatile int direction=0;
 
 volatile unsigned int servo_counter=0;
 volatile unsigned char servo1=250, servo2=250;
+/////////////////////////////LCD//////////////////////////
 
+#define LCD_RS P2_2
+//#define LCD_RW Px_x // Not used in this code.  Connect to GND
+#define LCD_E  P2_6
+#define LCD_D4 P1_2
+#define LCD_D5 P1_1
+#define LCD_D6 P1_0
+#define LCD_D7 P0_7
+#define CHARS_PER_LINE 16
+
+const unsigned char customMouth[8] = {0x0E,0x04,0x00,0x00,0x11,0x15,0x0A,0x00};
+const unsigned char customEye[8] = {0x00,0x0E,0x19,0x19,0x1F,0x17,0x0E,0x00};
+const unsigned char customOpenMouth[8] = {0x0E,0x04,0x00,0x0E,0x11,0x11,0x0E,0x00};
+const unsigned char customSparkle [8] = {0x04,0x04,0x0A,0x11,0x0A,0x04,0x04,0x00};
+const unsigned char customMoney [8] = {0x04,0x0E,0x15,0x14,0x0E,0x05,0x15,0x0E};
+const unsigned char customHappyMouth [8] = {0x0E,0x04,0x00,0x15,0x0A,0x0A,0x0E,0x00};
 	
 /////////////////////////////////////////////////
 
@@ -615,10 +631,114 @@ unsigned long GetFrequency (long int c)
 	return f;
 }
 
+///////////////////////LCD/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void LCD_pulse (void)
+{
+    LCD_E=1;
+    Timer3us(40);
+    LCD_E=0;
+}
+
+void LCD_byte (unsigned char x)
+{
+    // The accumulator in the C8051Fxxx is bit addressable!
+    ACC=x; //Send high nible
+    LCD_D7=ACC_7;
+    LCD_D6=ACC_6;
+    LCD_D5=ACC_5;
+    LCD_D4=ACC_4;
+    LCD_pulse();
+    Timer3us(40);
+    ACC=x; //Send low nible
+    LCD_D7=ACC_3;
+    LCD_D6=ACC_2;
+    LCD_D5=ACC_1;
+    LCD_D4=ACC_0;
+    LCD_pulse();
+}
+
+void WriteData (unsigned char x)
+{
+    LCD_RS=1;
+    LCD_byte(x);
+    waitms(2);
+}
+
+void WriteCommand (unsigned char x)
+{
+    LCD_RS=0;
+    LCD_byte(x);
+    waitms(5);
+}
+
+void LCD_4BIT (void)
+{
+    LCD_E=0; // Resting state of LCD's enable is zero
+    // LCD_RW=0; // We are only writing to the LCD in this program
+    waitms(20);
+    // First make sure the LCD is in 8-bit mode and then change to 4-bit mode
+    WriteCommand(0x33);
+    WriteCommand(0x33);
+    WriteCommand(0x32); // Change to 4-bit mode
+
+    // Configure the LCD
+    WriteCommand(0x28);
+    WriteCommand(0x0c);
+    WriteCommand(0x01); // Clear screen command (takes some time)
+    waitms(20); // Wait for clear screen command to finsih.
+}
+//////////////////////////////////////////////////////////
 
 void servomotion(void)
 {
 	unsigned char j;
+    int i;
+
+    WriteCommand(0x40);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customMouth[i]);
+    }
+
+    WriteCommand(0x48);
+    for(i=0; i<8; i++) {
+
+         WriteData(customEye[i]);
+    }
+
+    WriteCommand(0x50);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customOpenMouth[i]);
+    }
+
+    WriteCommand(0x58);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customSparkle[i]);
+    }
+
+    WriteCommand(0x60);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customMoney[i]);
+    }
+
+    WriteCommand(0x68);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customHappyMouth[i]);
+    }
+
+    WriteCommand(0x83);
+    WriteData(3);
+
+    WriteCommand(0x85);
+    WriteData(3);
+
+    WriteCommand(0xC4);
+    WriteData(2);
+    
 	waitms(500);
 	servo1 = 150;
 	waitms(100);
@@ -657,6 +777,15 @@ void servomotion(void)
 	servo1 = 250;
 	servo2 = 250; 
 	EMAGNET=0;
+	
+	WriteCommand(0x83);
+    WriteData(1);
+
+    WriteCommand(0x85);
+    WriteData(1);
+
+    WriteCommand(0xC4);
+    WriteData(0);
 
 }
 /*
@@ -720,10 +849,6 @@ void automaticmode(float fowardper, float sideper, float freq)
 
 }
 
-
-////////////////////////////////// LCD //////////////////////////////////////////
-//////////////////////////////////
-
 void main (void)
 {
     //unsigned int evilcode, evilcode1;
@@ -733,6 +858,7 @@ void main (void)
 	int adcwheel1, adcwheel2;
 	int which;
  	//char c;
+ 	int i;
 
 	// initialization for the period code
 	long int count, f;
@@ -747,6 +873,8 @@ void main (void)
 	UART1_Init(9600);
 
 	ReceptionOff();
+	
+	LCD_4BIT();
 
 	TIMER0_Init(); 
 
@@ -767,6 +895,51 @@ void main (void)
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");  
+	
+	WriteCommand(0x40);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customMouth[i]);
+    }
+
+    WriteCommand(0x48);
+    for(i=0; i<8; i++) {
+
+         WriteData(customEye[i]);
+    }
+
+    WriteCommand(0x50);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customOpenMouth[i]);
+    }
+
+    WriteCommand(0x58);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customSparkle[i]);
+    }
+
+    WriteCommand(0x60);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customMoney[i]);
+    }
+
+    WriteCommand(0x68);  // Set CGRAM address
+    for(i=0; i<8; i++) {
+
+         WriteData(customHappyMouth[i]);
+    }
+
+    WriteCommand(0x83);
+    WriteData(1);
+
+    WriteCommand(0x85);
+    WriteData(1);
+
+    WriteCommand(0xC4);
+    WriteData(0);
 	
 	P1_5 = 0;
 	while(1)
