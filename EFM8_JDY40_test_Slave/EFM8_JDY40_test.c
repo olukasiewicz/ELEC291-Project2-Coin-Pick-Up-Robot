@@ -11,25 +11,6 @@
 #define PERIOD_PIN P0_6
 #define VDD 3.3035 // The measured value of VDD in volts
 #define p_thresh 0.1
-//////////////LCD/////////////
-
-#define LCD_RS P2_6
-//#define LCD_RW Px_x // Not used in this code.  Connect to GND
-#define LCD_E  P2_5
-#define LCD_D4 P2_4
-#define LCD_D5 P2_3
-#define LCD_D6 P2_2
-#define LCD_D7 P2_1
-#define CHARS_PER_LINE 16
-
-const unsigned char customMouth[8] = {0x0E,0x04,0x00,0x00,0x11,0x15,0x0A,0x00};
-const unsigned char customEye[8] = {0x00,0x0E,0x19,0x19,0x1F,0x17,0x0E,0x00};
-const unsigned char customOpenMouth[8] = {0x0E,0x04,0x00,0x0E,0x11,0x11,0x0E,0x00};
-const unsigned char customSparkle [8] = {0x04,0x04,0x0A,0x11,0x0A,0x04,0x04,0x00};
-const unsigned char customMoney [8] = {0x04,0x0E,0x15,0x14,0x0E,0x05,0x15,0x0E};
-const unsigned char customHappyMouth [8] = {0x0E,0x04,0x00,0x15,0x0A,0x0A,0x0E,0x00};
-
-//////////////////////////////
 /*
 						P3_7=0;  //wheel 1
 						P3_2=0;	// wheel 1 
@@ -636,123 +617,14 @@ unsigned long GetFrequency (long int c)
 }
 
 
-////////////////////////////////// LCD //////////////////////////////////////////
-
-void LCD_pulse (void)
-{
-	LCD_E=1;
-	Timer3us(40);
-	LCD_E=0;
-}
-
-void LCD_byte (unsigned char x)
-{
-	// The accumulator in the C8051Fxxx is bit addressable!
-	ACC=x; //Send high nible
-	LCD_D7=ACC_7;
-	LCD_D6=ACC_6;
-	LCD_D5=ACC_5;
-	LCD_D4=ACC_4;
-	LCD_pulse();
-	Timer3us(40);
-	ACC=x; //Send low nible
-	LCD_D7=ACC_3;
-	LCD_D6=ACC_2;
-	LCD_D5=ACC_1;
-	LCD_D4=ACC_0;
-	LCD_pulse();
-}
-
-void WriteData (unsigned char x)
-{
-	LCD_RS=1;
-	LCD_byte(x);
-	waitms(2);
-}
-
-void WriteCommand (unsigned char x)
-{
-	LCD_RS=0;
-	LCD_byte(x);
-	waitms(5);
-}
-
-void LCD_4BIT (void)
-{
-	LCD_E=0; // Resting state of LCD's enable is zero
-	// LCD_RW=0; // We are only writing to the LCD in this program
-	waitms(20);
-	// First make sure the LCD is in 8-bit mode and then change to 4-bit mode
-	WriteCommand(0x33);
-	WriteCommand(0x33);
-	WriteCommand(0x32); // Change to 4-bit mode
-
-	// Configure the LCD
-	WriteCommand(0x28);
-	WriteCommand(0x0c);
-	WriteCommand(0x01); // Clear screen command (takes some time)
-	waitms(20); // Wait for clear screen command to finsih.
-}
-
-//////////////////////////////////
-
-
 void servomotion(void)
 {
 	unsigned char j;
-	int i;
-	
-	WriteCommand(0x40);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMouth[i]);
-	}
-	
-	WriteCommand(0x48);
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customEye[i]);
-	}
-	
-	WriteCommand(0x50);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customOpenMouth[i]);
-	}
-	
-	WriteCommand(0x58);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customSparkle[i]);
-	}
-	
-	WriteCommand(0x60);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMoney[i]);
-	}
-	
-	WriteCommand(0x68);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customHappyMouth[i]);
-	}
-	
-	WriteCommand(0x83);
-	WriteData(3);
-			
-	WriteCommand(0x85);
-	WriteData(3);
-			
-	WriteCommand(0xC4);
-	WriteData(2);
-	
 	waitms(500);
 	servo1 = 150;
 	waitms(100);
 	
-	P1_5 = 1;
-	
+	P1_5 = 1;	
 
 	// sweeping motion of servo2
 	for(j=250; j>180; j-=5) 
@@ -773,7 +645,7 @@ void servomotion(void)
 	waitms(1000);
 	
 	// move servo2 to bring arm over coin bucket
-	for(j=180; j > 60; j-=5){
+	for(j=180; j > 90; j-=5){
 		servo2 = j;
 		waitms(20);
 	}
@@ -786,15 +658,6 @@ void servomotion(void)
 	servo1 = 250;
 	servo2 = 250; 
 	EMAGNET=0;
-	
-	WriteCommand(0x83);
-	WriteData(1);
-			
-	WriteCommand(0x85);
-	WriteData(1);
-			
-	WriteCommand(0xC4);
-	WriteData(0);
 
 }
 /*
@@ -805,7 +668,6 @@ move foward untill dectects per
 void automaticmode(float fowardper, float sideper, float freq)
 {
 	int control = 0;
-	
 	direction = 3;
 	//move fowawrd
 	P3_7=1;  //wheel 1
@@ -888,6 +750,10 @@ void automaticmode(float fowardper, float sideper, float freq)
 
 }
 
+
+////////////////////////////////// LCD //////////////////////////////////////////
+//////////////////////////////////
+
 void main (void)
 {
     //unsigned int evilcode, evilcode1;
@@ -896,7 +762,6 @@ void main (void)
 	float pulse_width1 = 10;
 	int adcwheel1, adcwheel2;
 	int which;
-	int i;
  	//char c;
 
 	// initialization for the period code
@@ -912,8 +777,6 @@ void main (void)
 	UART1_Init(9600);
 
 	ReceptionOff();
-
-	LCD_4BIT();
 
 	TIMER0_Init(); 
 
@@ -935,51 +798,6 @@ void main (void)
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");  
 	
-	WriteCommand(0x40);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMouth[i]);
-	}
-	
-	WriteCommand(0x48);
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customEye[i]);
-	}
-	
-	WriteCommand(0x50);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customOpenMouth[i]);
-	}
-	
-	WriteCommand(0x58);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customSparkle[i]);
-	}
-	
-	WriteCommand(0x60);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMoney[i]);
-	}
-	
-	WriteCommand(0x68);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customHappyMouth[i]);
-	}
-	
-	WriteCommand(0x83);
-	WriteData(1);
-			
-	WriteCommand(0x85);
-	WriteData(1);
-			
-	WriteCommand(0xC4);
-	WriteData(0);
-	
 	P1_5 = 0;
 	while(1)
 	{	
@@ -987,20 +805,17 @@ void main (void)
 		/* PERIOD CODE */
 		count = GetPeriod(200);
 		f = GetFrequency(count);
-//		coinPresent = CoinDecider(f); 
-//		if(coinPresent)
-//		{
-//			sprintf(msg, "%ld", f-55000); // subtracted so that it sends a smaller value
-//			sendstr1(msg);
-//		}
+		
+			sprintf(msg, "%05ld\n\r", f); // subtracted so that it sends a smaller value
+			sendstr1(msg);
+			waitms(50);
+
 
 		/* PERIMETER CODE */
 		v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 		v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 		
-		
-		// printing the voltage at the inductors (if perimeter is reached)
-//		printf(" V_P2_1 = %f V_P2_3 = %f %ld\n\r", v[0], v[1], f);
+
 		if(RXU1()) // Something has arrived
 		{
 		//agartha will rise again
@@ -1023,6 +838,7 @@ void main (void)
 			
 				if(RXU1())
 				{
+					printf("hello");
 					getstr1(buff, sizeof(buff));
 					if (strcmp(buff, "A") == 0 ) break;
 				}
@@ -1034,13 +850,9 @@ void main (void)
 			
 							if ( strcmp(buff, "S") == 0 )	
 					{
-					
-						
 						servomotion();
-						
 						printf("this should be the motor function");
 						waitms(500);
-
 					}	
 
 		
@@ -1066,16 +878,8 @@ void main (void)
 			if ( adcwheel1 == 535 ) adcwheel1 = 65535;
 			if ( adcwheel1 == 86 ) adcwheel1 = 65535;
 			pwm_duty2 = adcwheel1;
+	//		printf("%u , %u\n\r", pwm_duty4, pwm_duty2);
 
-			
-//			printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
-<<<<<<< HEAD
-		//	printf("%ld\n\r", f);
-=======
-			printf("%ld\n\r", f);
->>>>>>> 9f3d00fd8684da6548fdc3eb46f2b7a34f1299fc
-	//		PrintNumber(pwm_duty2, 10, 6);
-	//		eputs("\n\r");
 			waitms(5); // The radio seems to need this delay...
 
 		}

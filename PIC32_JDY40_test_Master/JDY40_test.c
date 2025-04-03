@@ -673,20 +673,29 @@ void main(void)
 		adcvalx = ADCRead(4);
 		adcvaly = ( ADCRead(3));
 		if ( adcvaly < 450 ) which = 0;
+	
 		else which = 1;
-		if(U1STAbits.URXDA) // Something has arrived from the slave
-			{
-				SerialReceive1(buff, sizeof(buff)-1);
-				printf("asdiubasd");
-			
-			}
-
-	//	printf("jacob park has cp\n\r");
-		ADCsteeringRatio(adcvalx, adcvaly, &newadcx, &newadcy);
+		putc1('!');
+				ADCsteeringRatio(adcvalx, adcvaly, &newadcx, &newadcy);
 		thing = ADCtoPWM(newadcx);
 		thing1 = ADCtoPWM(newadcy);	
 		sprintf(sendbuff, "K%uW%uG%d\n", thing, thing1, which);
 		SerialTransmit1(sendbuff);
+		waitms(25);
+		putc1('@');
+		waitms(25);
+		if(U1STAbits.URXDA) // Something has arrived from the slave
+			{
+				SerialReceive1(buff, sizeof(buff)-1);
+		//		printf("asdiubasd");
+				
+				printf("%s\n\r", buff);
+			//	LCDprint(buff,1,1);
+			
+			}
+
+
+	//	printf("jacob park has cp\n\r");
 //		printf ("sendbuff= %s %u %u, %d\n\r",sendbuff, thing, thing1, which);	
 		
 		thing = PORTB&(1<<10) ? 0 : 1;
@@ -706,6 +715,8 @@ void main(void)
 				SerialTransmit1(sendbuff);
 				delayms(1500);				
 			}
+			
+	//		printf("%s\n\r", sendbuff);
 			
 		
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
