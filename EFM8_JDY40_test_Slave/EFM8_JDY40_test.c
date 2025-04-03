@@ -58,8 +58,9 @@ volatile int peggingsidnatu=0;
 #define SERVO2   P1_4 // bottom servo
 #define EMAGNET  P1_5 // magnet
 
-volatile unsigned int servo_counter=0, money_count=0;
+volatile unsigned int servo_counter=0;
 volatile unsigned char servo1=250, servo2=250;
+
 	
 /////////////////////////////////////////////////
 
@@ -809,7 +810,7 @@ void automaticmode(float fowardper, float sideper, float freq)
 	
 	direction = 3;
 	//move fowawrd
-	P3_7=1; // wheel 1
+	P3_7=1;  //wheel 1
 	P3_2=0;	// wheel 1 
 	P3_0=0; // wheel 2
 	P2_5=1; // wheel 2
@@ -825,7 +826,7 @@ void automaticmode(float fowardper, float sideper, float freq)
 		P3_2=0;	// wheel 1 
 		P3_0=0; // wheel 2
 		P2_5=0; // wheel 2
-		servomotion();
+	servomotion();
 	}
 
 	//foward per logic 
@@ -897,9 +898,7 @@ void main (void)
 	float pulse_width1 = 10;
 	int adcwheel1, adcwheel2;
 	int which;
-	int i;
-
- 	char moneyString[2];
+ 	//char c;
 
 	// initialization for the period code
 	long int count, f;
@@ -937,57 +936,7 @@ void main (void)
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");  
 	
-	WriteCommand(0x40);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMouth[i]);
-	}
-	
-	WriteCommand(0x48);
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customEye[i]);
-	}
-	
-	WriteCommand(0x50);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customOpenMouth[i]);
-	}
-	
-	WriteCommand(0x58);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customSparkle[i]);
-	}
-	
-	WriteCommand(0x60);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customMoney[i]);
-	}
-	
-	WriteCommand(0x68);  // Set CGRAM address
-	for(i=0; i<8; i++) {
-        
-	 	WriteData(customHappyMouth[i]);
-	}
-	
-	WriteCommand(0x83);
-	WriteData(1);
-			
-	WriteCommand(0x85);
-	WriteData(1);
-			
-	WriteCommand(0xC4);
-	WriteData(0);
-
-	sprintf(moneyString, "%d", money_count);
-	WriteCommand(0x8f); 
-	WriteData(moneyString[0]);
-	
 	P1_5 = 0;
-	
 	while(1)
 	{	
 		EMAGNET = 0;
@@ -1081,19 +1030,6 @@ void main (void)
 	//		eputs("\n\r");
 			waitms(5); // The radio seems to need this delay...
 
-			// printing the money count on the lcd
-			sprintf(moneyString, "%d", money_count);
-			if(money_count >=10)
-			{
-				WriteCommand(0x8e);
-				WriteData(moneyString[0]);
-				WriteCommand(0x8f);
-				WriteData(moneyString[1]);
-			} else 
-			{
-				WriteCommand(0x8f); 
-				WriteData(moneyString[0]);
-			}
 		}
 
 
