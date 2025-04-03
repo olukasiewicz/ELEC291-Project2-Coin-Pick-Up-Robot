@@ -684,13 +684,22 @@ void main(void)
 		waitms(25);
 		putc1('@');
 		waitms(25);
+
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 			{
 				SerialReceive1(buff, sizeof(buff)-1);
+		//		printf("asdiubasd");
+				
+				printf("%s\n\r", buff);
 				stringtobuff = atof(buff);
-				evilcode = (stringtobuff - 633000 ) / (65000 - 633000 );
+				LCDprint(buff,1,1);	
 			
+			} else 
+			{
+			ClearFIFO();
+			UART1Configure(9600);
 			}
+		
 
 
 	//	printf("jacob park has cp\n\r");
@@ -700,18 +709,24 @@ void main(void)
 			if( thing == 1 ) 
 				{
 				printf ("the automatic mode button has been pressed\n\r");
+				waitms(5000);
 				sprintf(sendbuff, "A"); 
 				SerialTransmit1(sendbuff);
-				delayms(1500);
+				delayms(5000);
+    			UART1Configure(9600);
+    			ClearFIFO();
 			}
 			
 		thing1 = (PORTAbits.RA1==0);
 			if ( thing1 == 1)
 			{
 				printf ("the servo mode button has been pressed\n\r");
+				waitms(5000);
 				sprintf(sendbuff, "S"); 
 				SerialTransmit1(sendbuff);
-				delayms(1500);				
+				delayms(5000);	
+    			UART1Configure(9600);
+    			ClearFIFO();			
 			}
 			
 	//		printf("%s\n\r", sendbuff);
