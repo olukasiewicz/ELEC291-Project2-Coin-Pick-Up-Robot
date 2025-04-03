@@ -36,11 +36,56 @@
 // Defines
 #define SYSCLK 40000000L
 #define DEF_FREQ 16000L
-//#define PWM_FREQ    1500L
+//#define PWM_FREQ    2000L
 #define DUTY_CYCLE  50
 #define Baud2BRG(desired_baud)( (SYSCLK / (16*desired_baud))-1)
 #define Baud1BRG(desired_baud)( (SYSCLK / (16*desired_baud))-1)
+
+#define FREQ 100000L
+// servo values
+volatile int ISR_pw=100, ISR_cnt=0, ISR_frc;
  
+// The Interrupt Service Routine for timer 1 is used to generate one or more standard
+// hobby servo signals.  The servo signal has a fixed period of 20ms and a pulse width
+// between 0.6ms and 2.4ms.
+void __ISR(_TIMER_1_VECTOR, IPL5SOFT) Timer1_Handler(void)
+{
+	IFS0CLR=_IFS0_T1IF_MASK; // Clear timer 1 interrupt flag, bit 4 of IFS0
+
+	ISR_cnt++;
+	if(ISR_cnt<ISR_pw)
+	{
+		LATBbits.LATB0 = 1;
+	}
+	else
+	{
+		LATBbits.LATB0 = 0;
+	}
+	if(ISR_cnt>=2000)
+	{
+		ISR_cnt=0; // 2000 * 10us=20ms
+		ISR_frc++;
+	}
+}
+
+void SetupTimer1 (void)
+{
+	// Explanation here: https://www.youtube.com/watch?v=bu6TTZHnMPY
+	__builtin_disable_interrupts();
+	PR1 =(SYSCLK/FREQ)-1; // since SYSCLK/FREQ = PS*(PR1+1)
+	TMR1 = 0;
+	T1CONbits.TCKPS = 0; // 3=1:256 prescale value, 2=1:64 prescale value, 1=1:8 prescale value, 0=1:1 prescale value
+	T1CONbits.TCS = 0; // Clock source
+	T1CONbits.ON = 1;
+	IPC1bits.T1IP = 5;
+	IPC1bits.T1IS = 0;
+	IFS0bits.T1IF = 0;
+	IEC0bits.T1IE = 1;
+	
+	INTCONbits.MVEC = 1; //Int multi-vector
+	__builtin_enable_interrupts();
+}
+
 void UART2Configure(int baud_rate)
 {
     // Peripheral Pin Select
@@ -186,6 +231,14 @@ void delayus(uint16_t uiuSec)
         while(_CP0_GET_COUNT() < ulEnd);
     else
         while((_CP0_GET_COUNT() > ulStart) || (_CP0_GET_COUNT() < ulEnd));
+}
+
+void delay_ms (int msecs)
+{	
+	int ticks;
+	ISR_frc=0;
+	ticks=msecs/20;
+	while(ISR_frc<ticks);
 }
 
 unsigned int SerialReceive1_timeout(char *buffer, unsigned int max_size)
@@ -409,6 +462,8 @@ void Init_pwm (long PWM_FREQ)
     OC1CONSET = 0x8000;     // Enable Output Compare Module 1
 }
 
+
+
 void Set_pwm (unsigned char val)
 {
 	OC1RS = (PR2 + 1) * ((float)val / 256.0);
@@ -603,8 +658,6 @@ void ADCsteeringRatio(int steering, int speed, int *ADCwheel1, int *ADCwheel2)
 	*ADCwheel2 = (unsigned int)((wheel2Speed * 1023L) / 507L);	
 }
 
-
-
 void main(void)
 {
 	char buff[80];
@@ -614,7 +667,7 @@ void main(void)
     unsigned char evilcode;
 	volatile unsigned long t=0;
 	unsigned char myduty=0;
-	unsigned int thing, thing1;
+	unsigned int thing, thing1, thing2;
 	float stringtobuff;
 	int adcvalx;
 	int adcvaly;
@@ -623,10 +676,19 @@ void main(void)
 	int which;
 	long int counter = 0;
 	char c;
+	
+	// define pin 4 as servo output
+	TRISBbits.TRISB0 = 0; // Set RB0 as output
+	LATBbits.LATB0 = 0;   // Start LOW
+	INTCONbits.MVEC = 1;
+	
+	SetupTimer1();
+	
+	ISR_pw = 60; // initialize "locked" position of servo
     
 	DDPCON = 0;
 	CFGCON = 0;
-	Init_pwm(2000L);
+	Init_pwm(25);
 	LCD_4BIT();
     UART2Configure(115200);  // Configure UART2 for a baud rate of 115200
     UART1Configure(9600);  // Configure UART1 to communicate with JDY40 with a baud rate of 9600
@@ -641,12 +703,12 @@ void main(void)
 	ANSELB &= ~(1<<10); // Set RB14 as a digital I/O
     TRISB &= ~(1<<10);  // configure pin RB14 as output
 	LATB |= (1<<10);    // 'SET' pin of JDY40 to 1 is normal operation mode
-/*	
-	ANSELB &= ~(1<<0); // Set RB14 as a digital I/O
-    TRISB &= ~(1<<0);  // configure pin RB14 as output
-	LATB |= (1<<0);    // 'SET' pin of JDY40 to 1 is normal operation mode
+	
+	ANSELB &= ~(1<<12); // Set RB14 as a digital I/O
+    TRISB &= ~(1<<12);  // configure pin RB14 as output
+	LATB |= (1<<12);    // 'SET' pin of JDY40 to 1 is normal operation mode
 	   // 'SET' pin of JDY40 to 1 is normal operation mode
-*/
+
 	ANSELAbits.ANSA1 = 0; // Make RA1 digital
 	TRISAbits.TRISA1 = 1; // Set RA1 as input
 	CNPUAbits.CNPUA1 = 1; // Enable pull-up resistor (optional)
@@ -662,13 +724,13 @@ void main(void)
 	SendATCommand("AT+RFC120\r\n");
 	SendATCommand("AT+POWE\r\n");
 	SendATCommand("AT+CLSS\r\n");
-	TRISBbits.TRISB0 = 1;
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");
 	while(1)
 	{
-  		Set_pwm(0);
+  		Set_pwm(127);
+  		
 		
 		adcvalx = ADCRead(4);
 		adcvaly = ( ADCRead(3));
@@ -692,7 +754,9 @@ void main(void)
 				
 				printf("%s\n\r", buff);
 				stringtobuff = atof(buff);
-				LCDprint(buff,1,1);	
+				evilcode = 51/400*(stringtobuff-61000);
+				if (evilcode > 255 ) evilcode =255;
+				Set_pwm(evilcode);
 			
 			} else 
 			{
@@ -729,6 +793,19 @@ void main(void)
     			ClearFIFO();			
 			}
 			
+		thing2 = PORTB&(1<<12) ? 0 : 1;
+            if( thing2 == 1 ) 
+                {
+                printf("launching coins!!\n\r");
+                //launch coins
+                //ISR_pw = 240;
+        Init_pwm(25);
+  		waitms(500);
+  		Init_pwm(50);	
+    			UART1Configure(9600);
+    			ClearFIFO();
+                //ISR_pw = 60;
+            }
 	//		printf("%s\n\r", sendbuff);
 			
 		

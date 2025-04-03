@@ -730,13 +730,13 @@ void servomotion(void)
          WriteData(customHappyMouth[i]);
     }
 
-    WriteCommand(0x83);
+    WriteCommand(0x87);
     WriteData(3);
 
-    WriteCommand(0x85);
+    WriteCommand(0x89);
     WriteData(3);
 
-    WriteCommand(0xC4);
+    WriteCommand(0xC9);
     WriteData(2);
     
 	waitms(500);
@@ -778,13 +778,13 @@ void servomotion(void)
 	servo2 = 250; 
 	EMAGNET=0;
 	
-	WriteCommand(0x83);
+	WriteCommand(0x87);
     WriteData(1);
 
-    WriteCommand(0x85);
+    WriteCommand(0x88);
     WriteData(1);
 
-    WriteCommand(0xC4);
+    WriteCommand(0xC9);
     WriteData(0);
 
 }
@@ -932,13 +932,13 @@ void main (void)
          WriteData(customHappyMouth[i]);
     }
 
-    WriteCommand(0x83);
+    WriteCommand(0x87);
     WriteData(1);
 
-    WriteCommand(0x85);
+    WriteCommand(0x88);
     WriteData(1);
 
-    WriteCommand(0xC4);
+    WriteCommand(0xC9);
     WriteData(0);
 	
 	P1_5 = 0;
