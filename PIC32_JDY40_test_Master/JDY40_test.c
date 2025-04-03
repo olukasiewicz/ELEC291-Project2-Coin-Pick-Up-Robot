@@ -687,10 +687,8 @@ void main(void)
 		if(U1STAbits.URXDA) // Something has arrived from the slave
 			{
 				SerialReceive1(buff, sizeof(buff)-1);
-		//		printf("asdiubasd");
-				
-				printf("%s\n\r", buff);
-			//	LCDprint(buff,1,1);
+				stringtobuff = atof(buff);
+				evilcode = (stringtobuff - 633000 ) / (65000 - 633000 );
 			
 			}
 
