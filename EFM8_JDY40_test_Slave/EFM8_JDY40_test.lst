@@ -1,7 +1,7 @@
 0000              1   ;--------------------------------------------------------
 0000              2   ; File Created by C51
 0000              3   ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-0000              4   ; This file was generated Tue Apr 01 17:33:53 2025
+0000              4   ; This file was generated Wed Apr 02 23:16:20 2025
 0000              5   ;--------------------------------------------------------
                   5   $name EFM8_JDY40_test
                   6   $optc51 --model-small
@@ -2685,315 +2685,360 @@
 0A2A 120000    2685            lcall   _GetPeriod
 0A2D           2686   ;        EFM8_JDY40_test.c:807: f = GetFrequency(count);
 0A2D 120000    2687            lcall   _GetFrequency
-0A30           2688   ;        EFM8_JDY40_test.c:816: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
-0A30 75820E    2689            mov     dpl,#0x0E
-0A33 120000    2690            lcall   _Volts_at_Pin
-0A36 858230    2691            mov     _main_sloc0_1_0,dpl
-0A39 858331    2692            mov     (_main_sloc0_1_0 + 1),dph
-0A3C 85F032    2693            mov     (_main_sloc0_1_0 + 2),b
-0A3F F533      2694            mov     (_main_sloc0_1_0 + 3),a
-0A41 8530F0    2695            mov     _main_v_1_186,_main_sloc0_1_0
-0A44 8531F1    2696            mov     (_main_v_1_186 + 1),(_main_sloc0_1_0 + 1)
-0A47 8532F2    2697            mov     (_main_v_1_186 + 2),(_main_sloc0_1_0 + 2)
-0A4A 8533F3    2698            mov     (_main_v_1_186 + 3),(_main_sloc0_1_0 + 3)
-0A4D           2699   ;        EFM8_JDY40_test.c:817: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
-0A4D 758210    2700            mov     dpl,#0x10
-0A50 120000    2701            lcall   _Volts_at_Pin
-0A53 858230    2702            mov     _main_sloc0_1_0,dpl
-0A56 858331    2703            mov     (_main_sloc0_1_0 + 1),dph
-0A59 85F032    2704            mov     (_main_sloc0_1_0 + 2),b
-0A5C F533      2705            mov     (_main_sloc0_1_0 + 3),a
-0A5E 8530F4    2706            mov     (_main_v_1_186 + 0x0004),_main_sloc0_1_0
-0A61 8531F5    2707            mov     ((_main_v_1_186 + 0x0004) + 1),(_main_sloc0_1_0 + 1)
-0A64 8532F6    2708            mov     ((_main_v_1_186 + 0x0004) + 2),(_main_sloc0_1_0 + 2)
-0A67 8533F7    2709            mov     ((_main_v_1_186 + 0x0004) + 3),(_main_sloc0_1_0 + 3)
-0A6A           2710   ;        EFM8_JDY40_test.c:822: if(RXU1()) // Something has arrived
-0A6A 120000    2711            lcall   _RXU1
-0A6D 5000      2712            jnc     L029026?
-0A6F           2713   ;        EFM8_JDY40_test.c:825: getstr1(buff, sizeof(buff));
-0A6F 75F814    2714            mov     _getstr1_PARM_2,#0x14
-0A72 901950    2715            mov     dptr,#_buff
-0A75 75F040    2716            mov     b,#0x40
-0A78 120000    2717            lcall   _getstr1
-0A7B           2718   ;        EFM8_JDY40_test.c:827: if ( strcmp(buff, "A") == 0 )
-0A7B 750080    2719            mov     _strcmp_PARM_2,#__str_15
-0A7E 7501E0    2720            mov     (_strcmp_PARM_2 + 1),#(__str_15 >> 8)
-0A81 750280    2721            mov     (_strcmp_PARM_2 + 2),#0x80
-0A84 901950    2722            mov     dptr,#_buff
-0A87 75F040    2723            mov     b,#0x40
-0A8A 120000    2724            lcall   _strcmp
-0A8D E582      2725            mov     a,dpl
-0A8F 8583F0    2726            mov     b,dph
-0A92 45F0      2727            orl     a,b
-0A94 6000      2728            jz      L029042?
-0A96 020000    2729            ljmp    L029009?
-0A99           2730   L029042?:
-0A99           2731   ;        EFM8_JDY40_test.c:829: waitms(500);
-0A99 9001F4    2732            mov     dptr,#0x01F4
-0A9C 120000    2733            lcall   _waitms
-0A9F           2734   ;        EFM8_JDY40_test.c:830: while(1)
-0A9F           2735   L029006?:
-0A9F           2736   ;        EFM8_JDY40_test.c:832: waitms(5);
-0A9F 900005    2737            mov     dptr,#0x0005
-0AA2 120000    2738            lcall   _waitms
-0AA5           2739   ;        EFM8_JDY40_test.c:833: direction=3; 
-0AA5 757803    2740            mov     _direction,#0x03
-0AA8 E4        2741            clr     a
-0AA9 F579      2742            mov     (_direction + 1),a
-0AAB           2743   ;        EFM8_JDY40_test.c:836: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
-0AAB 75820E    2744            mov     dpl,#0x0E
-0AAE 120000    2745            lcall   _Volts_at_Pin
-0AB1 858230    2746            mov     _main_sloc0_1_0,dpl
-0AB4 858331    2747            mov     (_main_sloc0_1_0 + 1),dph
-0AB7 85F032    2748            mov     (_main_sloc0_1_0 + 2),b
-0ABA F533      2749            mov     (_main_sloc0_1_0 + 3),a
-0ABC 8530F0    2750            mov     _main_v_1_186,_main_sloc0_1_0
-0ABF 8531F1    2751            mov     (_main_v_1_186 + 1),(_main_sloc0_1_0 + 1)
-0AC2 8532F2    2752            mov     (_main_v_1_186 + 2),(_main_sloc0_1_0 + 2)
-0AC5 8533F3    2753            mov     (_main_v_1_186 + 3),(_main_sloc0_1_0 + 3)
-0AC8           2754   ;        EFM8_JDY40_test.c:837: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
-0AC8 758210    2755            mov     dpl,#0x10
-0ACB 120000    2756            lcall   _Volts_at_Pin
-0ACE 858230    2757            mov     _main_sloc0_1_0,dpl
-0AD1 858331    2758            mov     (_main_sloc0_1_0 + 1),dph
-0AD4 85F032    2759            mov     (_main_sloc0_1_0 + 2),b
-0AD7 F533      2760            mov     (_main_sloc0_1_0 + 3),a
-0AD9 8530F4    2761            mov     (_main_v_1_186 + 0x0004),_main_sloc0_1_0
-0ADC 8531F5    2762            mov     ((_main_v_1_186 + 0x0004) + 1),(_main_sloc0_1_0 + 1)
-0ADF 8532F6    2763            mov     ((_main_v_1_186 + 0x0004) + 2),(_main_sloc0_1_0 + 2)
-0AE2 8533F7    2764            mov     ((_main_v_1_186 + 0x0004) + 3),(_main_sloc0_1_0 + 3)
-0AE5           2765   ;        EFM8_JDY40_test.c:838: count = GetPeriod(200);
-0AE5 9000C8    2766            mov     dptr,#0x00C8
-0AE8 120000    2767            lcall   _GetPeriod
-0AEB           2768   ;        EFM8_JDY40_test.c:839: f = GetFrequency(count);
-0AEB 120000    2769            lcall   _GetFrequency
-0AEE 8582B0    2770            mov     _main_f_1_186,dpl
-0AF1 8583B1    2771            mov     (_main_f_1_186 + 1),dph
-0AF4 85F0B2    2772            mov     (_main_f_1_186 + 2),b
-0AF7 F5B3      2773            mov     (_main_f_1_186 + 3),a
-0AF9           2774   ;        EFM8_JDY40_test.c:840: automaticmode(v[0], v[1], f);
-0AF9 85F030    2775            mov     _main_sloc0_1_0,_main_v_1_186
-0AFC 85F131    2776            mov     (_main_sloc0_1_0 + 1),(_main_v_1_186 + 1)
-0AFF 85F232    2777            mov     (_main_sloc0_1_0 + 2),(_main_v_1_186 + 2)
-0B02 85F333    2778            mov     (_main_sloc0_1_0 + 3),(_main_v_1_186 + 3)
-0B05 ACF4      2779            mov     r4,(_main_v_1_186 + 0x0004)
-0B07 ADF5      2780            mov     r5,((_main_v_1_186 + 0x0004) + 1)
-0B09 AAF6      2781            mov     r2,((_main_v_1_186 + 0x0004) + 2)
-0B0B ABF7      2782            mov     r3,((_main_v_1_186 + 0x0004) + 3)
-0B0D 85B082    2783            mov     dpl,_main_f_1_186
-0B10 85B183    2784            mov     dph,(_main_f_1_186 + 1)
-0B13 85B2F0    2785            mov     b,(_main_f_1_186 + 2)
-0B16 E5B3      2786            mov     a,(_main_f_1_186 + 3)
-0B18 C002      2787            push    ar2
-0B1A C003      2788            push    ar3
-0B1C C004      2789            push    ar4
-0B1E C005      2790            push    ar5
-0B20 120000    2791            lcall   ___slong2fs
-0B23 8582E0    2792            mov     _automaticmode_PARM_3,dpl
-0B26 8583E1    2793            mov     (_automaticmode_PARM_3 + 1),dph
-0B29 85F0E2    2794            mov     (_automaticmode_PARM_3 + 2),b
-0B2C F5E3      2795            mov     (_automaticmode_PARM_3 + 3),a
-0B2E D005      2796            pop     ar5
-0B30 D004      2797            pop     ar4
-0B32 D003      2798            pop     ar3
-0B34 D002      2799            pop     ar2
-0B36 8C30      2800            mov     _automaticmode_PARM_2,r4
-0B38 8D31      2801            mov     (_automaticmode_PARM_2 + 1),r5
-0B3A 8A32      2802            mov     (_automaticmode_PARM_2 + 2),r2
-0B3C 8B33      2803            mov     (_automaticmode_PARM_2 + 3),r3
-0B3E 853082    2804            mov     dpl,_main_sloc0_1_0
-0B41 853183    2805            mov     dph,(_main_sloc0_1_0 + 1)
-0B44 8532F0    2806            mov     b,(_main_sloc0_1_0 + 2)
-0B47 E533      2807            mov     a,(_main_sloc0_1_0 + 3)
-0B49 120000    2808            lcall   _automaticmode
-0B4C           2809   ;        EFM8_JDY40_test.c:842: if(RXU1())
-0B4C 120000    2810            lcall   _RXU1
-0B4F 4000      2811            jc      L029043?
-0B51 020000    2812            ljmp    L029006?
-0B54           2813   L029043?:
-0B54           2814   ;        EFM8_JDY40_test.c:844: getstr1(buff, sizeof(buff));
-0B54 75F814    2815            mov     _getstr1_PARM_2,#0x14
-0B57 901950    2816            mov     dptr,#_buff
-0B5A 75F040    2817            mov     b,#0x40
-0B5D 120000    2818            lcall   _getstr1
-0B60           2819   ;        EFM8_JDY40_test.c:845: if (strcmp(buff, "A") == 0 ) break;
-0B60 750080    2820            mov     _strcmp_PARM_2,#__str_15
-0B63 7501E0    2821            mov     (_strcmp_PARM_2 + 1),#(__str_15 >> 8)
-0B66 750280    2822            mov     (_strcmp_PARM_2 + 2),#0x80
-0B69 901950    2823            mov     dptr,#_buff
-0B6C 75F040    2824            mov     b,#0x40
-0B6F 120000    2825            lcall   _strcmp
-0B72 E582      2826            mov     a,dpl
-0B74 8583F0    2827            mov     b,dph
-0B77 45F0      2828            orl     a,b
-0B79 6000      2829            jz      L029044?
-0B7B 020000    2830            ljmp    L029006?
-0B7E           2831   L029044?:
-0B7E           2832   L029009?:
-0B7E           2833   ;        EFM8_JDY40_test.c:853: if ( strcmp(buff, "S") == 0 )    
-0B7E 750040    2834            mov     _strcmp_PARM_2,#__str_16
-0B81 7501E2    2835            mov     (_strcmp_PARM_2 + 1),#(__str_16 >> 8)
-0B84 750280    2836            mov     (_strcmp_PARM_2 + 2),#0x80
-0B87 901950    2837            mov     dptr,#_buff
-0B8A 75F040    2838            mov     b,#0x40
-0B8D 120000    2839            lcall   _strcmp
-0B90 E582      2840            mov     a,dpl
-0B92 8583F0    2841            mov     b,dph
-0B95 45F0      2842            orl     a,b
-0B97 7000      2843            jnz     L029011?
-0B99           2844   ;        EFM8_JDY40_test.c:855: servomotion();
-0B99 120000    2845            lcall   _servomotion
-0B9C           2846   ;        EFM8_JDY40_test.c:856: printf("this should be the motor function");
-0B9C 74C0      2847            mov     a,#__str_17
-0B9E C0E0      2848            push    acc
-0BA0 74E2      2849            mov     a,#(__str_17 >> 8)
-0BA2 C0E0      2850            push    acc
-0BA4 7480      2851            mov     a,#0x80
-0BA6 C0E0      2852            push    acc
-0BA8 120000    2853            lcall   _printf
-0BAB 1581      2854            dec     sp
-0BAD 1581      2855            dec     sp
-0BAF 1581      2856            dec     sp
-0BB1           2857   ;        EFM8_JDY40_test.c:857: waitms(500);
-0BB1 9001F4    2858            mov     dptr,#0x01F4
-0BB4 120000    2859            lcall   _waitms
-0BB7           2860   L029011?:
-0BB7           2861   ;        EFM8_JDY40_test.c:861: sscanf(buff, "K%uW%uG%d\n", &adcwheel1, &adcwheel2, &which);
-0BB7 7470      2862            mov     a,#_main_which_1_186
-0BB9 C0E0      2863            push    acc
-0BBB 74BD      2864            mov     a,#(_main_which_1_186 >> 8)
-0BBD C0E0      2865            push    acc
-0BBF 7440      2866            mov     a,#0x40
-0BC1 C0E0      2867            push    acc
-0BC3 7420      2868            mov     a,#_main_adcwheel2_1_186
-0BC5 C0E0      2869            push    acc
-0BC7 74BD      2870            mov     a,#(_main_adcwheel2_1_186 >> 8)
-0BC9 C0E0      2871            push    acc
-0BCB 7440      2872            mov     a,#0x40
-0BCD C0E0      2873            push    acc
-0BCF 74D0      2874            mov     a,#_main_adcwheel1_1_186
-0BD1 C0E0      2875            push    acc
-0BD3 74BC      2876            mov     a,#(_main_adcwheel1_1_186 >> 8)
-0BD5 C0E0      2877            push    acc
-0BD7 7440      2878            mov     a,#0x40
-0BD9 C0E0      2879            push    acc
-0BDB 7400      2880            mov     a,#__str_18
-0BDD C0E0      2881            push    acc
-0BDF 74E3      2882            mov     a,#(__str_18 >> 8)
-0BE1 C0E0      2883            push    acc
-0BE3 7480      2884            mov     a,#0x80
-0BE5 C0E0      2885            push    acc
-0BE7 7450      2886            mov     a,#_buff
-0BE9 C0E0      2887            push    acc
-0BEB 7419      2888            mov     a,#(_buff >> 8)
-0BED C0E0      2889            push    acc
-0BEF 7440      2890            mov     a,#0x40
-0BF1 C0E0      2891            push    acc
-0BF3 120000    2892            lcall   _sscanf
-0BF6 E581      2893            mov     a,sp
-0BF8 24F1      2894            add     a,#0xf1
-0BFA F581      2895            mov     sp,a
-0BFC           2896   ;        EFM8_JDY40_test.c:863: if (which == 0 )
-0BFC E570      2897            mov     a,_main_which_1_186
-0BFE 4571      2898            orl     a,(_main_which_1_186 + 1)
-0C00 7000      2899            jnz     L029013?
-0C02           2900   ;        EFM8_JDY40_test.c:865: P2_5 = 0;
-0C02 C2A5      2901            clr     _P2_5
-0C04           2902   ;        EFM8_JDY40_test.c:866: P3_7=0;
-0C04 C2B7      2903            clr     _P3_7
-0C06           2904   ;        EFM8_JDY40_test.c:867: direction = 1;
-0C06 757801    2905            mov     _direction,#0x01
-0C09 E4        2906            clr     a
-0C0A F579      2907            mov     (_direction + 1),a
-0C0C 8000      2908            sjmp    L029014?
-0C0E           2909   L029013?:
-0C0E           2910   ;        EFM8_JDY40_test.c:871: P3_2=0;
-0C0E C2B2      2911            clr     _P3_2
-0C10           2912   ;        EFM8_JDY40_test.c:872: P3_0=0;
-0C10 C2B0      2913            clr     _P3_0
-0C12           2914   ;        EFM8_JDY40_test.c:873: direction = 0;
-0C12 E4        2915            clr     a
-0C13 F578      2916            mov     _direction,a
-0C15 F579      2917            mov     (_direction + 1),a
-0C17           2918   L029014?:
-0C17           2919   ;        EFM8_JDY40_test.c:877: pwm_duty4 = adcwheel2;
-0C17 852038    2920            mov     _pwm_duty4,_main_adcwheel2_1_186
-0C1A 852139    2921            mov     (_pwm_duty4 + 1),(_main_adcwheel2_1_186 + 1)
-0C1D           2922   ;        EFM8_JDY40_test.c:878: if ( adcwheel1 == 5535 ) adcwheel1 = 65535;
-0C1D 749F      2923            mov     a,#0x9F
-0C1F B5D000    2924            cjne    a,_main_adcwheel1_1_186,L029016?
-0C22 7415      2925            mov     a,#0x15
-0C24 B5D100    2926            cjne    a,(_main_adcwheel1_1_186 + 1),L029016?
-0C27 75D0FF    2927            mov     _main_adcwheel1_1_186,#0xFF
-0C2A 75D1FF    2928            mov     (_main_adcwheel1_1_186 + 1),#0xFF
-0C2D           2929   L029016?:
-0C2D           2930   ;        EFM8_JDY40_test.c:879: if ( adcwheel1 == 5086 ) adcwheel1 = 65535;
-0C2D 74DE      2931            mov     a,#0xDE
-0C2F B5D040    2932            cjne    a,_main_adcwheel1_1_186,L029018?
-0C32 7413      2933            mov     a,#0x13
-0C34 B5D140    2934            cjne    a,(_main_adcwheel1_1_186 + 1),L029018?
-0C37 75D0FF    2935            mov     _main_adcwheel1_1_186,#0xFF
-0C3A 75D1FF    2936            mov     (_main_adcwheel1_1_186 + 1),#0xFF
-0C3D           2937   L029018?:
-0C3D           2938   ;        EFM8_JDY40_test.c:880: if ( adcwheel1 == 535 ) adcwheel1 = 65535;
-0C3D 7417      2939            mov     a,#0x17
-0C3F B5D080    2940            cjne    a,_main_adcwheel1_1_186,L029020?
-0C42 7402      2941            mov     a,#0x02
-0C44 B5D180    2942            cjne    a,(_main_adcwheel1_1_186 + 1),L029020?
-0C47 75D0FF    2943            mov     _main_adcwheel1_1_186,#0xFF
-0C4A 75D1FF    2944            mov     (_main_adcwheel1_1_186 + 1),#0xFF
-0C4D           2945   L029020?:
-0C4D           2946   ;        EFM8_JDY40_test.c:881: if ( adcwheel1 == 86 ) adcwheel1 = 65535;
-0C4D 7456      2947            mov     a,#0x56
-0C4F B5D0C0    2948            cjne    a,_main_adcwheel1_1_186,L029053?
-0C52 E4        2949            clr     a
-0C53 B5D1C0    2950            cjne    a,(_main_adcwheel1_1_186 + 1),L029053?
-0C56 8000      2951            sjmp    L029054?
-0C58           2952   L029053?:
-0C58 8000      2953            sjmp    L029022?
-0C5A           2954   L029054?:
-0C5A 75D0FF    2955            mov     _main_adcwheel1_1_186,#0xFF
-0C5D 75D1FF    2956            mov     (_main_adcwheel1_1_186 + 1),#0xFF
-0C60           2957   L029022?:
-0C60           2958   ;        EFM8_JDY40_test.c:882: pwm_duty2 = adcwheel1;
-0C60 85D0B8    2959            mov     _pwm_duty2,_main_adcwheel1_1_186
-0C63 85D1B9    2960            mov     (_pwm_duty2 + 1),(_main_adcwheel1_1_186 + 1)
-0C66           2961   ;        EFM8_JDY40_test.c:889: waitms(5); // The radio seems to need this delay...
-0C66 900005    2962            mov     dptr,#0x0005
-0C69 120000    2963            lcall   _waitms
-0C6C 020000    2964            ljmp    L029026?
-0C6F           2965            rseg R_CSEG
-0C6F           2966   
-0000           2967            rseg R_XINIT
-0000           2968   
-0000           2969            rseg R_CONST
-0000           2970   __str_0:
-0000 436F6D6D  2971            db 'Command: %s'
+0A30 8582B0    2688            mov     _main_f_1_186,dpl
+0A33 8583B1    2689            mov     (_main_f_1_186 + 1),dph
+0A36 85F0B2    2690            mov     (_main_f_1_186 + 2),b
+0A39 F5B3      2691            mov     (_main_f_1_186 + 3),a
+0A3B           2692   ;        EFM8_JDY40_test.c:809: sprintf(msg, "%05ld\n\r", f); // subtracted so that it sends a smaller value
+0A3B C0B0      2693            push    _main_f_1_186
+0A3D C0B1      2694            push    (_main_f_1_186 + 1)
+0A3F C0B2      2695            push    (_main_f_1_186 + 2)
+0A41 C0B3      2696            push    (_main_f_1_186 + 3)
+0A43 7440      2697            mov     a,#__str_15
+0A45 C0E0      2698            push    acc
+0A47 74E0      2699            mov     a,#(__str_15 >> 8)
+0A49 C0E0      2700            push    acc
+0A4B 7480      2701            mov     a,#0x80
+0A4D C0E0      2702            push    acc
+0A4F 7410      2703            mov     a,#_msg
+0A51 C0E0      2704            push    acc
+0A53 7419      2705            mov     a,#(_msg >> 8)
+0A55 C0E0      2706            push    acc
+0A57 7440      2707            mov     a,#0x40
+0A59 C0E0      2708            push    acc
+0A5B 120000    2709            lcall   _sprintf
+0A5E E581      2710            mov     a,sp
+0A60 24F6      2711            add     a,#0xf6
+0A62 F581      2712            mov     sp,a
+0A64           2713   ;        EFM8_JDY40_test.c:810: sendstr1(msg);
+0A64 901910    2714            mov     dptr,#_msg
+0A67 75F040    2715            mov     b,#0x40
+0A6A 120000    2716            lcall   _sendstr1
+0A6D           2717   ;        EFM8_JDY40_test.c:811: waitms(50);
+0A6D 900032    2718            mov     dptr,#0x0032
+0A70 120000    2719            lcall   _waitms
+0A73           2720   ;        EFM8_JDY40_test.c:815: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
+0A73 75820E    2721            mov     dpl,#0x0E
+0A76 120000    2722            lcall   _Volts_at_Pin
+0A79 858230    2723            mov     _main_sloc0_1_0,dpl
+0A7C 858331    2724            mov     (_main_sloc0_1_0 + 1),dph
+0A7F 85F032    2725            mov     (_main_sloc0_1_0 + 2),b
+0A82 F533      2726            mov     (_main_sloc0_1_0 + 3),a
+0A84 8530F0    2727            mov     _main_v_1_186,_main_sloc0_1_0
+0A87 8531F1    2728            mov     (_main_v_1_186 + 1),(_main_sloc0_1_0 + 1)
+0A8A 8532F2    2729            mov     (_main_v_1_186 + 2),(_main_sloc0_1_0 + 2)
+0A8D 8533F3    2730            mov     (_main_v_1_186 + 3),(_main_sloc0_1_0 + 3)
+0A90           2731   ;        EFM8_JDY40_test.c:816: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
+0A90 758210    2732            mov     dpl,#0x10
+0A93 120000    2733            lcall   _Volts_at_Pin
+0A96 858230    2734            mov     _main_sloc0_1_0,dpl
+0A99 858331    2735            mov     (_main_sloc0_1_0 + 1),dph
+0A9C 85F032    2736            mov     (_main_sloc0_1_0 + 2),b
+0A9F F533      2737            mov     (_main_sloc0_1_0 + 3),a
+0AA1 8530F4    2738            mov     (_main_v_1_186 + 0x0004),_main_sloc0_1_0
+0AA4 8531F5    2739            mov     ((_main_v_1_186 + 0x0004) + 1),(_main_sloc0_1_0 + 1)
+0AA7 8532F6    2740            mov     ((_main_v_1_186 + 0x0004) + 2),(_main_sloc0_1_0 + 2)
+0AAA 8533F7    2741            mov     ((_main_v_1_186 + 0x0004) + 3),(_main_sloc0_1_0 + 3)
+0AAD           2742   ;        EFM8_JDY40_test.c:819: if(RXU1()) // Something has arrived
+0AAD 120000    2743            lcall   _RXU1
+0AB0 4000      2744            jc      L029041?
+0AB2 020000    2745            ljmp    L029026?
+0AB5           2746   L029041?:
+0AB5           2747   ;        EFM8_JDY40_test.c:822: getstr1(buff, sizeof(buff));
+0AB5 75F814    2748            mov     _getstr1_PARM_2,#0x14
+0AB8 901950    2749            mov     dptr,#_buff
+0ABB 75F040    2750            mov     b,#0x40
+0ABE 120000    2751            lcall   _getstr1
+0AC1           2752   ;        EFM8_JDY40_test.c:824: if ( strcmp(buff, "A") == 0 )
+0AC1 750040    2753            mov     _strcmp_PARM_2,#__str_16
+0AC4 7501E1    2754            mov     (_strcmp_PARM_2 + 1),#(__str_16 >> 8)
+0AC7 750280    2755            mov     (_strcmp_PARM_2 + 2),#0x80
+0ACA 901950    2756            mov     dptr,#_buff
+0ACD 75F040    2757            mov     b,#0x40
+0AD0 120000    2758            lcall   _strcmp
+0AD3 E582      2759            mov     a,dpl
+0AD5 8583F0    2760            mov     b,dph
+0AD8 45F0      2761            orl     a,b
+0ADA 6000      2762            jz      L029042?
+0ADC 020000    2763            ljmp    L029009?
+0ADF           2764   L029042?:
+0ADF           2765   ;        EFM8_JDY40_test.c:826: waitms(500);
+0ADF 9001F4    2766            mov     dptr,#0x01F4
+0AE2 120000    2767            lcall   _waitms
+0AE5           2768   ;        EFM8_JDY40_test.c:827: while(1)
+0AE5           2769   L029006?:
+0AE5           2770   ;        EFM8_JDY40_test.c:829: waitms(5);
+0AE5 900005    2771            mov     dptr,#0x0005
+0AE8 120000    2772            lcall   _waitms
+0AEB           2773   ;        EFM8_JDY40_test.c:830: direction=3; 
+0AEB 757803    2774            mov     _direction,#0x03
+0AEE E4        2775            clr     a
+0AEF F579      2776            mov     (_direction + 1),a
+0AF1           2777   ;        EFM8_JDY40_test.c:833: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
+0AF1 75820E    2778            mov     dpl,#0x0E
+0AF4 120000    2779            lcall   _Volts_at_Pin
+0AF7 858230    2780            mov     _main_sloc0_1_0,dpl
+0AFA 858331    2781            mov     (_main_sloc0_1_0 + 1),dph
+0AFD 85F032    2782            mov     (_main_sloc0_1_0 + 2),b
+0B00 F533      2783            mov     (_main_sloc0_1_0 + 3),a
+0B02 8530F0    2784            mov     _main_v_1_186,_main_sloc0_1_0
+0B05 8531F1    2785            mov     (_main_v_1_186 + 1),(_main_sloc0_1_0 + 1)
+0B08 8532F2    2786            mov     (_main_v_1_186 + 2),(_main_sloc0_1_0 + 2)
+0B0B 8533F3    2787            mov     (_main_v_1_186 + 3),(_main_sloc0_1_0 + 3)
+0B0E           2788   ;        EFM8_JDY40_test.c:834: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
+0B0E 758210    2789            mov     dpl,#0x10
+0B11 120000    2790            lcall   _Volts_at_Pin
+0B14 858230    2791            mov     _main_sloc0_1_0,dpl
+0B17 858331    2792            mov     (_main_sloc0_1_0 + 1),dph
+0B1A 85F032    2793            mov     (_main_sloc0_1_0 + 2),b
+0B1D F533      2794            mov     (_main_sloc0_1_0 + 3),a
+0B1F 8530F4    2795            mov     (_main_v_1_186 + 0x0004),_main_sloc0_1_0
+0B22 8531F5    2796            mov     ((_main_v_1_186 + 0x0004) + 1),(_main_sloc0_1_0 + 1)
+0B25 8532F6    2797            mov     ((_main_v_1_186 + 0x0004) + 2),(_main_sloc0_1_0 + 2)
+0B28 8533F7    2798            mov     ((_main_v_1_186 + 0x0004) + 3),(_main_sloc0_1_0 + 3)
+0B2B           2799   ;        EFM8_JDY40_test.c:835: count = GetPeriod(200);
+0B2B 9000C8    2800            mov     dptr,#0x00C8
+0B2E 120000    2801            lcall   _GetPeriod
+0B31           2802   ;        EFM8_JDY40_test.c:836: f = GetFrequency(count);
+0B31 120000    2803            lcall   _GetFrequency
+0B34 8582B0    2804            mov     _main_f_1_186,dpl
+0B37 8583B1    2805            mov     (_main_f_1_186 + 1),dph
+0B3A 85F0B2    2806            mov     (_main_f_1_186 + 2),b
+0B3D F5B3      2807            mov     (_main_f_1_186 + 3),a
+0B3F           2808   ;        EFM8_JDY40_test.c:837: automaticmode(v[0], v[1], f);
+0B3F 85F030    2809            mov     _main_sloc0_1_0,_main_v_1_186
+0B42 85F131    2810            mov     (_main_sloc0_1_0 + 1),(_main_v_1_186 + 1)
+0B45 85F232    2811            mov     (_main_sloc0_1_0 + 2),(_main_v_1_186 + 2)
+0B48 85F333    2812            mov     (_main_sloc0_1_0 + 3),(_main_v_1_186 + 3)
+0B4B AEF4      2813            mov     r6,(_main_v_1_186 + 0x0004)
+0B4D AFF5      2814            mov     r7,((_main_v_1_186 + 0x0004) + 1)
+0B4F AAF6      2815            mov     r2,((_main_v_1_186 + 0x0004) + 2)
+0B51 ABF7      2816            mov     r3,((_main_v_1_186 + 0x0004) + 3)
+0B53 85B082    2817            mov     dpl,_main_f_1_186
+0B56 85B183    2818            mov     dph,(_main_f_1_186 + 1)
+0B59 85B2F0    2819            mov     b,(_main_f_1_186 + 2)
+0B5C E5B3      2820            mov     a,(_main_f_1_186 + 3)
+0B5E C002      2821            push    ar2
+0B60 C003      2822            push    ar3
+0B62 C006      2823            push    ar6
+0B64 C007      2824            push    ar7
+0B66 120000    2825            lcall   ___slong2fs
+0B69 8582E0    2826            mov     _automaticmode_PARM_3,dpl
+0B6C 8583E1    2827            mov     (_automaticmode_PARM_3 + 1),dph
+0B6F 85F0E2    2828            mov     (_automaticmode_PARM_3 + 2),b
+0B72 F5E3      2829            mov     (_automaticmode_PARM_3 + 3),a
+0B74 D007      2830            pop     ar7
+0B76 D006      2831            pop     ar6
+0B78 D003      2832            pop     ar3
+0B7A D002      2833            pop     ar2
+0B7C 8E30      2834            mov     _automaticmode_PARM_2,r6
+0B7E 8F31      2835            mov     (_automaticmode_PARM_2 + 1),r7
+0B80 8A32      2836            mov     (_automaticmode_PARM_2 + 2),r2
+0B82 8B33      2837            mov     (_automaticmode_PARM_2 + 3),r3
+0B84 853082    2838            mov     dpl,_main_sloc0_1_0
+0B87 853183    2839            mov     dph,(_main_sloc0_1_0 + 1)
+0B8A 8532F0    2840            mov     b,(_main_sloc0_1_0 + 2)
+0B8D E533      2841            mov     a,(_main_sloc0_1_0 + 3)
+0B8F 120000    2842            lcall   _automaticmode
+0B92           2843   ;        EFM8_JDY40_test.c:839: if(RXU1())
+0B92 120000    2844            lcall   _RXU1
+0B95 4000      2845            jc      L029043?
+0B97 020000    2846            ljmp    L029006?
+0B9A           2847   L029043?:
+0B9A           2848   ;        EFM8_JDY40_test.c:841: printf("hello");
+0B9A 74C0      2849            mov     a,#__str_17
+0B9C C0E0      2850            push    acc
+0B9E 74E2      2851            mov     a,#(__str_17 >> 8)
+0BA0 C0E0      2852            push    acc
+0BA2 7480      2853            mov     a,#0x80
+0BA4 C0E0      2854            push    acc
+0BA6 120000    2855            lcall   _printf
+0BA9 1581      2856            dec     sp
+0BAB 1581      2857            dec     sp
+0BAD 1581      2858            dec     sp
+0BAF           2859   ;        EFM8_JDY40_test.c:842: getstr1(buff, sizeof(buff));
+0BAF 75F814    2860            mov     _getstr1_PARM_2,#0x14
+0BB2 901950    2861            mov     dptr,#_buff
+0BB5 75F040    2862            mov     b,#0x40
+0BB8 120000    2863            lcall   _getstr1
+0BBB           2864   ;        EFM8_JDY40_test.c:843: if (strcmp(buff, "A") == 0 ) break;
+0BBB 750040    2865            mov     _strcmp_PARM_2,#__str_16
+0BBE 7501E1    2866            mov     (_strcmp_PARM_2 + 1),#(__str_16 >> 8)
+0BC1 750280    2867            mov     (_strcmp_PARM_2 + 2),#0x80
+0BC4 901950    2868            mov     dptr,#_buff
+0BC7 75F040    2869            mov     b,#0x40
+0BCA 120000    2870            lcall   _strcmp
+0BCD E582      2871            mov     a,dpl
+0BCF 8583F0    2872            mov     b,dph
+0BD2 45F0      2873            orl     a,b
+0BD4 6000      2874            jz      L029044?
+0BD6 020000    2875            ljmp    L029006?
+0BD9           2876   L029044?:
+0BD9           2877   L029009?:
+0BD9           2878   ;        EFM8_JDY40_test.c:851: if ( strcmp(buff, "S") == 0 )    
+0BD9 750040    2879            mov     _strcmp_PARM_2,#__str_18
+0BDC 7501E3    2880            mov     (_strcmp_PARM_2 + 1),#(__str_18 >> 8)
+0BDF 750280    2881            mov     (_strcmp_PARM_2 + 2),#0x80
+0BE2 901950    2882            mov     dptr,#_buff
+0BE5 75F040    2883            mov     b,#0x40
+0BE8 120000    2884            lcall   _strcmp
+0BEB E582      2885            mov     a,dpl
+0BED 8583F0    2886            mov     b,dph
+0BF0 45F0      2887            orl     a,b
+0BF2 7000      2888            jnz     L029011?
+0BF4           2889   ;        EFM8_JDY40_test.c:853: servomotion();
+0BF4 120000    2890            lcall   _servomotion
+0BF7           2891   ;        EFM8_JDY40_test.c:854: printf("this should be the motor function");
+0BF7 74C0      2892            mov     a,#__str_19
+0BF9 C0E0      2893            push    acc
+0BFB 74E3      2894            mov     a,#(__str_19 >> 8)
+0BFD C0E0      2895            push    acc
+0BFF 7480      2896            mov     a,#0x80
+0C01 C0E0      2897            push    acc
+0C03 120000    2898            lcall   _printf
+0C06 1581      2899            dec     sp
+0C08 1581      2900            dec     sp
+0C0A 1581      2901            dec     sp
+0C0C           2902   ;        EFM8_JDY40_test.c:855: waitms(500);
+0C0C 9001F4    2903            mov     dptr,#0x01F4
+0C0F 120000    2904            lcall   _waitms
+0C12           2905   L029011?:
+0C12           2906   ;        EFM8_JDY40_test.c:859: sscanf(buff, "K%uW%uG%d\n", &adcwheel1, &adcwheel2, &which);
+0C12 7470      2907            mov     a,#_main_which_1_186
+0C14 C0E0      2908            push    acc
+0C16 74BD      2909            mov     a,#(_main_which_1_186 >> 8)
+0C18 C0E0      2910            push    acc
+0C1A 7440      2911            mov     a,#0x40
+0C1C C0E0      2912            push    acc
+0C1E 7420      2913            mov     a,#_main_adcwheel2_1_186
+0C20 C0E0      2914            push    acc
+0C22 74BD      2915            mov     a,#(_main_adcwheel2_1_186 >> 8)
+0C24 C0E0      2916            push    acc
+0C26 7440      2917            mov     a,#0x40
+0C28 C0E0      2918            push    acc
+0C2A 74D0      2919            mov     a,#_main_adcwheel1_1_186
+0C2C C0E0      2920            push    acc
+0C2E 74BC      2921            mov     a,#(_main_adcwheel1_1_186 >> 8)
+0C30 C0E0      2922            push    acc
+0C32 7440      2923            mov     a,#0x40
+0C34 C0E0      2924            push    acc
+0C36 7400      2925            mov     a,#__str_20
+0C38 C0E0      2926            push    acc
+0C3A 74E4      2927            mov     a,#(__str_20 >> 8)
+0C3C C0E0      2928            push    acc
+0C3E 7480      2929            mov     a,#0x80
+0C40 C0E0      2930            push    acc
+0C42 7450      2931            mov     a,#_buff
+0C44 C0E0      2932            push    acc
+0C46 7419      2933            mov     a,#(_buff >> 8)
+0C48 C0E0      2934            push    acc
+0C4A 7440      2935            mov     a,#0x40
+0C4C C0E0      2936            push    acc
+0C4E 120000    2937            lcall   _sscanf
+0C51 E581      2938            mov     a,sp
+0C53 24F1      2939            add     a,#0xf1
+0C55 F581      2940            mov     sp,a
+0C57           2941   ;        EFM8_JDY40_test.c:861: if (which == 0 )
+0C57 E570      2942            mov     a,_main_which_1_186
+0C59 4571      2943            orl     a,(_main_which_1_186 + 1)
+0C5B 7000      2944            jnz     L029013?
+0C5D           2945   ;        EFM8_JDY40_test.c:863: P2_5 = 0;
+0C5D C2A5      2946            clr     _P2_5
+0C5F           2947   ;        EFM8_JDY40_test.c:864: P3_7=0;
+0C5F C2B7      2948            clr     _P3_7
+0C61           2949   ;        EFM8_JDY40_test.c:865: direction = 1;
+0C61 757801    2950            mov     _direction,#0x01
+0C64 E4        2951            clr     a
+0C65 F579      2952            mov     (_direction + 1),a
+0C67 8000      2953            sjmp    L029014?
+0C69           2954   L029013?:
+0C69           2955   ;        EFM8_JDY40_test.c:869: P3_2=0;
+0C69 C2B2      2956            clr     _P3_2
+0C6B           2957   ;        EFM8_JDY40_test.c:870: P3_0=0;
+0C6B C2B0      2958            clr     _P3_0
+0C6D           2959   ;        EFM8_JDY40_test.c:871: direction = 0;
+0C6D E4        2960            clr     a
+0C6E F578      2961            mov     _direction,a
+0C70 F579      2962            mov     (_direction + 1),a
+0C72           2963   L029014?:
+0C72           2964   ;        EFM8_JDY40_test.c:875: pwm_duty4 = adcwheel2;
+0C72 852038    2965            mov     _pwm_duty4,_main_adcwheel2_1_186
+0C75 852139    2966            mov     (_pwm_duty4 + 1),(_main_adcwheel2_1_186 + 1)
+0C78           2967   ;        EFM8_JDY40_test.c:876: if ( adcwheel1 == 5535 ) adcwheel1 = 65535;
+0C78 749F      2968            mov     a,#0x9F
+0C7A B5D000    2969            cjne    a,_main_adcwheel1_1_186,L029016?
+0C7D 7415      2970            mov     a,#0x15
+0C7F B5D100    2971            cjne    a,(_main_adcwheel1_1_186 + 1),L029016?
+0C82 75D0FF    2972            mov     _main_adcwheel1_1_186,#0xFF
+0C85 75D1FF    2973            mov     (_main_adcwheel1_1_186 + 1),#0xFF
+0C88           2974   L029016?:
+0C88           2975   ;        EFM8_JDY40_test.c:877: if ( adcwheel1 == 5086 ) adcwheel1 = 65535;
+0C88 74DE      2976            mov     a,#0xDE
+0C8A B5D040    2977            cjne    a,_main_adcwheel1_1_186,L029018?
+0C8D 7413      2978            mov     a,#0x13
+0C8F B5D140    2979            cjne    a,(_main_adcwheel1_1_186 + 1),L029018?
+0C92 75D0FF    2980            mov     _main_adcwheel1_1_186,#0xFF
+0C95 75D1FF    2981            mov     (_main_adcwheel1_1_186 + 1),#0xFF
+0C98           2982   L029018?:
+0C98           2983   ;        EFM8_JDY40_test.c:878: if ( adcwheel1 == 535 ) adcwheel1 = 65535;
+0C98 7417      2984            mov     a,#0x17
+0C9A B5D080    2985            cjne    a,_main_adcwheel1_1_186,L029020?
+0C9D 7402      2986            mov     a,#0x02
+0C9F B5D180    2987            cjne    a,(_main_adcwheel1_1_186 + 1),L029020?
+0CA2 75D0FF    2988            mov     _main_adcwheel1_1_186,#0xFF
+0CA5 75D1FF    2989            mov     (_main_adcwheel1_1_186 + 1),#0xFF
+0CA8           2990   L029020?:
+0CA8           2991   ;        EFM8_JDY40_test.c:879: if ( adcwheel1 == 86 ) adcwheel1 = 65535;
+0CA8 7456      2992            mov     a,#0x56
+0CAA B5D0C0    2993            cjne    a,_main_adcwheel1_1_186,L029053?
+0CAD E4        2994            clr     a
+0CAE B5D1C0    2995            cjne    a,(_main_adcwheel1_1_186 + 1),L029053?
+0CB1 8000      2996            sjmp    L029054?
+0CB3           2997   L029053?:
+0CB3 8000      2998            sjmp    L029022?
+0CB5           2999   L029054?:
+0CB5 75D0FF    3000            mov     _main_adcwheel1_1_186,#0xFF
+0CB8 75D1FF    3001            mov     (_main_adcwheel1_1_186 + 1),#0xFF
+0CBB           3002   L029022?:
+0CBB           3003   ;        EFM8_JDY40_test.c:880: pwm_duty2 = adcwheel1;
+0CBB 85D0B8    3004            mov     _pwm_duty2,_main_adcwheel1_1_186
+0CBE 85D1B9    3005            mov     (_pwm_duty2 + 1),(_main_adcwheel1_1_186 + 1)
+0CC1           3006   ;        EFM8_JDY40_test.c:883: waitms(5); // The radio seems to need this delay...
+0CC1 900005    3007            mov     dptr,#0x0005
+0CC4 120000    3008            lcall   _waitms
+0CC7 020000    3009            ljmp    L029026?
+0CCA           3010            rseg R_CSEG
+0CCA           3011   
+0000           3012            rseg R_XINIT
+0000           3013   
+0000           3014            rseg R_CONST
+0000           3015   __str_0:
+0000 436F6D6D  3016            db 'Command: %s'
      616E643A
      202573
-000B 00        2972            db 0x00
-000C           2973   __str_1:
-000C 52657370  2974            db 'Response: %s'
+000B 00        3017            db 0x00
+000C           3018   __str_1:
+000C 52657370  3019            db 'Response: %s'
      6F6E7365
      3A202573
-0018 0D        2975            db 0x0D
-0019 0A        2976            db 0x0A
-001A 00        2977            db 0x00
-001B           2978   __str_2:
-001B 41542B44  2979            db 'AT+DVID0000'
+0018 0D        3020            db 0x0D
+0019 0A        3021            db 0x0A
+001A 00        3022            db 0x00
+001B           3023   __str_2:
+001B 41542B44  3024            db 'AT+DVID0000'
      56494430
      303030
-0026 0D        2980            db 0x0D
-0027 0A        2981            db 0x0A
-0028 00        2982            db 0x00
-0029           2983   _PrintNumber_HexDigit_1_164:
-0029 30313233  2984            db '0123456789ABCDEF'
+0026 0D        3025            db 0x0D
+0027 0A        3026            db 0x0A
+0028 00        3027            db 0x00
+0029           3028   _PrintNumber_HexDigit_1_164:
+0029 30313233  3029            db '0123456789ABCDEF'
      34353637
      38394142
      43444546
-0039 00        2985            db 0x00
-003A           2986   __str_4:
-003A 204E4F20  2987            db ' NO SIGNAL                     '
+0039 00        3030            db 0x00
+003A           3031   __str_4:
+003A 204E4F20  3032            db ' NO SIGNAL                     '
      5349474E
      414C2020
      20202020
@@ -3001,84 +3046,94 @@
      20202020
      20202020
      202020
-0059 0D        2988            db 0x0D
-005A 00        2989            db 0x00
-005B           2990   __str_5:
-005B 256C64    2991            db '%ld'
-005E 0A        2992            db 0x0A
-005F 0D        2993            db 0x0D
-0060 00        2994            db 0x00
-0061           2995   __str_6:
-0061 0D        2996            db 0x0D
-0062 0A        2997            db 0x0A
-0063 45464D38  2998            db 'EFM8LB12 JDY-40 Slave Test.'
+0059 0D        3033            db 0x0D
+005A 00        3034            db 0x00
+005B           3035   __str_5:
+005B 256C64    3036            db '%ld'
+005E 0A        3037            db 0x0A
+005F 0D        3038            db 0x0D
+0060 00        3039            db 0x00
+0061           3040   __str_6:
+0061 0D        3041            db 0x0D
+0062 0A        3042            db 0x0A
+0063 45464D38  3043            db 'EFM8LB12 JDY-40 Slave Test.'
      4C423132
      204A4459
      2D343020
      536C6176
      65205465
      73742E
-007E 0D        2999            db 0x0D
-007F 0A        3000            db 0x0A
-0080 00        3001            db 0x00
-0081           3002   __str_7:
-0081 41542B56  3003            db 'AT+VER'
+007E 0D        3044            db 0x0D
+007F 0A        3045            db 0x0A
+0080 00        3046            db 0x00
+0081           3047   __str_7:
+0081 41542B56  3048            db 'AT+VER'
      4552
-0087 0D        3004            db 0x0D
-0088 0A        3005            db 0x0A
-0089 00        3006            db 0x00
-008A           3007   __str_8:
-008A 41542B42  3008            db 'AT+BAUD'
+0087 0D        3049            db 0x0D
+0088 0A        3050            db 0x0A
+0089 00        3051            db 0x00
+008A           3052   __str_8:
+008A 41542B42  3053            db 'AT+BAUD'
      415544
-0091 0D        3009            db 0x0D
-0092 0A        3010            db 0x0A
-0093 00        3011            db 0x00
-0094           3012   __str_9:
-0094 41542B52  3013            db 'AT+RFID'
+0091 0D        3054            db 0x0D
+0092 0A        3055            db 0x0A
+0093 00        3056            db 0x00
+0094           3057   __str_9:
+0094 41542B52  3058            db 'AT+RFID'
      464944
-009B 0D        3014            db 0x0D
-009C 0A        3015            db 0x0A
-009D 00        3016            db 0x00
-009E           3017   __str_10:
-009E 41542B44  3018            db 'AT+DVID'
+009B 0D        3059            db 0x0D
+009C 0A        3060            db 0x0A
+009D 00        3061            db 0x00
+009E           3062   __str_10:
+009E 41542B44  3063            db 'AT+DVID'
      564944
-00A5 0D        3019            db 0x0D
-00A6 0A        3020            db 0x0A
-00A7 00        3021            db 0x00
-00A8           3022   __str_11:
-00A8 41542B52  3023            db 'AT+RFC120'
+00A5 0D        3064            db 0x0D
+00A6 0A        3065            db 0x0A
+00A7 00        3066            db 0x00
+00A8           3067   __str_11:
+00A8 41542B52  3068            db 'AT+RFC120'
      46433132
      30
-00B1 0D        3024            db 0x0D
-00B2 0A        3025            db 0x0A
-00B3 00        3026            db 0x00
-00B4           3027   __str_12:
-00B4 41542B50  3028            db 'AT+POWE'
+00B1 0D        3069            db 0x0D
+00B2 0A        3070            db 0x0A
+00B3 00        3071            db 0x00
+00B4           3072   __str_12:
+00B4 41542B50  3073            db 'AT+POWE'
      4F5745
-00BB 0D        3029            db 0x0D
-00BC 0A        3030            db 0x0A
-00BD 00        3031            db 0x00
-00BE           3032   __str_13:
-00BE 41542B43  3033            db 'AT+CLSS'
+00BB 0D        3074            db 0x0D
+00BC 0A        3075            db 0x0A
+00BD 00        3076            db 0x00
+00BE           3077   __str_13:
+00BE 41542B43  3078            db 'AT+CLSS'
      4C5353
-00C5 0D        3034            db 0x0D
-00C6 0A        3035            db 0x0A
-00C7 00        3036            db 0x00
-00C8           3037   __str_14:
-00C8 41542B44  3038            db 'AT+DVIDFFFF'
+00C5 0D        3079            db 0x0D
+00C6 0A        3080            db 0x0A
+00C7 00        3081            db 0x00
+00C8           3082   __str_14:
+00C8 41542B44  3083            db 'AT+DVIDFFFF'
      56494446
      464646
-00D3 0D        3039            db 0x0D
-00D4 0A        3040            db 0x0A
-00D5 00        3041            db 0x00
-00D6           3042   __str_15:
-00D6 41        3043            db 'A'
-00D7 00        3044            db 0x00
-00D8           3045   __str_16:
-00D8 53        3046            db 'S'
-00D9 00        3047            db 0x00
-00DA           3048   __str_17:
-00DA 74686973  3049            db 'this should be the motor function'
+00D3 0D        3084            db 0x0D
+00D4 0A        3085            db 0x0A
+00D5 00        3086            db 0x00
+00D6           3087   __str_15:
+00D6 2530356C  3088            db '%05ld'
+     64
+00DB 0A        3089            db 0x0A
+00DC 0D        3090            db 0x0D
+00DD 00        3091            db 0x00
+00DE           3092   __str_16:
+00DE 41        3093            db 'A'
+00DF 00        3094            db 0x00
+00E0           3095   __str_17:
+00E0 68656C6C  3096            db 'hello'
+     6F
+00E5 00        3097            db 0x00
+00E6           3098   __str_18:
+00E6 53        3099            db 'S'
+00E7 00        3100            db 0x00
+00E8           3101   __str_19:
+00E8 74686973  3102            db 'this should be the motor function'
      2073686F
      756C6420
      62652074
@@ -3087,14 +3142,14 @@
      2066756E
      6374696F
      6E
-00FB 00        3050            db 0x00
-00FC           3051   __str_18:
-00FC 4B257557  3052            db 'K%uW%uG%d'
+0109 00        3103            db 0x00
+010A           3104   __str_20:
+010A 4B257557  3105            db 'K%uW%uG%d'
      25754725
      64
-0105 0A        3053            db 0x0A
-0106 00        3054            db 0x00
-0107           3055   
-0096           3056            CSEG
-0096           3057   
-0096           3058   end
+0113 0A        3106            db 0x0A
+0114 00        3107            db 0x00
+0115           3108   
+0096           3109            CSEG
+0096           3110   
+0096           3111   end
