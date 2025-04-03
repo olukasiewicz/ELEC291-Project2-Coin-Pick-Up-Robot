@@ -727,10 +727,11 @@ void main(void)
 	// We should select an unique device ID.  The device ID can be a hex
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");
+	Set_pwm(0);
 	while(1)
-	{
-  		Set_pwm(127);
-  		
+	{	
+
+  	
 		
 		adcvalx = ADCRead(4);
 		adcvaly = ( ADCRead(3));
@@ -752,11 +753,21 @@ void main(void)
 				SerialReceive1(buff, sizeof(buff)-1);
 		//		printf("asdiubasd");
 				
-				printf("%s\n\r", buff);
+		//		printf("%s\n\r", buff);
 				stringtobuff = atof(buff);
-				evilcode = 51/400*(stringtobuff-61000);
+				evilcode = ((stringtobuff - 63400.0) * 255.0 / (64500.0 - 63400.0));
+
+
 				if (evilcode > 255 ) evilcode =255;
+				if (evilcode < 70 ) 
+				{
+				evilcode = 0;
+				Init_pwm(1);
+				}
+				Init_pwm(2000L);
 				Set_pwm(evilcode);
+				printf("%s %u\n\r", buff, evilcode);
+				LCDprint(buff, 1,1);
 			
 			} else 
 			{
@@ -800,6 +811,7 @@ void main(void)
                 //launch coins
                 //ISR_pw = 240;
         Init_pwm(25);
+        Set_pwm(127);
   		waitms(500);
   		Init_pwm(50);	
     			UART1Configure(9600);
