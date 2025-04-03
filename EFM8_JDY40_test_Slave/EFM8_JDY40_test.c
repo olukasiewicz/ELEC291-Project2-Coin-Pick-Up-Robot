@@ -58,9 +58,8 @@ volatile int peggingsidnatu=0;
 #define SERVO2   P1_4 // bottom servo
 #define EMAGNET  P1_5 // magnet
 
-volatile unsigned int servo_counter=0;
+volatile unsigned int servo_counter=0, money_count=0;
 volatile unsigned char servo1=250, servo2=250;
-
 	
 /////////////////////////////////////////////////
 
@@ -796,6 +795,8 @@ void servomotion(void)
 	WriteCommand(0xC4);
 	WriteData(0);
 
+	money_count++;
+
 }
 /*
 automaticmode
@@ -808,7 +809,7 @@ void automaticmode(float fowardper, float sideper, float freq)
 	
 	direction = 3;
 	//move fowawrd
-	P3_7=1;  //wheel 1
+	P3_7=1; // wheel 1
 	P3_2=0;	// wheel 1 
 	P3_0=0; // wheel 2
 	P2_5=1; // wheel 2
@@ -824,7 +825,7 @@ void automaticmode(float fowardper, float sideper, float freq)
 		P3_2=0;	// wheel 1 
 		P3_0=0; // wheel 2
 		P2_5=0; // wheel 2
-	servomotion();
+		servomotion();
 	}
 
 	//foward per logic 
@@ -897,7 +898,8 @@ void main (void)
 	int adcwheel1, adcwheel2;
 	int which;
 	int i;
- 	//char c;
+
+ 	char moneyString[2];
 
 	// initialization for the period code
 	long int count, f;
@@ -979,8 +981,13 @@ void main (void)
 			
 	WriteCommand(0xC4);
 	WriteData(0);
+
+	sprintf(moneyString, "%d", money_count);
+	WriteCommand(0x8f); 
+	WriteData(moneyString[0]);
 	
 	P1_5 = 0;
+	
 	while(1)
 	{	
 		EMAGNET = 0;
@@ -1068,16 +1075,25 @@ void main (void)
 			pwm_duty2 = adcwheel1;
 
 			
-//			printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
-<<<<<<< HEAD
-		//	printf("%ld\n\r", f);
-=======
-			printf("%ld\n\r", f);
->>>>>>> 9f3d00fd8684da6548fdc3eb46f2b7a34f1299fc
+    //		printf("pwm_duty4 = %u pwm_duty3 = %u dir = %d \n", pwm_duty4, pwm_duty2, which);
+	//	    printf("%ld\n\r", f);
 	//		PrintNumber(pwm_duty2, 10, 6);
 	//		eputs("\n\r");
 			waitms(5); // The radio seems to need this delay...
 
+			// printing the money count on the lcd
+			sprintf(moneyString, "%d", money_count);
+			if(money_count >=10)
+			{
+				WriteCommand(0x8e);
+				WriteData(moneyString[0]);
+				WriteCommand(0x8f);
+				WriteData(moneyString[1]);
+			} else 
+			{
+				WriteCommand(0x8f); 
+				WriteData(moneyString[0]);
+			}
 		}
 
 
