@@ -40,6 +40,7 @@ volatile int direction=0;
 
 volatile unsigned int servo_counter=0;
 volatile unsigned char servo1=250, servo2=250;
+volatile unsigned int cointcount =0;
 /////////////////////////////LCD//////////////////////////
 
 #define LCD_RS P2_2
@@ -778,6 +779,17 @@ void servomotion(void)
 	servo2 = 250; 
 	EMAGNET=0;
 	
+	if ( cointcount >= 20 ) {
+	direction = 1;
+						P3_7=0;  //wheel 1
+						P3_2=1;	// wheel 1 
+						P3_0=1; // wheel 2
+						P2_5=0; // wheel 2
+	cointcount=0;
+	}
+
+	
+	
 	WriteCommand(0x87);
     WriteData(1);
 
@@ -793,17 +805,19 @@ automaticmode
 move foward untill dectects per
 */
 
-void automaticmode(float fowardper, float sideper, float freq)
+void automaticmode(float fowardper, float sideper, long int freq)
 {
 	int control = 0;
 	direction = 3;
+			sprintf(msg, "%05ld\n\r", freq); // subtracted so that it sends a smaller value
+			sendstr1(msg);
+			waitms(50);
 	//move fowawrd
 	P3_7=1;  //wheel 1
 	P3_2=0;	// wheel 1 
 	P3_0=0; // wheel 2
 	P2_5=1; // wheel 2
-	printf("%ld\n\r", freq);
-		if ( freq >= 64100)  //100000    63750   65000
+		if ( freq >= 64050)  //100000    63750   65000
 	{
 		P3_7=0;  //wheel 1
 		P3_2=1;	// wheel 1 
@@ -815,6 +829,7 @@ void automaticmode(float fowardper, float sideper, float freq)
 		P3_0=0; // wheel 2
 		P2_5=0; // wheel 2
 	servomotion();
+	cointcount++;
 	}
 
 	//foward per logic 

@@ -728,6 +728,7 @@ void main(void)
 	// number from 0x0000 to 0xFFFF.  In this case is set to 0xABBA
 	SendATCommand("AT+DVIDFFFF\r\n");
 	Set_pwm(0);
+	LCDprint("A10 CAR", 2,1);
 	while(1)
 	{	
 
@@ -766,7 +767,7 @@ void main(void)
 				}
 				Init_pwm(2000L);
 				Set_pwm(evilcode);
-				printf("%s %u\n\r", buff, evilcode);
+			//	printf("%s %u\n\r", buff, evilcode);
 				LCDprint(buff, 1,1);
 			
 			} else 
@@ -818,7 +819,7 @@ void main(void)
     			ClearFIFO();
                 //ISR_pw = 60;
             }
-	//		printf("%s\n\r", sendbuff);
+			printf("%s\n\r", sendbuff);
 			
 		
 		delayms(50);  // Set the information interchange pace: communicate about every 50ms
