@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by C51
 ; Version 1.0.0 #1170 (Feb 16 2022) (MSVC)
-; This file was generated Thu Apr 03 05:21:02 2025
+; This file was generated Thu Apr 03 13:58:20 2025
 ;--------------------------------------------------------
 $name EFM8_JDY40_test
 $optc51 --model-small
@@ -2638,8 +2638,8 @@ L032026?:
 ;	EFM8_JDY40_test.c:738: WriteData(3);
 	mov	dpl,#0x03
 	lcall	_WriteData
-;	EFM8_JDY40_test.c:740: WriteCommand(0xC9);
-	mov	dpl,#0xC9
+;	EFM8_JDY40_test.c:740: WriteCommand(0xC8);
+	mov	dpl,#0xC8
 	lcall	_WriteCommand
 ;	EFM8_JDY40_test.c:741: WriteData(2);
 	mov	dpl,#0x02
@@ -2728,10 +2728,10 @@ L032038?:
 	mov	_servo2,#0xFA
 ;	EFM8_JDY40_test.c:780: EMAGNET=0;
 	clr	_P1_5
-;	EFM8_JDY40_test.c:782: if ( cointcount >= 20 ) {
+;	EFM8_JDY40_test.c:782: if ( cointcount >= 10 ) {
 	clr	c
 	mov	a,_cointcount
-	subb	a,#0x14
+	subb	a,#0x0A
 	mov	a,(_cointcount + 1)
 	subb	a,#0x00
 	jc	L032002?
@@ -2739,35 +2739,27 @@ L032038?:
 	mov	_direction,#0x01
 	clr	a
 	mov	(_direction + 1),a
-;	EFM8_JDY40_test.c:784: P3_7=0;  //wheel 1
-	clr	_P3_7
-;	EFM8_JDY40_test.c:785: P3_2=1;	// wheel 1 
-	setb	_P3_2
-;	EFM8_JDY40_test.c:786: P3_0=1; // wheel 2
-	setb	_P3_0
-;	EFM8_JDY40_test.c:787: P2_5=0; // wheel 2
-	clr	_P2_5
-;	EFM8_JDY40_test.c:788: cointcount=0;
+;	EFM8_JDY40_test.c:784: cointcount=0;
 	clr	a
 	mov	_cointcount,a
 	mov	(_cointcount + 1),a
 L032002?:
-;	EFM8_JDY40_test.c:793: WriteCommand(0x87);
+;	EFM8_JDY40_test.c:789: WriteCommand(0x87);
 	mov	dpl,#0x87
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:794: WriteData(1);
+;	EFM8_JDY40_test.c:790: WriteData(1);
 	mov	dpl,#0x01
 	lcall	_WriteData
-;	EFM8_JDY40_test.c:796: WriteCommand(0x88);
-	mov	dpl,#0x88
+;	EFM8_JDY40_test.c:792: WriteCommand(0x89);
+	mov	dpl,#0x89
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:797: WriteData(1);
+;	EFM8_JDY40_test.c:793: WriteData(1);
 	mov	dpl,#0x01
 	lcall	_WriteData
-;	EFM8_JDY40_test.c:799: WriteCommand(0xC9);
-	mov	dpl,#0xC9
+;	EFM8_JDY40_test.c:795: WriteCommand(0xC8);
+	mov	dpl,#0xC8
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:800: WriteData(0);
+;	EFM8_JDY40_test.c:796: WriteData(0);
 	mov	dpl,#0x00
 	ljmp	_WriteData
 ;------------------------------------------------------------
@@ -2778,7 +2770,7 @@ L032002?:
 ;fowardper                 Allocated to registers r2 r3 r4 r5 
 ;control                   Allocated to registers 
 ;------------------------------------------------------------
-;	EFM8_JDY40_test.c:808: void automaticmode(float fowardper, float sideper, long int freq)
+;	EFM8_JDY40_test.c:804: void automaticmode(float fowardper, float sideper, long int freq)
 ;	-----------------------------------------
 ;	 function automaticmode
 ;	-----------------------------------------
@@ -2787,11 +2779,11 @@ _automaticmode:
 	mov	r3,dph
 	mov	r4,b
 	mov	r5,a
-;	EFM8_JDY40_test.c:811: direction = 3;
+;	EFM8_JDY40_test.c:807: direction = 3;
 	mov	_direction,#0x03
 	clr	a
 	mov	(_direction + 1),a
-;	EFM8_JDY40_test.c:812: sprintf(msg, "%05ld\n\r", freq); // subtracted so that it sends a smaller value
+;	EFM8_JDY40_test.c:808: sprintf(msg, "%05ld\n\r", freq); // subtracted so that it sends a smaller value
 	push	ar2
 	push	ar3
 	push	ar4
@@ -2816,67 +2808,67 @@ _automaticmode:
 	mov	a,sp
 	add	a,#0xf6
 	mov	sp,a
-;	EFM8_JDY40_test.c:813: sendstr1(msg);
+;	EFM8_JDY40_test.c:809: sendstr1(msg);
 	mov	dptr,#_msg
 	mov	b,#0x40
 	lcall	_sendstr1
-;	EFM8_JDY40_test.c:814: waitms(50);
+;	EFM8_JDY40_test.c:810: waitms(50);
 	mov	dptr,#0x0032
 	lcall	_waitms
 	pop	ar5
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:816: P3_7=1;  //wheel 1
+;	EFM8_JDY40_test.c:812: P3_7=1;  //wheel 1
 	setb	_P3_7
-;	EFM8_JDY40_test.c:817: P3_2=0;	// wheel 1 
+;	EFM8_JDY40_test.c:813: P3_2=0;	// wheel 1 
 	clr	_P3_2
-;	EFM8_JDY40_test.c:818: P3_0=0; // wheel 2
+;	EFM8_JDY40_test.c:814: P3_0=0; // wheel 2
 	clr	_P3_0
-;	EFM8_JDY40_test.c:819: P2_5=1; // wheel 2
+;	EFM8_JDY40_test.c:815: P2_5=1; // wheel 2
 	setb	_P2_5
-;	EFM8_JDY40_test.c:820: if ( freq >= 64050)  //100000    63750   65000
+;	EFM8_JDY40_test.c:816: if ( freq >= 63500)  //100000    63750   65000
 	clr	c
 	mov	a,_automaticmode_PARM_3
-	subb	a,#0x32
+	subb	a,#0x0C
 	mov	a,(_automaticmode_PARM_3 + 1)
-	subb	a,#0xFA
+	subb	a,#0xF8
 	mov	a,(_automaticmode_PARM_3 + 2)
 	subb	a,#0x00
 	mov	a,(_automaticmode_PARM_3 + 3)
 	xrl	a,#0x80
 	subb	a,#0x80
 	jc	L033002?
-;	EFM8_JDY40_test.c:822: P3_7=0;  //wheel 1
+;	EFM8_JDY40_test.c:818: P3_7=0;  //wheel 1
 	clr	_P3_7
-;	EFM8_JDY40_test.c:823: P3_2=1;	// wheel 1 
+;	EFM8_JDY40_test.c:819: P3_2=1;	// wheel 1 
 	setb	_P3_2
-;	EFM8_JDY40_test.c:824: P3_0=1; // wheel 2
+;	EFM8_JDY40_test.c:820: P3_0=1; // wheel 2
 	setb	_P3_0
-;	EFM8_JDY40_test.c:825: P2_5=0; // wheel 2
+;	EFM8_JDY40_test.c:821: P2_5=0; // wheel 2
 	clr	_P2_5
-;	EFM8_JDY40_test.c:826: waitms(150);
-	mov	dptr,#0x0096
+;	EFM8_JDY40_test.c:822: waitms(250);
+	mov	dptr,#0x00FA
 	push	ar2
 	push	ar3
 	push	ar4
 	push	ar5
 	lcall	_waitms
-;	EFM8_JDY40_test.c:827: P3_7=0;  //wheel 1
+;	EFM8_JDY40_test.c:823: P3_7=0;  //wheel 1
 	clr	_P3_7
-;	EFM8_JDY40_test.c:828: P3_2=0;	// wheel 1 
+;	EFM8_JDY40_test.c:824: P3_2=0;	// wheel 1 
 	clr	_P3_2
-;	EFM8_JDY40_test.c:829: P3_0=0; // wheel 2
+;	EFM8_JDY40_test.c:825: P3_0=0; // wheel 2
 	clr	_P3_0
-;	EFM8_JDY40_test.c:830: P2_5=0; // wheel 2
+;	EFM8_JDY40_test.c:826: P2_5=0; // wheel 2
 	clr	_P2_5
-;	EFM8_JDY40_test.c:831: servomotion();
+;	EFM8_JDY40_test.c:827: servomotion();
 	lcall	_servomotion
 	pop	ar5
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:832: cointcount++;
+;	EFM8_JDY40_test.c:828: cointcount++;
 	mov	a,#0x01
 	add	a,_cointcount
 	mov	_cointcount,a
@@ -2884,7 +2876,7 @@ _automaticmode:
 	addc	a,(_cointcount + 1)
 	mov	(_cointcount + 1),a
 L033002?:
-;	EFM8_JDY40_test.c:836: if ( fowardper >= p_thresh)
+;	EFM8_JDY40_test.c:832: if ( fowardper >= p_thresh)
 	mov	a,#0xCD
 	push	acc
 	mov	a,#0xCC
@@ -2903,31 +2895,31 @@ L033002?:
 	mov	sp,a
 	mov	a,r2
 	jnz	L033004?
-;	EFM8_JDY40_test.c:838: P3_7=0;  //wheel 1
+;	EFM8_JDY40_test.c:834: P3_7=0;  //wheel 1
 	clr	_P3_7
-;	EFM8_JDY40_test.c:839: P3_2=1;	// wheel 1 
+;	EFM8_JDY40_test.c:835: P3_2=1;	// wheel 1 
 	setb	_P3_2
-;	EFM8_JDY40_test.c:840: P3_0=1; // wheel 2
+;	EFM8_JDY40_test.c:836: P3_0=1; // wheel 2
 	setb	_P3_0
-;	EFM8_JDY40_test.c:841: P2_5=0; // wheel 2
+;	EFM8_JDY40_test.c:837: P2_5=0; // wheel 2
 	clr	_P2_5
-;	EFM8_JDY40_test.c:842: waitms(300);
+;	EFM8_JDY40_test.c:838: waitms(300);
 	mov	dptr,#0x012C
 	lcall	_waitms
-;	EFM8_JDY40_test.c:843: P3_7=0;  //wheel 1
+;	EFM8_JDY40_test.c:839: P3_7=0;  //wheel 1
 	clr	_P3_7
-;	EFM8_JDY40_test.c:844: P3_2=1;	// wheel 1 
+;	EFM8_JDY40_test.c:840: P3_2=1;	// wheel 1 
 	setb	_P3_2
-;	EFM8_JDY40_test.c:845: P3_0=0; // wheel 2
+;	EFM8_JDY40_test.c:841: P3_0=0; // wheel 2
 	clr	_P3_0
-;	EFM8_JDY40_test.c:846: P2_5=0; // wheel 2
+;	EFM8_JDY40_test.c:842: P2_5=0; // wheel 2
 	clr	_P2_5
-;	EFM8_JDY40_test.c:847: waitms(750);
+;	EFM8_JDY40_test.c:843: waitms(750);
 	mov	dptr,#0x02EE
-;	EFM8_JDY40_test.c:848: return;
+;	EFM8_JDY40_test.c:844: return;
 	ljmp	_waitms
 L033004?:
-;	EFM8_JDY40_test.c:853: if ( sideper >= p_thresh)
+;	EFM8_JDY40_test.c:849: if ( sideper >= p_thresh)
 	mov	a,#0xCD
 	push	acc
 	mov	a,#0xCC
@@ -2946,17 +2938,17 @@ L033004?:
 	mov	sp,a
 	mov	a,r2
 	jnz	L033007?
-;	EFM8_JDY40_test.c:855: P3_7=0;  //wheel 1
+;	EFM8_JDY40_test.c:851: P3_7=0;  //wheel 1
 	clr	_P3_7
-;	EFM8_JDY40_test.c:856: P3_2=1;	// wheel 1 
+;	EFM8_JDY40_test.c:852: P3_2=1;	// wheel 1 
 	setb	_P3_2
-;	EFM8_JDY40_test.c:857: P3_0=0; // wheel 2
+;	EFM8_JDY40_test.c:853: P3_0=0; // wheel 2
 	clr	_P3_0
-;	EFM8_JDY40_test.c:858: P2_5=0; // wheel 2
+;	EFM8_JDY40_test.c:854: P2_5=0; // wheel 2
 	clr	_P2_5
-;	EFM8_JDY40_test.c:859: waitms(750);
+;	EFM8_JDY40_test.c:855: waitms(750);
 	mov	dptr,#0x02EE
-;	EFM8_JDY40_test.c:860: control = 1;
+;	EFM8_JDY40_test.c:856: control = 1;
 	ljmp	_waitms
 L033007?:
 	ret
@@ -2975,15 +2967,15 @@ L033007?:
 ;v                         Allocated with name '_main_v_1_199'
 ;sloc0                     Allocated with name '_main_sloc0_1_0'
 ;------------------------------------------------------------
-;	EFM8_JDY40_test.c:867: void main (void)
+;	EFM8_JDY40_test.c:863: void main (void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
 _main:
-;	EFM8_JDY40_test.c:886: waitms(500);
+;	EFM8_JDY40_test.c:882: waitms(500);
 	mov	dptr,#0x01F4
 	lcall	_waitms
-;	EFM8_JDY40_test.c:887: printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
+;	EFM8_JDY40_test.c:883: printf("\r\nEFM8LB12 JDY-40 Slave Test.\r\n");
 	mov	a,#__str_6
 	push	acc
 	mov	a,#(__str_6 >> 8)
@@ -2994,74 +2986,74 @@ _main:
 	dec	sp
 	dec	sp
 	dec	sp
-;	EFM8_JDY40_test.c:888: UART1_Init(9600);
+;	EFM8_JDY40_test.c:884: UART1_Init(9600);
 	mov	dptr,#0x2580
 	clr	a
 	mov	b,a
 	lcall	_UART1_Init
-;	EFM8_JDY40_test.c:890: ReceptionOff();
+;	EFM8_JDY40_test.c:886: ReceptionOff();
 	lcall	_ReceptionOff
-;	EFM8_JDY40_test.c:892: LCD_4BIT();
+;	EFM8_JDY40_test.c:888: LCD_4BIT();
 	lcall	_LCD_4BIT
-;	EFM8_JDY40_test.c:894: TIMER0_Init(); 
+;	EFM8_JDY40_test.c:890: TIMER0_Init(); 
 	lcall	_TIMER0_Init
-;	EFM8_JDY40_test.c:896: InitPinADC(2, 1); // Configure P2.1 as analog input
+;	EFM8_JDY40_test.c:892: InitPinADC(2, 1); // Configure P2.1 as analog input
 	mov	_InitPinADC_PARM_2,#0x01
 	mov	dpl,#0x02
 	lcall	_InitPinADC
-;	EFM8_JDY40_test.c:897: InitPinADC(2, 3); // Configure P2.1 as analog input
+;	EFM8_JDY40_test.c:893: InitPinADC(2, 3); // Configure P2.1 as analog input
 	mov	_InitPinADC_PARM_2,#0x03
 	mov	dpl,#0x02
 	lcall	_InitPinADC
-;	EFM8_JDY40_test.c:898: InitADC();
+;	EFM8_JDY40_test.c:894: InitADC();
 	lcall	_InitADC
-;	EFM8_JDY40_test.c:902: SendATCommand("AT+VER\r\n");
+;	EFM8_JDY40_test.c:898: SendATCommand("AT+VER\r\n");
 	mov	dptr,#__str_7
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:903: SendATCommand("AT+BAUD\r\n");
+;	EFM8_JDY40_test.c:899: SendATCommand("AT+BAUD\r\n");
 	mov	dptr,#__str_8
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:904: SendATCommand("AT+RFID\r\n");
+;	EFM8_JDY40_test.c:900: SendATCommand("AT+RFID\r\n");
 	mov	dptr,#__str_9
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:905: SendATCommand("AT+DVID\r\n");
+;	EFM8_JDY40_test.c:901: SendATCommand("AT+DVID\r\n");
 	mov	dptr,#__str_10
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:906: SendATCommand("AT+RFC120\r\n");
+;	EFM8_JDY40_test.c:902: SendATCommand("AT+RFC120\r\n");
 	mov	dptr,#__str_11
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:907: SendATCommand("AT+POWE\r\n");
+;	EFM8_JDY40_test.c:903: SendATCommand("AT+POWE\r\n");
 	mov	dptr,#__str_12
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:908: SendATCommand("AT+CLSS\r\n");
+;	EFM8_JDY40_test.c:904: SendATCommand("AT+CLSS\r\n");
 	mov	dptr,#__str_13
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:912: SendATCommand("AT+DVIDFFFF\r\n");  
+;	EFM8_JDY40_test.c:908: SendATCommand("AT+DVIDFFFF\r\n");  
 	mov	dptr,#__str_14
 	mov	b,#0x80
 	lcall	_SendATCommand
-;	EFM8_JDY40_test.c:914: WriteCommand(0x40);  // Set CGRAM address
+;	EFM8_JDY40_test.c:910: WriteCommand(0x40);  // Set CGRAM address
 	mov	dpl,#0x40
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:915: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:911: for(i=0; i<8; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00
-L034028?:
+L034030?:
 	clr	c
 	mov	a,r2
 	subb	a,#0x08
 	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	L034031?
-;	EFM8_JDY40_test.c:917: WriteData(customMouth[i]);
+	jnc	L034033?
+;	EFM8_JDY40_test.c:913: WriteData(customMouth[i]);
 	mov	a,r2
 	add	a,#_customMouth
 	mov	dpl,a
@@ -3076,27 +3068,27 @@ L034028?:
 	lcall	_WriteData
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:915: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:911: for(i=0; i<8; i++) {
 	inc	r2
-	cjne	r2,#0x00,L034028?
+	cjne	r2,#0x00,L034030?
 	inc	r3
-	sjmp	L034028?
-L034031?:
-;	EFM8_JDY40_test.c:920: WriteCommand(0x48);
+	sjmp	L034030?
+L034033?:
+;	EFM8_JDY40_test.c:916: WriteCommand(0x48);
 	mov	dpl,#0x48
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:921: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:917: for(i=0; i<8; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00
-L034032?:
+L034034?:
 	clr	c
 	mov	a,r2
 	subb	a,#0x08
 	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	L034035?
-;	EFM8_JDY40_test.c:923: WriteData(customEye[i]);
+	jnc	L034037?
+;	EFM8_JDY40_test.c:919: WriteData(customEye[i]);
 	mov	a,r2
 	add	a,#_customEye
 	mov	dpl,a
@@ -3111,27 +3103,27 @@ L034032?:
 	lcall	_WriteData
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:921: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:917: for(i=0; i<8; i++) {
 	inc	r2
-	cjne	r2,#0x00,L034032?
+	cjne	r2,#0x00,L034034?
 	inc	r3
-	sjmp	L034032?
-L034035?:
-;	EFM8_JDY40_test.c:926: WriteCommand(0x50);  // Set CGRAM address
+	sjmp	L034034?
+L034037?:
+;	EFM8_JDY40_test.c:922: WriteCommand(0x50);  // Set CGRAM address
 	mov	dpl,#0x50
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:927: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:923: for(i=0; i<8; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00
-L034036?:
+L034038?:
 	clr	c
 	mov	a,r2
 	subb	a,#0x08
 	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	L034039?
-;	EFM8_JDY40_test.c:929: WriteData(customOpenMouth[i]);
+	jnc	L034041?
+;	EFM8_JDY40_test.c:925: WriteData(customOpenMouth[i]);
 	mov	a,r2
 	add	a,#_customOpenMouth
 	mov	dpl,a
@@ -3146,27 +3138,27 @@ L034036?:
 	lcall	_WriteData
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:927: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:923: for(i=0; i<8; i++) {
 	inc	r2
-	cjne	r2,#0x00,L034036?
+	cjne	r2,#0x00,L034038?
 	inc	r3
-	sjmp	L034036?
-L034039?:
-;	EFM8_JDY40_test.c:932: WriteCommand(0x58);  // Set CGRAM address
+	sjmp	L034038?
+L034041?:
+;	EFM8_JDY40_test.c:928: WriteCommand(0x58);  // Set CGRAM address
 	mov	dpl,#0x58
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:933: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:929: for(i=0; i<8; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00
-L034040?:
+L034042?:
 	clr	c
 	mov	a,r2
 	subb	a,#0x08
 	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	L034043?
-;	EFM8_JDY40_test.c:935: WriteData(customSparkle[i]);
+	jnc	L034045?
+;	EFM8_JDY40_test.c:931: WriteData(customSparkle[i]);
 	mov	a,r2
 	add	a,#_customSparkle
 	mov	dpl,a
@@ -3181,27 +3173,27 @@ L034040?:
 	lcall	_WriteData
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:933: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:929: for(i=0; i<8; i++) {
 	inc	r2
-	cjne	r2,#0x00,L034040?
+	cjne	r2,#0x00,L034042?
 	inc	r3
-	sjmp	L034040?
-L034043?:
-;	EFM8_JDY40_test.c:938: WriteCommand(0x60);  // Set CGRAM address
+	sjmp	L034042?
+L034045?:
+;	EFM8_JDY40_test.c:934: WriteCommand(0x60);  // Set CGRAM address
 	mov	dpl,#0x60
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:939: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:935: for(i=0; i<8; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00
-L034044?:
+L034046?:
 	clr	c
 	mov	a,r2
 	subb	a,#0x08
 	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	L034047?
-;	EFM8_JDY40_test.c:941: WriteData(customMoney[i]);
+	jnc	L034049?
+;	EFM8_JDY40_test.c:937: WriteData(customMoney[i]);
 	mov	a,r2
 	add	a,#_customMoney
 	mov	dpl,a
@@ -3216,27 +3208,27 @@ L034044?:
 	lcall	_WriteData
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:939: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:935: for(i=0; i<8; i++) {
 	inc	r2
-	cjne	r2,#0x00,L034044?
+	cjne	r2,#0x00,L034046?
 	inc	r3
-	sjmp	L034044?
-L034047?:
-;	EFM8_JDY40_test.c:944: WriteCommand(0x68);  // Set CGRAM address
+	sjmp	L034046?
+L034049?:
+;	EFM8_JDY40_test.c:940: WriteCommand(0x68);  // Set CGRAM address
 	mov	dpl,#0x68
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:945: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:941: for(i=0; i<8; i++) {
 	mov	r2,#0x00
 	mov	r3,#0x00
-L034048?:
+L034050?:
 	clr	c
 	mov	a,r2
 	subb	a,#0x08
 	mov	a,r3
 	xrl	a,#0x80
 	subb	a,#0x80
-	jnc	L034051?
-;	EFM8_JDY40_test.c:947: WriteData(customHappyMouth[i]);
+	jnc	L034053?
+;	EFM8_JDY40_test.c:943: WriteData(customHappyMouth[i]);
 	mov	a,r2
 	add	a,#_customHappyMouth
 	mov	dpl,a
@@ -3251,46 +3243,46 @@ L034048?:
 	lcall	_WriteData
 	pop	ar3
 	pop	ar2
-;	EFM8_JDY40_test.c:945: for(i=0; i<8; i++) {
+;	EFM8_JDY40_test.c:941: for(i=0; i<8; i++) {
 	inc	r2
-	cjne	r2,#0x00,L034048?
+	cjne	r2,#0x00,L034050?
 	inc	r3
-	sjmp	L034048?
-L034051?:
-;	EFM8_JDY40_test.c:950: WriteCommand(0x87);
+	sjmp	L034050?
+L034053?:
+;	EFM8_JDY40_test.c:946: WriteCommand(0x87);
 	mov	dpl,#0x87
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:951: WriteData(1);
+;	EFM8_JDY40_test.c:947: WriteData(1);
 	mov	dpl,#0x01
 	lcall	_WriteData
-;	EFM8_JDY40_test.c:953: WriteCommand(0x88);
-	mov	dpl,#0x88
+;	EFM8_JDY40_test.c:949: WriteCommand(0x89);
+	mov	dpl,#0x89
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:954: WriteData(1);
+;	EFM8_JDY40_test.c:950: WriteData(1);
 	mov	dpl,#0x01
 	lcall	_WriteData
-;	EFM8_JDY40_test.c:956: WriteCommand(0xC9);
-	mov	dpl,#0xC9
+;	EFM8_JDY40_test.c:952: WriteCommand(0xC8);
+	mov	dpl,#0xC8
 	lcall	_WriteCommand
-;	EFM8_JDY40_test.c:957: WriteData(0);
+;	EFM8_JDY40_test.c:953: WriteData(0);
 	mov	dpl,#0x00
 	lcall	_WriteData
-;	EFM8_JDY40_test.c:959: P1_5 = 0;
+;	EFM8_JDY40_test.c:955: P1_5 = 0;
 	clr	_P1_5
-;	EFM8_JDY40_test.c:960: while(1)
-L034026?:
-;	EFM8_JDY40_test.c:962: EMAGNET = 0;
+;	EFM8_JDY40_test.c:956: while(1)
+L034028?:
+;	EFM8_JDY40_test.c:958: EMAGNET = 0;
 	clr	_P1_5
-;	EFM8_JDY40_test.c:964: count = GetPeriod(200);
+;	EFM8_JDY40_test.c:960: count = GetPeriod(200);
 	mov	dptr,#0x00C8
 	lcall	_GetPeriod
-;	EFM8_JDY40_test.c:965: f = GetFrequency(count);
+;	EFM8_JDY40_test.c:961: f = GetFrequency(count);
 	lcall	_GetFrequency
 	mov	_main_f_1_199,dpl
 	mov	(_main_f_1_199 + 1),dph
 	mov	(_main_f_1_199 + 2),b
 	mov	(_main_f_1_199 + 3),a
-;	EFM8_JDY40_test.c:967: sprintf(msg, "%05ld\n\r", f); // subtracted so that it sends a smaller value
+;	EFM8_JDY40_test.c:963: sprintf(msg, "%05ld\n\r", f); // subtracted so that it sends a smaller value
 	push	_main_f_1_199
 	push	(_main_f_1_199 + 1)
 	push	(_main_f_1_199 + 2)
@@ -3311,14 +3303,14 @@ L034026?:
 	mov	a,sp
 	add	a,#0xf6
 	mov	sp,a
-;	EFM8_JDY40_test.c:968: sendstr1(msg);
+;	EFM8_JDY40_test.c:964: sendstr1(msg);
 	mov	dptr,#_msg
 	mov	b,#0x40
 	lcall	_sendstr1
-;	EFM8_JDY40_test.c:969: waitms(50);
+;	EFM8_JDY40_test.c:965: waitms(50);
 	mov	dptr,#0x0032
 	lcall	_waitms
-;	EFM8_JDY40_test.c:972: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
+;	EFM8_JDY40_test.c:968: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 	mov	dpl,#0x0E
 	lcall	_Volts_at_Pin
 	mov	_main_sloc0_1_0,dpl
@@ -3329,7 +3321,7 @@ L034026?:
 	mov	(_main_v_1_199 + 1),(_main_sloc0_1_0 + 1)
 	mov	(_main_v_1_199 + 2),(_main_sloc0_1_0 + 2)
 	mov	(_main_v_1_199 + 3),(_main_sloc0_1_0 + 3)
-;	EFM8_JDY40_test.c:973: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
+;	EFM8_JDY40_test.c:969: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 	mov	dpl,#0x10
 	lcall	_Volts_at_Pin
 	mov	_main_sloc0_1_0,dpl
@@ -3340,17 +3332,17 @@ L034026?:
 	mov	((_main_v_1_199 + 0x0004) + 1),(_main_sloc0_1_0 + 1)
 	mov	((_main_v_1_199 + 0x0004) + 2),(_main_sloc0_1_0 + 2)
 	mov	((_main_v_1_199 + 0x0004) + 3),(_main_sloc0_1_0 + 3)
-;	EFM8_JDY40_test.c:976: if(RXU1()) // Something has arrived
+;	EFM8_JDY40_test.c:972: if(RXU1()) // Something has arrived
 	lcall	_RXU1
-	jc	L034095?
-	ljmp	L034026?
-L034095?:
-;	EFM8_JDY40_test.c:979: getstr1(buff, sizeof(buff));
+	jc	L034098?
+	ljmp	L034028?
+L034098?:
+;	EFM8_JDY40_test.c:975: getstr1(buff, sizeof(buff));
 	mov	_getstr1_PARM_2,#0x14
 	mov	dptr,#_buff
 	mov	b,#0x40
 	lcall	_getstr1
-;	EFM8_JDY40_test.c:980: if ( strcmp(buff, "A") == 0 )
+;	EFM8_JDY40_test.c:976: if ( strcmp(buff, "A") == 0 )
 	mov	_strcmp_PARM_2,#__str_15
 	mov	(_strcmp_PARM_2 + 1),#(__str_15 >> 8)
 	mov	(_strcmp_PARM_2 + 2),#0x80
@@ -3360,22 +3352,22 @@ L034095?:
 	mov	a,dpl
 	mov	b,dph
 	orl	a,b
-	jz	L034096?
-	ljmp	L034009?
-L034096?:
-;	EFM8_JDY40_test.c:982: waitms(500);
+	jz	L034099?
+	ljmp	L034011?
+L034099?:
+;	EFM8_JDY40_test.c:978: waitms(500);
 	mov	dptr,#0x01F4
 	lcall	_waitms
-;	EFM8_JDY40_test.c:983: while(1)
-L034006?:
-;	EFM8_JDY40_test.c:985: waitms(5);
+;	EFM8_JDY40_test.c:979: while(1)
+L034008?:
+;	EFM8_JDY40_test.c:981: waitms(5);
 	mov	dptr,#0x0005
 	lcall	_waitms
-;	EFM8_JDY40_test.c:986: direction=3; 
+;	EFM8_JDY40_test.c:982: direction=3; 
 	mov	_direction,#0x03
 	clr	a
 	mov	(_direction + 1),a
-;	EFM8_JDY40_test.c:989: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
+;	EFM8_JDY40_test.c:985: v[0] = Volts_at_Pin(QFP32_MUX_P2_1);
 	mov	dpl,#0x0E
 	lcall	_Volts_at_Pin
 	mov	_main_sloc0_1_0,dpl
@@ -3386,7 +3378,7 @@ L034006?:
 	mov	(_main_v_1_199 + 1),(_main_sloc0_1_0 + 1)
 	mov	(_main_v_1_199 + 2),(_main_sloc0_1_0 + 2)
 	mov	(_main_v_1_199 + 3),(_main_sloc0_1_0 + 3)
-;	EFM8_JDY40_test.c:990: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
+;	EFM8_JDY40_test.c:986: v[1] = Volts_at_Pin(QFP32_MUX_P2_3);
 	mov	dpl,#0x10
 	lcall	_Volts_at_Pin
 	mov	_main_sloc0_1_0,dpl
@@ -3397,16 +3389,16 @@ L034006?:
 	mov	((_main_v_1_199 + 0x0004) + 1),(_main_sloc0_1_0 + 1)
 	mov	((_main_v_1_199 + 0x0004) + 2),(_main_sloc0_1_0 + 2)
 	mov	((_main_v_1_199 + 0x0004) + 3),(_main_sloc0_1_0 + 3)
-;	EFM8_JDY40_test.c:991: count = GetPeriod(200);
+;	EFM8_JDY40_test.c:987: count = GetPeriod(200);
 	mov	dptr,#0x00C8
 	lcall	_GetPeriod
-;	EFM8_JDY40_test.c:992: f = GetFrequency(count);
+;	EFM8_JDY40_test.c:988: f = GetFrequency(count);
 	lcall	_GetFrequency
 	mov	_automaticmode_PARM_3,dpl
 	mov	(_automaticmode_PARM_3 + 1),dph
 	mov	(_automaticmode_PARM_3 + 2),b
 	mov	(_automaticmode_PARM_3 + 3),a
-;	EFM8_JDY40_test.c:993: automaticmode(v[0], v[1], f);
+;	EFM8_JDY40_test.c:989: automaticmode(v[0], v[1], f);
 	mov	_automaticmode_PARM_2,(_main_v_1_199 + 0x0004)
 	mov	(_automaticmode_PARM_2 + 1),((_main_v_1_199 + 0x0004) + 1)
 	mov	(_automaticmode_PARM_2 + 2),((_main_v_1_199 + 0x0004) + 2)
@@ -3416,12 +3408,19 @@ L034006?:
 	mov	b,(_main_v_1_199 + 2)
 	mov	a,(_main_v_1_199 + 3)
 	lcall	_automaticmode
-;	EFM8_JDY40_test.c:995: if(RXU1())
+;	EFM8_JDY40_test.c:990: if ( direction == 1 ) break;
+	mov	a,#0x01
+	cjne	a,_direction,L034100?
+	clr	a
+	cjne	a,(_direction + 1),L034100?
+	sjmp	L034011?
+L034100?:
+;	EFM8_JDY40_test.c:992: if(RXU1())
 	lcall	_RXU1
-	jc	L034097?
-	ljmp	L034006?
-L034097?:
-;	EFM8_JDY40_test.c:997: printf("hello");
+	jc	L034101?
+	ljmp	L034008?
+L034101?:
+;	EFM8_JDY40_test.c:994: printf("hello");
 	mov	a,#__str_16
 	push	acc
 	mov	a,#(__str_16 >> 8)
@@ -3432,12 +3431,12 @@ L034097?:
 	dec	sp
 	dec	sp
 	dec	sp
-;	EFM8_JDY40_test.c:998: getstr1(buff, sizeof(buff));
+;	EFM8_JDY40_test.c:995: getstr1(buff, sizeof(buff));
 	mov	_getstr1_PARM_2,#0x14
 	mov	dptr,#_buff
 	mov	b,#0x40
 	lcall	_getstr1
-;	EFM8_JDY40_test.c:999: if (strcmp(buff, "A") == 0 ) break;
+;	EFM8_JDY40_test.c:996: if (strcmp(buff, "A") == 0 ) break;
 	mov	_strcmp_PARM_2,#__str_15
 	mov	(_strcmp_PARM_2 + 1),#(__str_15 >> 8)
 	mov	(_strcmp_PARM_2 + 2),#0x80
@@ -3447,11 +3446,11 @@ L034097?:
 	mov	a,dpl
 	mov	b,dph
 	orl	a,b
-	jz	L034098?
-	ljmp	L034006?
-L034098?:
-L034009?:
-;	EFM8_JDY40_test.c:1007: if ( strcmp(buff, "S") == 0 )	
+	jz	L034102?
+	ljmp	L034008?
+L034102?:
+L034011?:
+;	EFM8_JDY40_test.c:1004: if ( strcmp(buff, "S") == 0 )	
 	mov	_strcmp_PARM_2,#__str_17
 	mov	(_strcmp_PARM_2 + 1),#(__str_17 >> 8)
 	mov	(_strcmp_PARM_2 + 2),#0x80
@@ -3461,10 +3460,10 @@ L034009?:
 	mov	a,dpl
 	mov	b,dph
 	orl	a,b
-	jnz	L034011?
-;	EFM8_JDY40_test.c:1009: servomotion();
+	jnz	L034013?
+;	EFM8_JDY40_test.c:1006: servomotion();
 	lcall	_servomotion
-;	EFM8_JDY40_test.c:1010: printf("this should be the motor function");
+;	EFM8_JDY40_test.c:1007: printf("this should be the motor function");
 	mov	a,#__str_18
 	push	acc
 	mov	a,#(__str_18 >> 8)
@@ -3475,11 +3474,11 @@ L034009?:
 	dec	sp
 	dec	sp
 	dec	sp
-;	EFM8_JDY40_test.c:1011: waitms(500);
+;	EFM8_JDY40_test.c:1008: waitms(500);
 	mov	dptr,#0x01F4
 	lcall	_waitms
-L034011?:
-;	EFM8_JDY40_test.c:1015: sscanf(buff, "K%uW%uG%d\n", &adcwheel1, &adcwheel2, &which);
+L034013?:
+;	EFM8_JDY40_test.c:1012: sscanf(buff, "K%uW%uG%d\n", &adcwheel1, &adcwheel2, &which);
 	mov	a,#_main_which_1_199
 	push	acc
 	mov	a,#(_main_which_1_199 >> 8)
@@ -3514,75 +3513,75 @@ L034011?:
 	mov	a,sp
 	add	a,#0xf1
 	mov	sp,a
-;	EFM8_JDY40_test.c:1016: if (which == 0 )
+;	EFM8_JDY40_test.c:1013: if (which == 0 )
 	mov	a,_main_which_1_199
 	orl	a,(_main_which_1_199 + 1)
-	jnz	L034013?
-;	EFM8_JDY40_test.c:1018: P2_5 = 0;
+	jnz	L034015?
+;	EFM8_JDY40_test.c:1015: P2_5 = 0;
 	clr	_P2_5
-;	EFM8_JDY40_test.c:1019: P3_7=0;
+;	EFM8_JDY40_test.c:1016: P3_7=0;
 	clr	_P3_7
-;	EFM8_JDY40_test.c:1020: direction = 1;
+;	EFM8_JDY40_test.c:1017: direction = 1;
 	mov	_direction,#0x01
 	clr	a
 	mov	(_direction + 1),a
-	sjmp	L034014?
-L034013?:
-;	EFM8_JDY40_test.c:1024: P3_2=0;
+	sjmp	L034016?
+L034015?:
+;	EFM8_JDY40_test.c:1021: P3_2=0;
 	clr	_P3_2
-;	EFM8_JDY40_test.c:1025: P3_0=0;
+;	EFM8_JDY40_test.c:1022: P3_0=0;
 	clr	_P3_0
-;	EFM8_JDY40_test.c:1026: direction = 0;
+;	EFM8_JDY40_test.c:1023: direction = 0;
 	clr	a
 	mov	_direction,a
 	mov	(_direction + 1),a
-L034014?:
-;	EFM8_JDY40_test.c:1030: pwm_duty4 = adcwheel2;
+L034016?:
+;	EFM8_JDY40_test.c:1027: pwm_duty4 = adcwheel2;
 	mov	_pwm_duty4,_main_adcwheel2_1_199
 	mov	(_pwm_duty4 + 1),(_main_adcwheel2_1_199 + 1)
-;	EFM8_JDY40_test.c:1031: if ( adcwheel1 == 5535 ) adcwheel1 = 65535;
+;	EFM8_JDY40_test.c:1028: if ( adcwheel1 == 5535 ) adcwheel1 = 65535;
 	mov	a,#0x9F
-	cjne	a,_main_adcwheel1_1_199,L034016?
-	mov	a,#0x15
-	cjne	a,(_main_adcwheel1_1_199 + 1),L034016?
-	mov	_main_adcwheel1_1_199,#0xFF
-	mov	(_main_adcwheel1_1_199 + 1),#0xFF
-L034016?:
-;	EFM8_JDY40_test.c:1032: if ( adcwheel1 == 5086 ) adcwheel1 = 65535;
-	mov	a,#0xDE
 	cjne	a,_main_adcwheel1_1_199,L034018?
-	mov	a,#0x13
+	mov	a,#0x15
 	cjne	a,(_main_adcwheel1_1_199 + 1),L034018?
 	mov	_main_adcwheel1_1_199,#0xFF
 	mov	(_main_adcwheel1_1_199 + 1),#0xFF
 L034018?:
-;	EFM8_JDY40_test.c:1033: if ( adcwheel1 == 535 ) adcwheel1 = 65535;
-	mov	a,#0x17
+;	EFM8_JDY40_test.c:1029: if ( adcwheel1 == 5086 ) adcwheel1 = 65535;
+	mov	a,#0xDE
 	cjne	a,_main_adcwheel1_1_199,L034020?
-	mov	a,#0x02
+	mov	a,#0x13
 	cjne	a,(_main_adcwheel1_1_199 + 1),L034020?
 	mov	_main_adcwheel1_1_199,#0xFF
 	mov	(_main_adcwheel1_1_199 + 1),#0xFF
 L034020?:
-;	EFM8_JDY40_test.c:1034: if ( adcwheel1 == 86 ) adcwheel1 = 65535;
-	mov	a,#0x56
-	cjne	a,_main_adcwheel1_1_199,L034107?
-	clr	a
-	cjne	a,(_main_adcwheel1_1_199 + 1),L034107?
-	sjmp	L034108?
-L034107?:
-	sjmp	L034022?
-L034108?:
+;	EFM8_JDY40_test.c:1030: if ( adcwheel1 == 535 ) adcwheel1 = 65535;
+	mov	a,#0x17
+	cjne	a,_main_adcwheel1_1_199,L034022?
+	mov	a,#0x02
+	cjne	a,(_main_adcwheel1_1_199 + 1),L034022?
 	mov	_main_adcwheel1_1_199,#0xFF
 	mov	(_main_adcwheel1_1_199 + 1),#0xFF
 L034022?:
-;	EFM8_JDY40_test.c:1035: pwm_duty2 = adcwheel1;
+;	EFM8_JDY40_test.c:1031: if ( adcwheel1 == 86 ) adcwheel1 = 65535;
+	mov	a,#0x56
+	cjne	a,_main_adcwheel1_1_199,L034111?
+	clr	a
+	cjne	a,(_main_adcwheel1_1_199 + 1),L034111?
+	sjmp	L034112?
+L034111?:
+	sjmp	L034024?
+L034112?:
+	mov	_main_adcwheel1_1_199,#0xFF
+	mov	(_main_adcwheel1_1_199 + 1),#0xFF
+L034024?:
+;	EFM8_JDY40_test.c:1032: pwm_duty2 = adcwheel1;
 	mov	_pwm_duty2,_main_adcwheel1_1_199
 	mov	(_pwm_duty2 + 1),(_main_adcwheel1_1_199 + 1)
-;	EFM8_JDY40_test.c:1038: waitms(5); // The radio seems to need this delay...
+;	EFM8_JDY40_test.c:1035: waitms(5); // The radio seems to need this delay...
 	mov	dptr,#0x0005
 	lcall	_waitms
-	ljmp	L034026?
+	ljmp	L034028?
 	rseg R_CSEG
 
 	rseg R_XINIT

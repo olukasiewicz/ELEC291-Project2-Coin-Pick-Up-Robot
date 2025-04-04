@@ -737,7 +737,7 @@ void servomotion(void)
     WriteCommand(0x89);
     WriteData(3);
 
-    WriteCommand(0xC9);
+    WriteCommand(0xC8);
     WriteData(2);
     
 	waitms(500);
@@ -779,12 +779,8 @@ void servomotion(void)
 	servo2 = 250; 
 	EMAGNET=0;
 	
-	if ( cointcount >= 20 ) {
+	if ( cointcount >= 10 ) {
 	direction = 1;
-						P3_7=0;  //wheel 1
-						P3_2=1;	// wheel 1 
-						P3_0=1; // wheel 2
-						P2_5=0; // wheel 2
 	cointcount=0;
 	}
 
@@ -793,10 +789,10 @@ void servomotion(void)
 	WriteCommand(0x87);
     WriteData(1);
 
-    WriteCommand(0x88);
+    WriteCommand(0x89);
     WriteData(1);
 
-    WriteCommand(0xC9);
+    WriteCommand(0xC8);
     WriteData(0);
 
 }
@@ -817,13 +813,13 @@ void automaticmode(float fowardper, float sideper, long int freq)
 	P3_2=0;	// wheel 1 
 	P3_0=0; // wheel 2
 	P2_5=1; // wheel 2
-		if ( freq >= 64050)  //100000    63750   65000
+		if ( freq >= 63500)  //100000    63750   65000
 	{
 		P3_7=0;  //wheel 1
 		P3_2=1;	// wheel 1 
 		P3_0=1; // wheel 2
 		P2_5=0; // wheel 2
-		waitms(150);
+		waitms(250);
 		P3_7=0;  //wheel 1
 		P3_2=0;	// wheel 1 
 		P3_0=0; // wheel 2
@@ -950,10 +946,10 @@ void main (void)
     WriteCommand(0x87);
     WriteData(1);
 
-    WriteCommand(0x88);
+    WriteCommand(0x89);
     WriteData(1);
 
-    WriteCommand(0xC9);
+    WriteCommand(0xC8);
     WriteData(0);
 	
 	P1_5 = 0;
@@ -991,6 +987,7 @@ void main (void)
 					count = GetPeriod(200);
 					f = GetFrequency(count);
 					automaticmode(v[0], v[1], f);
+					if ( direction == 1 ) break;
 			
 				if(RXU1())
 				{

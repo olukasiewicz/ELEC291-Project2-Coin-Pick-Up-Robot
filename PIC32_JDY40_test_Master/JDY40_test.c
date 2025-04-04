@@ -758,9 +758,9 @@ void main(void)
 				stringtobuff = atof(buff);
 				evilcode = ((stringtobuff - 63400.0) * 255.0 / (64500.0 - 63400.0));
 
-
+				
 				if (evilcode > 255 ) evilcode =255;
-				if (evilcode < 70 ) 
+				if (evilcode < 120 ) 
 				{
 				evilcode = 0;
 				Init_pwm(1);
