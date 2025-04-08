@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lcd.h"
+helloo i thhn code broken muahahahahahaa dnasd nasnd sa
 //REMOTE CONTROLLER MASTER
 /* Pinout for DIP28 PIC32MX130:
                                           --------
